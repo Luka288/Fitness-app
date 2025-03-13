@@ -1,0 +1,8 @@
+<main>
+  <div class="cards">
+    <app-card *ngFor="let item of workoutTypes" [workout]="item" />
+  </div>
+  <div class="buttons">
+    <button (click)="signIn()">sign in</button>
+  </div>
+</main>
