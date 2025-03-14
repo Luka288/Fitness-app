@@ -1,11 +1,16 @@
 .card-body {
-  width: 320px;
+  width: 90%;
+  max-width: 320px;
   height: 220px;
   background-color: black;
   padding: 20px;
   border: 2px solid gray;
   border-radius: 15px;
   cursor: pointer;
+  background-image: url("https://images.stockcake.com/public/8/0/0/800aff27-4ce0-4725-9ab2-93db69355cce_large/morning-city-run-stockcake.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  // background-size: contain;
 
   .card-title {
     p {

@@ -1,8 +1,29 @@
 <main>
-  <div class="cards">
-    <app-card *ngFor="let item of workoutTypes" [workout]="item" />
-  </div>
-  <div class="buttons">
-    <button (click)="signIn()">sign in</button>
-  </div>
+  <section class="top-section">
+    <div class="left-side">
+      <div class="text-title">
+        <h1>Track Your Fitness Progress</h1>
+      </div>
+      <div class="text-container">
+        <p>
+          Set daily fitness goals, log your workouts, track reps, and monitor
+          your progress over time. Stay consistent and achieve your fitness
+          milestones with ease!
+        </p>
+      </div>
+    </div>
+    <div class="auth-container">
+      <div class="c-title">
+        <p>Authorize</p>
+      </div>
+      <ul>
+        <li (click)="signIn()">
+          <a
+            >Google sign in
+            <i class="fa-brands fa-google" style="color: #f2b505"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </section>
 </main>

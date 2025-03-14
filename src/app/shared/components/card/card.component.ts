@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { WorkoutInterface } from '../../interfaces/workout.interface';
 
 @Component({
@@ -9,4 +9,9 @@ import { WorkoutInterface } from '../../interfaces/workout.interface';
 })
 export class CardComponent {
   @Input({ alias: 'workout' }) workoutInput!: WorkoutInterface;
+  @Output() emitWorkout = new EventEmitter<WorkoutInterface>();
+
+  sendWorkout() {
+    this.emitWorkout.emit(this.workoutInput);
+  }
 }
