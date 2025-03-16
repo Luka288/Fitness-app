@@ -25,6 +25,24 @@ export const routes: Routes = [
         (c) => c.DashboardComponent
       ),
     canActivate: [routeGuard],
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/main-content/main-content.component').then(
+            (c) => c.MainContentComponent
+          ),
+      },
+
+      {
+        title: 'Fit APP | Settings',
+        path: 'settings',
+        loadComponent: () =>
+          import('./features/settings/settings.component').then(
+            (c) => c.SettingsComponent
+          ),
+      },
+    ],
   },
 
   {

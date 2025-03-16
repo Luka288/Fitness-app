@@ -1,0 +1,8 @@
+<div class="side-panel">
+  @for (item of sidePanelItems(); track $index) {
+  <a [routerLink]="[item.href]">
+    {{ item.title }}
+  </a>
+  }
+  <a (click)="logOut()">Logout</a>
+</div>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HomeComponent } from './features/home/home.component';
 import { RouterModule } from '@angular/router';
+import { SidePanelComponent } from './shared/components/side-panel/side-panel.component';
 
 @Component({
   selector: 'app-root',

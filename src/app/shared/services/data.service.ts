@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { headerBtns } from '../consts/header';
+import { headerBtns, sidePanel } from '../consts/header';
 import { workoutTypes } from '../consts/workouts';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +13,9 @@ export class DataService {
 
   getHeaderButtons() {
     return headerBtns;
+  }
+
+  getSideNavItems() {
+    return of(sidePanel);
   }
 }
