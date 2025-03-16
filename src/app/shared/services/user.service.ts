@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { setDoc } from 'firebase/firestore';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,9 @@ export class UserService {
       // sweet alerts maybe?
       return error;
     }
+  }
+
+  async currentUser() {
+    return this.FireAuth.currentUser || false;
   }
 }

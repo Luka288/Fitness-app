@@ -1,3 +1,22 @@
+<header>
+  <div class="left-side">
+    <ul>
+      <li>
+        <a href="">logo</a>
+      </li>
+    </ul>
+  </div>
+  <div class="right-side">
+    <ul>
+      <li>
+        <a href="" *ngFor="let item of BTNS">
+          {{ item.title }}
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
 <main>
   <section class="top-section">
     <div class="left-side">
@@ -17,12 +36,16 @@
         <p>Authorize</p>
       </div>
       <ul>
-        <li (click)="signIn()">
+        <li (click)="googleAuth()">
           <a
             >Google sign in
             <i class="fa-brands fa-google" style="color: #f2b505"></i
           ></a>
         </li>
+
+        <!-- <li (click)="testLogout()">
+          <a>Log Out</a>
+        </li> -->
       </ul>
     </div>
   </section>

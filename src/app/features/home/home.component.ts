@@ -5,6 +5,8 @@ import { workoutTypes } from '../../shared/consts/workouts';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
+import { headerBtns } from './../../shared/consts/header';
+import { DataService } from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-home',
@@ -14,27 +16,21 @@ import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 })
 export class HomeComponent {
   private readonly AuthService = inject(FirebaseAuthService);
+  private readonly dataService = inject(DataService);
 
-  workoutTypes = workoutTypes;
+  BTNS = this.dataService.getHeaderButtons();
 
   constructor() {}
 
-  signIn() {
-    this.AuthService.googleSing();
+  googleAuth() {
+    this.AuthService.googleAuth();
+  }
+
+  testLogout() {
+    this.AuthService.logOut();
   }
 
   getFromChild(workout: WorkoutInterface) {
     console.log(workout);
   }
 }
-
-// <div class="cards">
-// <app-card
-//   *ngFor="let item of workoutTypes"
-//   [workout]="item"
-//   (emitWorkout)="getFromChild($event)"
-// />
-// </div>
-// <div class="buttons">
-// <button (click)="signIn()">sign in</button>
-// </div>
