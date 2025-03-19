@@ -3,7 +3,7 @@ import { Auth, GoogleAuthProvider } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import { UserService } from './user.service';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -34,5 +34,9 @@ export class FirebaseAuthService {
       const result = await this.FirebaseAuth.signOut();
       this.router.navigate(['/home']);
     } catch (error) {}
+  }
+
+  currentUseR() {
+    return of(this.FirebaseAuth.currentUser);
   }
 }

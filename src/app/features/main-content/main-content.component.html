@@ -1,3 +1,39 @@
 <main>
-  <h1>main works</h1>
+  <div class="user-container">
+    <div class="image-container">
+      <img [src]="user()?.photoURL" [alt]="`${user()?.displayName} Logo`" />
+    </div>
+    <div class="user-baseInfo">
+      <p>
+        Username: <span>{{ user()?.displayName }}</span>
+      </p>
+      <p>
+        Email: <span>{{ user()?.email }}</span>
+      </p>
+      <p>
+        Member Since:
+        <span>{{
+          user()?.metadata?.creationTime | date : "dd/MM/yyyy HH:mm:ss"
+        }}</span>
+      </p>
+      <p>
+        Last seen:
+        <span>{{
+          user()?.metadata?.lastSignInTime | date : "dd/MM/yyyy HH:mm:ss"
+        }}</span>
+      </p>
+
+      <p>
+        Email verified:
+        <span>{{ user()?.emailVerified ? "Yes" : "No" }}</span>
+      </p>
+    </div>
+  </div>
+  <div class="workouts-container">
+    <app-card
+      *ngFor="let item of workoutTypes()"
+      [workout]="item"
+      (emitWorkout)="userWorkouts($event)"
+    />
+  </div>
 </main>

@@ -1,4 +1,8 @@
-<div class="card-body" (click)="sendWorkout()">
+<div
+  class="card-body"
+  (click)="sendWorkout()"
+  [style.background-image]="`url('${workoutInput.icon}')`"
+>
   <div class="card-title">
     <p>
       {{ workoutInput.name }}

@@ -8,7 +8,7 @@ import { of } from 'rxjs';
 })
 export class DataService {
   workoutTypes() {
-    return workoutTypes;
+    return of(workoutTypes);
   }
 
   getHeaderButtons() {
