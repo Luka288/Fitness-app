@@ -6,14 +6,21 @@ main {
 
   .user-container {
     width: 90%;
-    max-width: 550px;
-    background-color: red;
+    max-width: 850px;
     padding: 10px;
     @include flex(flex-start, wrap, row);
     gap: 15px;
+    border-radius: 3px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.8),
+      rgba(240, 240, 240, 0.6)
+    );
 
     .image-container {
       img {
+        border-radius: 3px;
         width: 100px;
         height: 100px;
       }
@@ -21,12 +28,12 @@ main {
 
     .user-baseInfo {
       @include flex(flex-start, base-line, wrap, column);
-      gap: 10px;
+      gap: 20px;
 
       p {
         padding: 0;
         margin: 0;
-        color: white;
+        color: black;
         font-family: $inter;
       }
     }
@@ -34,14 +41,16 @@ main {
 
   .workouts-container {
     width: 90%;
-    max-width: 550px;
+    max-width: 850px;
     height: 500px;
     padding: 10px;
     margin-top: 20px;
-    background-color: red;
     overflow: auto;
     @include flex(flex-start, baseline, wrap, row);
-    gap: 20px;
+    gap: 25px;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 
     app-card {
       width: 250px;

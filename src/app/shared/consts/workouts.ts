@@ -24,4 +24,16 @@ export const workoutTypes: WorkoutInterface[] = [
     name: 'Bodyweight Squats',
     icon: 'https://www.fitstream.com/images/bodyweight-training/bodyweight-exercises/bodyweight-squat.png',
   },
+
+  {
+    id: 'pull_up',
+    name: 'Pull Up',
+    icon: 'https://cdn-icons-png.flaticon.com/128/3043/3043199.png',
+  },
+
+  {
+    id: 'cycling',
+    name: 'Cycling',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3600/3600996.png',
+  },
 ];
