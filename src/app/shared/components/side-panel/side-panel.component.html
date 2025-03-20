@@ -3,8 +3,8 @@
     <ul>
       @for (item of sidePanelItems(); track $index) {
       <li>
+        <i [ngClass]="item.icon"></i>
         <a [routerLink]="[item.href]">
-          <i [ngClass]="item.icon"></i>
           {{ item.title }}
         </a>
       </li>

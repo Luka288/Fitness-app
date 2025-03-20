@@ -35,6 +35,15 @@ export const routes: Routes = [
       },
 
       {
+        title: 'Fit APP | Leaderboard',
+        path: 'leaderboard',
+        loadComponent: () =>
+          import('./features/leaderboard/leaderboard.component').then(
+            (c) => c.LeaderboardComponent
+          ),
+      },
+
+      {
         title: 'Fit APP | Settings',
         path: 'settings',
         loadComponent: () =>

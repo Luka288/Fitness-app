@@ -5,19 +5,16 @@
   width: 90%;
   max-width: 350px;
   height: 150px;
-  background-color: white;
+  background-color: #00aeff;
   padding: 5px;
   cursor: pointer;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   transition: all 0.1s;
-  border-radius: 10px;
-
-  &:hover {
-    background-color: #f0f2f9;
-    transition: all 0.1s;
-  }
+  border: 1px solid #00a1ff;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 
   .card-title {
     text-align: center;
