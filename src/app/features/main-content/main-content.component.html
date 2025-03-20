@@ -14,13 +14,13 @@
         <p>
           Member Since:
           <span>{{
-            user()?.metadata?.creationTime | date : "dd/MM/yyyy HH:mm:ss"
+            user()?.metadata?.creationTime | date : "dd/MM/yyyy"
           }}</span>
         </p>
         <p>
           Last seen:
           <span>{{
-            user()?.metadata?.lastSignInTime | date : "dd/MM/yyyy HH:mm:ss"
+            user()?.metadata?.lastSignInTime | date : "dd/MM/yyyy"
           }}</span>
         </p>
 
@@ -31,11 +31,16 @@
       </div>
     </div>
     <div class="workouts-container">
-      <app-card
-        *ngFor="let item of workoutTypes()"
-        [workout]="item"
-        (emitWorkout)="userWorkouts($event)"
-      />
+      <div class="container-title">
+        <p>choose today's activity</p>
+      </div>
+      <div class="wrokout-cards">
+        <app-card
+          *ngFor="let item of workoutTypes()"
+          [workout]="item"
+          (emitWorkout)="userWorkouts($event)"
+        />
+      </div>
     </div>
   </div>
   <section class="user-activites">

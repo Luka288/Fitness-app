@@ -15,12 +15,9 @@ main {
       @include flex(flex-start, wrap, row);
       gap: 15px;
       border-radius: 3px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.8),
-        rgba(240, 240, 240, 0.6)
-      );
+      // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
+      border: 3px solid rgb(226, 226, 226);
+      background-color: white;
 
       .image-container {
         img {
@@ -44,20 +41,63 @@ main {
     }
 
     .workouts-container {
-      // width: 90%;
-      // max-width: 850px;
-      height: 500px;
-      padding: 10px;
-      margin-top: 20px;
-      overflow: auto;
-      @include flex(flex-start, baseline, wrap, row);
-      gap: 25px;
       border-radius: 3px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      margin-top: 30px;
+      height: fit-content;
+      background-color: white;
+      border: 3px solid rgb(226, 226, 226);
+      // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
+      padding: 10px;
 
-      app-card {
-        width: 250px;
+      .container-title {
+        height: 50px;
+        text-align: center;
+        @include flex(center, center);
+
+        p {
+          width: fit-content;
+          padding: 0;
+          margin: 0;
+          font-size: 24px;
+          text-align: center;
+          font-family: $inter;
+          font-weight: 500;
+          text-transform: capitalize;
+          color: #333;
+          position: relative;
+
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 50px;
+            height: 2px;
+            background-color: black;
+          }
+
+          &::before {
+            left: -60px;
+          }
+
+          &::after {
+            right: -60px;
+          }
+        }
+      }
+
+      .wrokout-cards {
+        width: 100%;
+        height: 480px;
+        overflow: auto;
+        @include flex(center, baseline, wrap, row);
+        gap: 15px;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+
+        app-card {
+          width: 250px;
+        }
       }
     }
   }
@@ -67,8 +107,12 @@ main {
     height: 700px;
     padding: 20px;
     border-radius: 3px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border: 3px solid rgb(226, 226, 226);
+    // border: 1px solid rgba(0, 0, 0, 0.1);
+    // box-shadow: 7px 10px 12px -1px rgba(0, 0, 0, 0.09);
+    // -webkit-box-shadow: 7px 10px 12px -1px rgba(0, 0, 0, 0.09);
+    // -moz-box-shadow: 7px 10px 12px -1px rgba(0, 0, 0, 0.09);
+    background-color: white;
 
     .place-holder {
       width: 100%;

@@ -35,5 +35,33 @@ export const workoutTypes: WorkoutInterface[] = [
     id: 'cycling',
     name: 'Cycling',
     icon: 'https://cdn-icons-png.flaticon.com/512/3600/3600996.png',
+    // main cycling
+  },
+
+  {
+    id: 'cycling',
+    name: 'Cycling',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3600/3600996.png',
+  },
+
+  {
+    id: 'cycling',
+    name: 'Cycling',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3600/3600996.png',
+  },
+  {
+    id: 'cycling',
+    name: 'Cycling',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3600/3600996.png',
+  },
+  {
+    id: 'cycling',
+    name: 'Cycling',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3600/3600996.png',
+  },
+  {
+    id: 'cycling',
+    name: 'Cycling',
+    icon: 'https://cdn-icons-png.flaticon.com/512/3600/3600996.png',
   },
 ];
