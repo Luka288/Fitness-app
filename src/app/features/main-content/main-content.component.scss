@@ -16,12 +16,12 @@ main {
       gap: 15px;
       border-radius: 3px;
       // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
-      border: 3px solid rgb(226, 226, 226);
+      // border: $base-border-color;
       background-color: white;
 
       .image-container {
         img {
-          border-radius: 3px;
+          border-radius: 130px;
           width: 100px;
           height: 100px;
         }
@@ -45,7 +45,7 @@ main {
       margin-top: 30px;
       height: fit-content;
       background-color: white;
-      border: 3px solid rgb(226, 226, 226);
+      // border: $base-border-color;
       // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
       padding: 10px;
 
@@ -107,11 +107,7 @@ main {
     height: 700px;
     padding: 20px;
     border-radius: 3px;
-    border: 3px solid rgb(226, 226, 226);
-    // border: 1px solid rgba(0, 0, 0, 0.1);
-    // box-shadow: 7px 10px 12px -1px rgba(0, 0, 0, 0.09);
-    // -webkit-box-shadow: 7px 10px 12px -1px rgba(0, 0, 0, 0.09);
-    // -moz-box-shadow: 7px 10px 12px -1px rgba(0, 0, 0, 0.09);
+    // border: $base-border-color;
     background-color: white;
 
     .place-holder {

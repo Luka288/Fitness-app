@@ -3,10 +3,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { DataService } from '../../services/data.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-side-panel',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './side-panel.component.html',
   styleUrl: './side-panel.component.scss',
 })

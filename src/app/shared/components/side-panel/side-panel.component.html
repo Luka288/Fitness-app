@@ -4,12 +4,15 @@
       @for (item of sidePanelItems(); track $index) {
       <li>
         <a [routerLink]="[item.href]">
+          <i [ngClass]="item.icon"></i>
           {{ item.title }}
         </a>
       </li>
       }
       <li>
-        <a (click)="logOut()">Logout</a>
+        <a (click)="logOut()"
+          ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
+        >
       </li>
     </ul>
   </div>
