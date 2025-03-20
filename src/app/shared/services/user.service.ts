@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { doc, Firestore } from '@angular/fire/firestore';
-import { setDoc } from 'firebase/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { collectionData, doc, Firestore } from '@angular/fire/firestore';
+import { collection, setDoc } from 'firebase/firestore';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,5 +31,14 @@ export class UserService {
 
   async currentUser() {
     return this.FireAuth.currentUser || false;
+  }
+
+  getUserActivity() {
+    const user = this.FireAuth.currentUser;
+    if (!user) return of([]);
+
+    const workouts = collection(this.Fire, `users/${user.uid}/workouts`);
+
+    return collectionData(workouts, { idField: 'id' });
   }
 }

@@ -1,39 +1,46 @@
 <main>
-  <div class="user-container">
-    <div class="image-container">
-      <img [src]="user()?.photoURL" [alt]="`${user()?.displayName} Logo`" />
-    </div>
-    <div class="user-baseInfo">
-      <p>
-        Username: <span>{{ user()?.displayName }}</span>
-      </p>
-      <p>
-        Email: <span>{{ user()?.email }}</span>
-      </p>
-      <p>
-        Member Since:
-        <span>{{
-          user()?.metadata?.creationTime | date : "dd/MM/yyyy HH:mm:ss"
-        }}</span>
-      </p>
-      <p>
-        Last seen:
-        <span>{{
-          user()?.metadata?.lastSignInTime | date : "dd/MM/yyyy HH:mm:ss"
-        }}</span>
-      </p>
+  <div class="base-side">
+    <div class="user-container">
+      <div class="image-container">
+        <img [src]="user()?.photoURL" [alt]="`${user()?.displayName} Logo`" />
+      </div>
+      <div class="user-baseInfo">
+        <p>
+          Username: <span>{{ user()?.displayName }}</span>
+        </p>
+        <p>
+          Email: <span>{{ user()?.email }}</span>
+        </p>
+        <p>
+          Member Since:
+          <span>{{
+            user()?.metadata?.creationTime | date : "dd/MM/yyyy HH:mm:ss"
+          }}</span>
+        </p>
+        <p>
+          Last seen:
+          <span>{{
+            user()?.metadata?.lastSignInTime | date : "dd/MM/yyyy HH:mm:ss"
+          }}</span>
+        </p>
 
-      <p>
-        Email verified:
-        <span>{{ user()?.emailVerified ? "Yes" : "No" }}</span>
-      </p>
+        <p>
+          Email verified:
+          <span>{{ user()?.emailVerified ? "Yes" : "No" }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="workouts-container">
+      <app-card
+        *ngFor="let item of workoutTypes()"
+        [workout]="item"
+        (emitWorkout)="userWorkouts($event)"
+      />
     </div>
   </div>
-  <div class="workouts-container">
-    <app-card
-      *ngFor="let item of workoutTypes()"
-      [workout]="item"
-      (emitWorkout)="userWorkouts($event)"
-    />
-  </div>
+  <section class="user-activites">
+    <div class="place-holder" *ngIf="userActivities().length === 0">
+      <p>no activities found.</p>
+    </div>
+  </section>
 </main>

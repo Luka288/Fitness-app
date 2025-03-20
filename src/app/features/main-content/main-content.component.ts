@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { DataService } from '../../shared/services/data.service';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
+import { UserService } from '../../shared/services/user.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-main-content',
@@ -15,8 +17,12 @@ import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 export class MainContentComponent {
   private readonly autService = inject(FirebaseAuthService);
   private readonly dataService = inject(DataService);
+  private readonly userService = inject(UserService);
 
   user = toSignal(this.autService.currentUseR(), { initialValue: null });
+  userActivities = toSignal(this.userService.getUserActivity(), {
+    initialValue: [],
+  });
   workoutTypes = toSignal(this.dataService.workoutTypes(), {
     initialValue: [],
   });
