@@ -44,11 +44,11 @@ export const routes: Routes = [
       },
 
       {
-        title: 'Fit APP | Settings',
-        path: 'settings',
+        title: 'Fit APP | Add Workout',
+        path: 'activity/:id',
         loadComponent: () =>
-          import('./features/settings/settings.component').then(
-            (c) => c.SettingsComponent
+          import('./features/workout-detail/workout-detail.component').then(
+            (c) => c.WorkoutDetailComponent
           ),
       },
     ],

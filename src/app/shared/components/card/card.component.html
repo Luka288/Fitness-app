@@ -2,6 +2,7 @@
   class="card-body"
   (click)="sendWorkout()"
   [style.background-image]="`url('${workoutInput.icon}')`"
+  [routerLink]="['activity', workoutInput.id]"
 >
   <div class="card-title">
     <p>

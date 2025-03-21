@@ -3,7 +3,7 @@
 
 .side-panel {
   width: 100%;
-  max-width: 120px;
+  max-width: 150px;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -33,7 +33,7 @@
         font-family: $montserrat;
         color: white;
         text-decoration: none;
-        font-size: 14px;
+        font-size: 1rem;
       }
 
       i {
