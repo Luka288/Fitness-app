@@ -2,11 +2,47 @@
   <section id="topSec"></section>
   <section id="inputsSec">
     <div class="title-container">
-      <p>Fill the form</p>
+      <p>
+        Activity name:
+        <span>
+          {{ workout?.name }}
+        </span>
+      </p>
     </div>
     <div class="inputs">
-      <label for="workoutInput">{{ workout?.type }}</label>
-      <input type="text" id="workoutInput" [attr.name]="workout?.type" />
+      <form [formGroup]="metricInputControl" (ngSubmit)="saveWorkout()">
+        <div
+          class="inputW"
+          *ngFor="let item of workout?.metrics; let i = index"
+        >
+          <input
+            type="text"
+            [attr.id]="'workoutInput' + i"
+            [attr.name]="item"
+            [placeholder]="item"
+            [formControlName]="item"
+            [ngClass]="{
+              errBorder:
+                metricInputControl.get(item)?.errors &&
+                metricInputControl.get(item)?.touched
+            }"
+          />
+          <div
+            class="errC"
+            *ngIf="
+              metricInputControl.get(item)?.errors &&
+              metricInputControl.get(item)?.touched
+            "
+          >
+            @if (metricInputControl.get(item)?.errors?.['required']) {
+            <p>{{ item }} is required</p>
+            }@else if (metricInputControl.get(item)?.errors?.['min']) {
+            <p>{{ item }} cannot be 0 Km</p>
+            }
+          </div>
+        </div>
+        <button type="submit">Save Activity</button>
+      </form>
     </div>
   </section>
 </main>

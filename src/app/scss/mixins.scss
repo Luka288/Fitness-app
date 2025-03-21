@@ -5,3 +5,9 @@
   flex-wrap: $wrap;
   flex-direction: $dir;
 }
+
+@mixin inputAling($dir: column, $g: 10px) {
+  display: flex;
+  flex-direction: $dir;
+  gap: $g;
+}

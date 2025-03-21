@@ -3,4 +3,5 @@ export interface WorkoutInterface {
   name: string;
   icon: string;
   type: 'distance' | 'reps' | 'time';
+  metrics: Array<string>;
 }
