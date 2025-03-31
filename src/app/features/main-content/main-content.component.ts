@@ -7,10 +7,12 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 import { WorkoutService } from '../../shared/services/workout.service';
 import { WorkoutData } from '../../shared/interfaces/workout.data.interface';
+import { TransformStrPipe } from '../../shared/pipes/transform-str.pipe';
+import { DashboardCardComponent } from '../../shared/components/dashboard-card/dashboard-card.component';
 
 @Component({
   selector: 'app-main-content',
-  imports: [CommonModule, CardComponent],
+  imports: [CommonModule, CardComponent, DashboardCardComponent],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',
 })

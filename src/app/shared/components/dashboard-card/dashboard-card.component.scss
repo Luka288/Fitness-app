@@ -1,0 +1,38 @@
+@use "../../../scss/mixins" as *;
+@use "../../../scss/variables" as *;
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 16px;
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: $montserrat;
+  font-size: 14px;
+  font-weight: 500;
+  width: fit-content;
+  max-width: 100%;
+
+  .activity {
+    font-weight: bold;
+    color: #333;
+    flex-shrink: 0;
+  }
+
+  .details {
+    display: flex;
+    gap: 15px;
+    color: #555;
+  }
+
+  .separator {
+    color: #aaa;
+  }
+
+  p {
+    margin: 0;
+  }
+}

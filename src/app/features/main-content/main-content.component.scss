@@ -15,8 +15,6 @@ main {
       @include flex(flex-start, wrap, row);
       gap: 15px;
       border-radius: 3px;
-      // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
-      // border: $base-border-color;
       background-color: white;
 
       .image-container {
@@ -123,5 +121,11 @@ main {
         text-transform: capitalize;
       }
     }
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 }
