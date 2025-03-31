@@ -21,7 +21,6 @@ export class UserService {
 
     try {
       setDoc(firebase, { uid, email, displayName, photoURL }, { merge: true });
-      console.log('user saved');
       return true;
     } catch (error) {
       // sweet alerts maybe?

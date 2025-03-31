@@ -82,6 +82,23 @@ main {
             transition: all 0.2s;
           }
         }
+
+        button {
+          width: 150px;
+          padding: 10px;
+          background-color: #4b4bdf;
+          color: white;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s;
+          border-radius: 3px;
+
+          &:hover {
+            background-color: #8a8adf;
+            transition: all 0.2s;
+          }
+        }
       }
     }
   }
