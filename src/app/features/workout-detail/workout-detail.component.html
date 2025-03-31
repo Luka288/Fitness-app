@@ -27,6 +27,17 @@
                 metricInputControl.get(item)?.touched
             }"
           />
+          @if (item === 'distance') {
+          <select name="" id="" formControlName="unit">
+            <option value="KM">KM</option>
+            <option value="MILES">Miles</option>
+          </select>
+          } @if (item === 'time') {
+          <select name="" id="" formControlName="timeUnit">
+            <option value="HOUR">HOUR</option>
+            <option value="MINUTES">MINUTES</option>
+          </select>
+          }
           <div
             class="errC"
             *ngIf="

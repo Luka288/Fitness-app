@@ -1,9 +1,3 @@
-<!-- <div class="card">
-  <span>{{ activity.activityName! | transformStr }} |</span>
-  <span>
-    {{ activity.reps ? `Reps: ${activity.reps}` : activity.sets ? `Sets: ${activity.sets}` :  `Time: ${activity.time}` }}
-  </span>
-</div> -->
 <div class="card">
   <div class="activity">
     <p>
@@ -12,26 +6,12 @@
   </div>
   <div class="details">
     <p>
-      {{ activity.reps ? `Reps: ${activity.reps}` : activity.sets ? `Sets: ${activity.sets}` :  `Time: ${activity.time}` }}
+      {{ activity.reps ? `Reps: ${activity.reps}` : activity.sets ? `Sets: ${activity.sets}` :  `Time: ${activity.time} ${activity.timeUnit}` }}
       |
     </p>
-    <p
-      *ngIf="
-        activity.activityName === 'morning_run' ||
-        activity.activityName === 'plank_hold'
-      "
-    >
-      Distance: {{ activity.distance }} |
+    <p *ngIf="activity.distance !== '' || !activity.distance">
+      Distance: {{ activity.distance }} {{ activity.unit }} |
     </p>
-    <p
-      *ngIf="
-        activity.activityName === 'morning_run' ||
-        activity.activityName === 'plank_hold'
-      "
-    >
-      Time: {{ activity.time }}
-    </p>
-
     <p>Calories: {{ activity.calories }} |</p>
   </div>
 </div>

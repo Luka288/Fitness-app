@@ -6,6 +6,8 @@ export interface BaseWorkoutData {
   reps: string;
   sets: string;
   weight: string;
+  timeUnit: number;
+  unit: string;
 }
 
 export interface WorkoutData extends Partial<BaseWorkoutData> {}

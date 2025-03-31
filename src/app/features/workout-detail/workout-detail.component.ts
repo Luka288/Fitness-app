@@ -43,6 +43,14 @@ export class WorkoutDetailComponent {
         metric,
         new FormControl('', [Validators.required, Validators.min(1)])
       );
+
+      if (metric === 'distance') {
+        this.metricInputControl.addControl('unit', new FormControl('KM'));
+      }
+
+      if (metric === 'time') {
+        this.metricInputControl.addControl('timeUnit', new FormControl('HOUR'));
+      }
     });
   }
 
@@ -51,8 +59,13 @@ export class WorkoutDetailComponent {
       Object.values(this.metricInputControl.controls).forEach((control) => {
         (control as AbstractControl).markAsTouched();
       });
+      return;
     }
+    console.log(this.metricInputControl.value);
     this.workoutService.sendData(this.metricInputControl.value);
-    this.metricInputControl.reset();
+    this.metricInputControl.reset({
+      unit: 'KM',
+      timeUnit: 'HOUR',
+    });
   }
 }

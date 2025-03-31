@@ -32,6 +32,7 @@ main {
 
         .inputW {
           width: fit-content;
+          position: relative;
 
           label {
             font-size: 14px;
@@ -98,6 +99,17 @@ main {
             background-color: #8a8adf;
             transition: all 0.2s;
           }
+        }
+
+        select {
+          width: 70px;
+          outline: none;
+          border: none;
+          background-color: transparent;
+          position: absolute;
+          margin-top: 20px;
+          font-size: 15px;
+          right: 0px;
         }
       }
     }

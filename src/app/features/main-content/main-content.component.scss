@@ -121,11 +121,25 @@ main {
         text-transform: capitalize;
       }
     }
+
+    .activities-title {
+      width: 100%;
+      border-bottom: 2px solid #0072ff;
+      text-align: center;
+
+      p {
+        padding: 0;
+        margin: 2px;
+        font-family: $inter;
+        font-size: 20px;
+      }
+    }
   }
 
   .cards {
     display: flex;
     flex-direction: column;
     gap: 15px;
+    margin-top: 20px;
   }
 }
