@@ -10,10 +10,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { filter, of } from 'rxjs';
-import { object } from '@angular/fire/database';
 import { WorkoutService } from '../../shared/services/workout.service';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   imports: [RouterModule, CommonModule, ReactiveFormsModule],
@@ -28,24 +25,18 @@ export class WorkoutDetailComponent {
 
   metricInputControl = new FormGroup({});
 
-  // distance: new FormControl('', [Validators.required, Validators.min(1)]),
-  // time: new FormControl('', [Validators.required, Validators.min(1)]),
-  // calories: new FormControl('', [Validators.required, Validators.min(1)]),
-  // reps: new FormControl('', [Validators.required, Validators.min(1)]),
-  // sets: new FormControl('', [Validators.required, Validators.min(1)]),
-  // weight: new FormControl('', [Validators.required, Validators.min(1)]),
-
   constructor() {}
 
   ngOnInit(): void {
     const currWorkout = this.router.snapshot.paramMap.get('id');
     this.workout = workoutTypes.find((workout) => workout.id === currWorkout);
-    console.log(this.workout);
 
-    // this.metricInputControl.addControl(
-    //   'activityName',
-    //   new FormControl(currWorkout)
-    // );
+    // ჭირდება რეფაქტორი უნდა გადასცეს workoutService ახლანდელი
+    // აქტივობის სახელი
+    this.metricInputControl.addControl(
+      'activityName',
+      new FormControl(currWorkout)
+    );
 
     this.workout?.metrics.forEach((metric) => {
       this.metricInputControl.addControl(
@@ -61,23 +52,7 @@ export class WorkoutDetailComponent {
         (control as AbstractControl).markAsTouched();
       });
     }
-    // ! რეფაქტორი ჭირდება
-    const currWorkout = this.router.snapshot.paramMap.get('id');
-    this.workoutService.sendData(this.metricInputControl.value, currWorkout!);
-    console.log('data sent');
+    this.workoutService.sendData(this.metricInputControl.value);
+    this.metricInputControl.reset();
   }
 }
-
-// if (this.metricInputControl.valid) {
-//   const filteredValues: Record<string, string> = {};
-//   for (const key in this.metricInputControl.controls) {
-//     const val = this.metricInputControl.get(key)?.value;
-
-//     if (val !== '' && val !== null) {
-//       filteredValues[key] = val;
-//     }
-//   }
-//   console.log(filteredValues);
-
-//   this.metricInputControl.reset();
-// }

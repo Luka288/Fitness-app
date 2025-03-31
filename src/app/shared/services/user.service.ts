@@ -31,13 +31,4 @@ export class UserService {
   async currentUser() {
     return this.FireAuth.currentUser || false;
   }
-
-  getUserActivity() {
-    const user = this.FireAuth.currentUser;
-    if (!user) return of([]);
-
-    const workouts = collection(this.Fire, `users/${user.uid}/workouts`);
-
-    return collectionData(workouts, { idField: 'id' });
-  }
 }

@@ -1,12 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FirebaseAuthService } from '../../shared/services/firebase-auth.service';
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../shared/services/data.service';
 import { CardComponent } from '../../shared/components/card/card.component';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
-import { UserService } from '../../shared/services/user.service';
-import { of } from 'rxjs';
+import { WorkoutService } from '../../shared/services/workout.service';
+import { WorkoutData } from '../../shared/interfaces/workout.data.interface';
 
 @Component({
   selector: 'app-main-content',
@@ -17,18 +17,21 @@ import { of } from 'rxjs';
 export class MainContentComponent {
   private readonly autService = inject(FirebaseAuthService);
   private readonly dataService = inject(DataService);
-  private readonly userService = inject(UserService);
+  readonly workoutService = inject(WorkoutService);
 
   user = toSignal(this.autService.currentUseR(), { initialValue: null });
-  userActivities = toSignal(this.userService.getUserActivity(), {
-    initialValue: [],
-  });
+  userActivities = signal<WorkoutData[]>([]);
+
+  // userActivities = toSignal(this.workoutService.getUserActivity());
+
   workoutTypes = toSignal(this.dataService.workoutTypes(), {
     initialValue: [],
   });
 
-  constructor() {
-    console.log(this.user());
+  ngOnInit(): void {
+    this.workoutService.getUserActivity().subscribe((res) => {
+      this.userActivities.set(res as WorkoutData[]);
+    });
   }
 
   userWorkouts(w: WorkoutInterface) {

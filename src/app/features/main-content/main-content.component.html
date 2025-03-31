@@ -47,5 +47,14 @@
     <div class="place-holder" *ngIf="userActivities().length === 0">
       <p>no activities found.</p>
     </div>
+    @for (item of userActivities(); track $index) {
+    <p>
+      {{ item.activityName }}
+      <span>
+        {{ item.reps ? `Reps: ${item.reps}` : item.sets ? `Sets: ${item.sets}` :  `Time: ${item.time}` }}
+      </span>
+    </p>
+
+    }
   </section>
 </main>

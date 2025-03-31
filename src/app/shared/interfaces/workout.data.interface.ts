@@ -1,4 +1,5 @@
 export interface BaseWorkoutData {
+  activityName: string;
   distance: string;
   time: string;
   calories: string;
