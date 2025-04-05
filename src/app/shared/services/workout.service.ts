@@ -1,10 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { collectionData, Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { docData, Firestore } from '@angular/fire/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { WorkoutData } from '../interfaces/workout.data.interface';
 import { AlertsService } from './alerts.service';
-import { of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,28 +14,35 @@ export class WorkoutService {
   private readonly fire = inject(Firestore);
   private readonly alerts = inject(AlertsService);
 
-  async sendData(workoutData: WorkoutData) {
+  async saveData(workoutData: WorkoutData) {
     try {
       const user = this.auth.currentUser;
       if (!user) return;
 
       const date = new Date().toISOString().split('T')[0];
 
-      const workoutRef = collection(this.fire, `users/${user.uid}/workouts`);
+      const workoutRef = doc(this.fire, `users/${user.uid}`);
 
-      await addDoc(workoutRef, { ...workoutData, date: date });
+      await updateDoc(workoutRef, {
+        activities: arrayUnion({ ...workoutData, date: date }),
+      });
+
       this.alerts.toast('Data saved!', 'success', '');
     } catch (error) {
       this.alerts.toast('Something went wrong try again', 'error', 'red');
     }
   }
 
-  getUserActivity() {
+  // ფუნქციას მოაქვს ახლანდელი მომხმარებლის ინფორმაცია
+  // და აბრუნებს მხოლოდ მომხმარებლის აქტივობების მასივს
+  userActivity(): Observable<WorkoutData[]> {
     const user = this.auth.currentUser;
     if (!user) return of([]);
 
-    const workouts = collection(this.fire, `users/${user.uid}/workouts`);
+    const userDoc = doc(this.fire, `users/${user.uid}`);
 
-    return collectionData(workouts, { idField: 'id' });
+    return docData(userDoc).pipe(
+      map((data) => (data ?? {})['activities'] || [])
+    );
   }
 }

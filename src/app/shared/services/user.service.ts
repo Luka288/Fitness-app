@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import { Auth, user } from '@angular/fire/auth';
 import { collectionData, doc, Firestore } from '@angular/fire/firestore';
-import { collection, setDoc } from 'firebase/firestore';
-import { of } from 'rxjs';
+import { collection, getDocs, setDoc } from 'firebase/firestore';
+import { from, Observable, of } from 'rxjs';
+import { userInterface } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,16 @@ export class UserService {
       // sweet alerts maybe?
       return error;
     }
+  }
+
+  getAllUsers(): Observable<userInterface[]> {
+    const userRef = collection(this.Fire, 'users');
+
+    return from(
+      getDocs(userRef).then((q) => {
+        return q.docs.map((doc) => doc.data() as userInterface);
+      })
+    );
   }
 
   async currentUser() {

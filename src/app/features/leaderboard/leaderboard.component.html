@@ -1,1 +1,3 @@
-<p>leaderboard works!</p>
+<main>
+  <app-leaderboard-card *ngFor="let user of users()" [userData]="user" />
+</main>

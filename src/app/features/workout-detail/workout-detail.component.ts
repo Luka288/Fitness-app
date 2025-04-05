@@ -62,7 +62,7 @@ export class WorkoutDetailComponent {
       return;
     }
     console.log(this.metricInputControl.value);
-    this.workoutService.sendData(this.metricInputControl.value);
+    this.workoutService.saveData(this.metricInputControl.value);
     this.metricInputControl.reset({
       unit: 'KM',
       timeUnit: 'HOUR',
