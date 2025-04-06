@@ -11,6 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { WorkoutService } from '../../shared/services/workout.service';
+import { CalculateService } from '../../shared/services/calculate.service';
 
 @Component({
   imports: [RouterModule, CommonModule, ReactiveFormsModule],
@@ -20,6 +21,7 @@ import { WorkoutService } from '../../shared/services/workout.service';
 export class WorkoutDetailComponent {
   private readonly router = inject(ActivatedRoute);
   private readonly workoutService = inject(WorkoutService);
+  private readonly calculateService = inject(CalculateService);
 
   workout: WorkoutInterface | undefined;
 
@@ -61,11 +63,20 @@ export class WorkoutDetailComponent {
       });
       return;
     }
-    console.log(this.metricInputControl.value);
-    this.workoutService.saveData(this.metricInputControl.value);
+
+    this.calulateSpeedCal();
+
+    // this.workoutService.saveData(this.metricInputControl.value);
     this.metricInputControl.reset({
       unit: 'KM',
       timeUnit: 'HOUR',
     });
+  }
+
+  calulateSpeedCal() {
+    const currWorkout = this.router.snapshot.paramMap.get('id');
+    const formData = this.metricInputControl.value;
+
+    this.calculateService.processWorkoutData(currWorkout!, formData);
   }
 }
