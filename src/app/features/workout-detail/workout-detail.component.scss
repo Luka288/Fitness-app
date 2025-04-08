@@ -5,48 +5,13 @@ main {
   width: 100%;
   height: 100%;
 
-  #topSec {
-    width: 75%;
-    max-height: 0;
-    opacity: 0;
-    background: rgba(255, 255, 255, 0.34);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    margin: auto;
-    padding: 16px;
-    font-family: $inter;
-    font-size: 22px;
-    transition: all 0.2s;
-
-    .title-container {
-      h1 {
-        padding: 0;
-        margin: 0;
-      }
-    }
-
-    &.active {
-      transition: all 0.2s;
-      max-height: fit-content;
-      opacity: 1;
-    }
-  }
-
   #inputsSec {
     width: 75%;
     height: fit-content;
     margin: auto;
     margin-top: 30px;
     padding: 20px;
-
-    // გამჭირვალე ეფექტი გასატანია variables.scss ფაილში
-    background: rgba(255, 255, 255, 0.34);
-    border-radius: 10px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    @include transparentGlass;
 
     .inputs {
       width: 100%;

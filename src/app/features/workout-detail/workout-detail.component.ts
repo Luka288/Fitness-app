@@ -13,13 +13,16 @@ import {
 import { WorkoutService } from '../../shared/services/workout.service';
 import { CalculateService } from '../../shared/services/calculate.service';
 import { userFormData } from '../../shared/interfaces/formData.interface';
-import {
-  calculatedData,
-  calculatedData2,
-} from '../../shared/interfaces/calculate.interface';
+import { calculatedData } from '../../shared/interfaces/calculate.interface';
+import { ActivityInfoComponent } from '../../shared/components/activity-info/activity-info.component';
 
 @Component({
-  imports: [RouterModule, CommonModule, ReactiveFormsModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    ReactiveFormsModule,
+    ActivityInfoComponent,
+  ],
   templateUrl: './workout-detail.component.html',
   styleUrl: './workout-detail.component.scss',
 })
@@ -30,7 +33,6 @@ export class WorkoutDetailComponent {
 
   workout: WorkoutInterface | undefined;
   calculatedData = signal<calculatedData[]>([]);
-  calc = [];
 
   metricInputControl = new FormGroup({});
 
@@ -86,7 +88,6 @@ export class WorkoutDetailComponent {
     this.calculateService
       .processWorkoutData(activityName, formData)
       ?.subscribe((res: calculatedData[]) => {
-        console.log(res);
         this.calculatedData.set(res);
       });
   }

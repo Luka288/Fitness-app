@@ -1,0 +1,11 @@
+<section id="dataSection" [ngClass]="calculatedData ? 'active' : ''">
+  <div class="title-container">
+    <h1>Activity Calculations</h1>
+  </div>
+  <p>
+    {{ calculatedData.speed ? `Avg Speed: ${calculatedData.speed} Km/h` : `Reps: ${calculatedData.totalReps}` }}
+  </p>
+  <p>Burned Calories: {{ calculatedData.burnedCalories }} KCAL</p>
+  <p *ngIf="calculatedData.MET">Effort: {{ calculatedData.MET }}</p>
+  <p *ngIf="calculatedData.time">Time spent {{ calculatedData.time }}</p>
+</section>
