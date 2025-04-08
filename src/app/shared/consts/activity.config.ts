@@ -10,7 +10,11 @@ export const activityConfig = {
 
       const calories = (8.0 * 3.5 * weight * timeInMinutes) / 200;
 
-      return { totalReps, calories: parseFloat(calories.toFixed(2)) };
+      return {
+        totalReps: totalReps,
+        burnedCalories: parseFloat(calories.toFixed(2)),
+        activityName: 'Push ups',
+      };
     },
   },
 
@@ -24,7 +28,11 @@ export const activityConfig = {
 
       const calories = (6.0 * 3.5 * weight * timeInMinutes) / 200;
 
-      return { totalReps, calories: parseFloat(calories.toFixed(2)) };
+      return {
+        totalReps: totalReps,
+        burnedCalories: parseFloat(calories.toFixed(2)),
+        activityName: 'Bodyweight Squats',
+      };
     },
   },
 
@@ -37,7 +45,11 @@ export const activityConfig = {
 
       const calories = (9.0 * 3.5 * weight * timeInMinutes) / 200;
 
-      return { totalReps, calories: parseFloat(calories.toFixed(2)) };
+      return {
+        totalReps: totalReps,
+        burnedCalories: parseFloat(calories.toFixed(2)),
+        activityName: 'Pull ups',
+      };
     },
   },
 
@@ -62,7 +74,12 @@ export const activityConfig = {
 
       const burnedCalories = (MET * 3.5 * formData.kg! * timeInMinutes) / 200;
 
-      return { speed: speed, burnedCalories: burnedCalories, MET: MET };
+      return {
+        speed: speed,
+        burnedCalories: burnedCalories,
+        MET: MET === 8.0 ? 'Light' : MET === 9.8 ? 'Moderate' : 'Vigorous',
+        activityName: 'Morning Run',
+      };
     },
   },
 
@@ -87,7 +104,12 @@ export const activityConfig = {
 
       const burnedCaloreis = (MET * 3.5 * formData.kg! * timeInMinutes) / 200;
 
-      return { speed: speed, burnedCaloreis: burnedCaloreis, met: MET };
+      return {
+        speed: speed,
+        burnedCaloreis: burnedCaloreis,
+        MET: MET === 8.0 ? 'Light' : MET === 9.8 ? 'Moderate' : 'Vigorous',
+        activityName: 'Cycling',
+      };
     },
   },
 
@@ -102,8 +124,9 @@ export const activityConfig = {
         200;
 
       return {
-        calories: caloriesBurned,
+        burnedCalories: caloriesBurned,
         time: `${formData.time} ${formData.timeUnit}`,
+        activityName: 'Plank Hold',
       };
     },
   },

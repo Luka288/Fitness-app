@@ -1,5 +1,20 @@
 <main>
-  <section id="topSec"></section>
+  <section
+    id="topSec"
+    [ngClass]="calculatedData() && calculatedData().length > 0 ? 'active' : ''"
+  >
+    <div class="title-container">
+      <h1>Activity Calculations</h1>
+    </div>
+    @for (item of calculatedData(); track $index) {
+    <p>
+      {{ item.speed ? `Avg Speed: ${item.speed} Km/h` : `Reps: ${item.totalReps}` }}
+    </p>
+    <p>Burned Calories: {{ item.burnedCalories }} KCAL</p>
+    <p *ngIf="item.MET">Effort: {{ item.MET }}</p>
+    <p *ngIf="item.time">Time spent {{ item.time }}</p>
+    }
+  </section>
   <section id="inputsSec">
     <div class="title-container">
       <p>

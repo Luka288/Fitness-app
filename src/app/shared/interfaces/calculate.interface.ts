@@ -1,4 +1,20 @@
 export interface calculatedData {
-  speed: number;
-  burnedCalories: number;
+  activityName: string;
+  // აზიდვები...
+  totalReps?: number;
+  // სირბილი, ველოსიპედით სიარული
+  MET?: number;
+  speed?: number;
+  // საერთო მეტრაჟი
+  burnedCalories?: number;
+  time?: string;
+}
+
+export interface calculatedData2 {
+  totalReps?: number;
+  calories?: number;
+  speed?: number;
+  burnedCalories?: number;
+  MET?: number;
+  time?: string;
 }

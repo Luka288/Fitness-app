@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 import { workoutTypes } from '../../shared/consts/workouts';
@@ -12,6 +12,11 @@ import {
 } from '@angular/forms';
 import { WorkoutService } from '../../shared/services/workout.service';
 import { CalculateService } from '../../shared/services/calculate.service';
+import { userFormData } from '../../shared/interfaces/formData.interface';
+import {
+  calculatedData,
+  calculatedData2,
+} from '../../shared/interfaces/calculate.interface';
 
 @Component({
   imports: [RouterModule, CommonModule, ReactiveFormsModule],
@@ -24,6 +29,8 @@ export class WorkoutDetailComponent {
   private readonly calculateService = inject(CalculateService);
 
   workout: WorkoutInterface | undefined;
+  calculatedData = signal<calculatedData[]>([]);
+  calc = [];
 
   metricInputControl = new FormGroup({});
 
@@ -57,6 +64,8 @@ export class WorkoutDetailComponent {
   }
 
   saveWorkout() {
+    const currWorkout = this.router.snapshot.paramMap.get('id');
+
     if (this.metricInputControl.invalid) {
       Object.values(this.metricInputControl.controls).forEach((control) => {
         (control as AbstractControl).markAsTouched();
@@ -64,7 +73,7 @@ export class WorkoutDetailComponent {
       return;
     }
 
-    this.calulateSpeedCal();
+    this.getCalculations(currWorkout!, this.metricInputControl.value);
 
     // this.workoutService.saveData(this.metricInputControl.value);
     this.metricInputControl.reset({
@@ -73,10 +82,12 @@ export class WorkoutDetailComponent {
     });
   }
 
-  calulateSpeedCal() {
-    const currWorkout = this.router.snapshot.paramMap.get('id');
-    const formData = this.metricInputControl.value;
-
-    this.calculateService.processWorkoutData(currWorkout!, formData);
+  getCalculations(activityName: string, formData: userFormData) {
+    this.calculateService
+      .processWorkoutData(activityName, formData)
+      ?.subscribe((res: calculatedData[]) => {
+        console.log(res);
+        this.calculatedData.set(res);
+      });
   }
 }
