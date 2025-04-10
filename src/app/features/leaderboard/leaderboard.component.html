@@ -1,3 +1,25 @@
 <main>
-  <app-leaderboard-card *ngFor="let user of users()" [userData]="user" />
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Total Burned Calories</th>
+        <th>Total Activities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of users()">
+        <td class="username">
+          <span
+            ><img [src]="item.photoURL" alt="Profile Picture" />
+            {{ item.displayName }}</span
+          >
+        </td>
+        <td>calories</td>
+        <td>
+          {{ (item.activities && item.activities.length) || 0 }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </main>

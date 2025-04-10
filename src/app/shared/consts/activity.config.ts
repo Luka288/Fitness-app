@@ -79,6 +79,8 @@ export const activityConfig = {
         burnedCalories: burnedCalories,
         MET: MET === 8.0 ? 'Light' : MET === 9.8 ? 'Moderate' : 'Vigorous',
         activityName: 'Morning Run',
+        time: `${formData.time} ${formData.timeUnit}`,
+        distance: `${formData.distance} ${formData.unit}`,
       };
     },
   },
@@ -109,6 +111,8 @@ export const activityConfig = {
         burnedCaloreis: burnedCaloreis,
         MET: MET === 8.0 ? 'Light' : MET === 9.8 ? 'Moderate' : 'Vigorous',
         activityName: 'Cycling',
+        time: `${formData.time} ${formData.timeUnit}`,
+        distance: `${formData.distance} ${formData.unit}`,
       };
     },
   },

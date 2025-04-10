@@ -6,12 +6,12 @@
   </div>
   <div class="details">
     <p>
-      {{ activity.reps ? `Reps: ${activity.reps}` : activity.sets ? `Sets: ${activity.sets}` :  `Time: ${activity.time} ${activity.timeUnit}` }}
+      {{ activity.totalReps ? `Reps: ${activity.totalReps}` :  `Time: ${activity.time}` }}
       |
     </p>
-    <p *ngIf="activity.distance !== '' || !activity.distance">
-      Distance: {{ activity.distance }} {{ activity.unit }} |
-    </p>
-    <p>Calories: {{ activity.calories }} |</p>
+    <p *ngIf="activity.distance">Distance: {{ activity.distance }} |</p>
+    <p>Calories: {{ activity.burnedCalories }}Kcal |</p>
   </div>
 </div>
+
+<!-- : activity.sets ? `Sets: ${activity.sets} -->

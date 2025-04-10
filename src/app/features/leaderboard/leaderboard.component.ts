@@ -7,7 +7,7 @@ import { LeaderboardCardComponent } from '../../shared/components/leaderboard-ca
 
 @Component({
   selector: 'app-leaderboard',
-  imports: [RouterModule, CommonModule, LeaderboardCardComponent],
+  imports: [RouterModule, CommonModule],
   templateUrl: './leaderboard.component.html',
   styleUrl: './leaderboard.component.scss',
 })

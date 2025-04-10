@@ -5,6 +5,7 @@ export interface formDataInterface {
   reps: number;
   sets: number;
   timeUnit: string;
+  unit: string;
 }
 
 export interface userFormData extends Partial<formDataInterface> {}

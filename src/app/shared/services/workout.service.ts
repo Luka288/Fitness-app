@@ -5,6 +5,7 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { WorkoutData } from '../interfaces/workout.data.interface';
 import { AlertsService } from './alerts.service';
 import { map, Observable, of } from 'rxjs';
+import { calculatedData } from '../interfaces/calculate.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class WorkoutService {
   private readonly fire = inject(Firestore);
   private readonly alerts = inject(AlertsService);
 
-  async saveData(workoutData: WorkoutData) {
+  async saveData(workoutData: calculatedData) {
     try {
       const user = this.auth.currentUser;
       if (!user) return;
@@ -35,7 +36,7 @@ export class WorkoutService {
 
   // ფუნქციას მოაქვს ახლანდელი მომხმარებლის ინფორმაცია
   // და აბრუნებს მხოლოდ მომხმარებლის აქტივობების მასივს
-  userActivity(): Observable<WorkoutData[]> {
+  userActivity(): Observable<calculatedData[]> {
     const user = this.auth.currentUser;
     if (!user) return of([]);
 

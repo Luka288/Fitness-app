@@ -77,7 +77,6 @@ export class WorkoutDetailComponent {
 
     this.getCalculations(currWorkout!, this.metricInputControl.value);
 
-    // this.workoutService.saveData(this.metricInputControl.value);
     this.metricInputControl.reset({
       unit: 'KM',
       timeUnit: 'HOUR',

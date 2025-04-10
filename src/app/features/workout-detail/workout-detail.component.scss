@@ -50,6 +50,11 @@ main {
               transition: all 0.4s;
             }
 
+            &.filled {
+              border-bottom: 3px solid green;
+              transition: all 0.4s;
+            }
+
             &.errBorder {
               border-bottom: 3px solid red;
               transition: all 0.4s;
