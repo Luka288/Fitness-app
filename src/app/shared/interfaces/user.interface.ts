@@ -1,9 +1,10 @@
-import { WorkoutData } from './workout.data.interface';
+import { userData, WorkoutData } from './workout.data.interface';
 
 export interface userInterface {
   displayName: string;
   email: string;
   photoURL: string;
   uid: string;
-  activities: WorkoutData[];
+  totalBurned?: number;
+  activities: userData[];
 }

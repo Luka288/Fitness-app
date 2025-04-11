@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, user } from '@angular/fire/auth';
-import { collectionData, doc, Firestore } from '@angular/fire/firestore';
+import { Auth, User } from '@angular/fire/auth';
+import { doc, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, setDoc } from 'firebase/firestore';
 import { from, Observable, of } from 'rxjs';
 import { userInterface } from '../interfaces/user.interface';
@@ -29,12 +29,27 @@ export class UserService {
     }
   }
 
+  // აბრუნებს ყველა მომხმარებელს მათი აქტივობებით
+  // ზრდის მიხედვით
   getAllUsers(): Observable<userInterface[]> {
     const userRef = collection(this.Fire, 'users');
 
     return from(
       getDocs(userRef).then((q) => {
-        return q.docs.map((doc) => doc.data() as userInterface);
+        const users = q.docs.map((doc) => {
+          const user = doc.data() as userInterface;
+
+          const totalBurned = (user.activities || []).reduce(
+            (total, activity) => total + activity.burnedCalories,
+            0
+          );
+
+          return { ...user, totalBurned };
+        });
+
+        return users.sort(
+          (a, b) => (b.totalBurned || 0) - (a.totalBurned || 0)
+        );
       })
     );
   }

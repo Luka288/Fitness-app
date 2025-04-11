@@ -1,4 +1,11 @@
 <main>
+  <div class="aboutPage">
+    <p>
+      <i class="fa-solid fa-circle-exclamation"></i> Welcome to the Leaderboard!
+      Compete with others, stay active, and climb your way to the top to become
+      the ultimate champion.
+    </p>
+  </div>
   <table>
     <thead>
       <tr>
@@ -12,10 +19,12 @@
         <td class="username">
           <span
             ><img [src]="item.photoURL" alt="Profile Picture" />
-            {{ item.displayName }}</span
-          >
+            {{ item.uid === user.currentUser?.uid ? "You" : item.displayName }}
+          </span>
         </td>
-        <td>calories</td>
+        <td>
+          {{ item.totalBurned }}
+        </td>
         <td>
           {{ (item.activities && item.activities.length) || 0 }}
         </td>

@@ -2,10 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { activityConfig, ActivityType } from '../consts/activity.config';
 import { userFormData } from '../interfaces/formData.interface';
-import {
-  calculatedData,
-  calculatedData2,
-} from '../interfaces/calculate.interface';
+import { calculatedData } from '../interfaces/calculate.interface';
 import { WorkoutService } from './workout.service';
 
 @Injectable({

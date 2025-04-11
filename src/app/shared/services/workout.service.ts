@@ -25,7 +25,11 @@ export class WorkoutService {
       const workoutRef = doc(this.fire, `users/${user.uid}`);
 
       await updateDoc(workoutRef, {
-        activities: arrayUnion({ ...workoutData, date: date }),
+        activities: arrayUnion({
+          ...workoutData,
+          date: date,
+          savedAt: new Date().toISOString(),
+        }),
       });
 
       this.alerts.toast('Data saved!', 'success', '');

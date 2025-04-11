@@ -1,16 +1,40 @@
+@use "../../scss/variables" as *;
+@use "../../scss/mixins" as *;
+
 main {
   width: 100%;
+  font-family: $inter;
+
+  .aboutPage {
+    width: 75%;
+    height: 100px;
+    @include flex();
+    background-color: white;
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: center;
+
+    p {
+      color: #ff9900;
+      font-size: 20px;
+
+      i {
+        font-size: 20px;
+      }
+    }
+  }
 
   table {
     width: 100%;
     border-collapse: collapse;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
     td,
     th {
-      border-left: 1px solid black;
-      border-right: 1px solid black;
-      border-bottom: 1px solid black;
-      padding: 10px;
+      background-color: white;
+      padding: 12px 16px;
+      text-align: left;
+      position: relative;
     }
 
     .username {

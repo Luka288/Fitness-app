@@ -10,12 +10,3 @@ export interface calculatedData {
   time?: string;
   distance: string;
 }
-
-export interface calculatedData2 {
-  totalReps?: number;
-  calories?: number;
-  speed?: number;
-  burnedCalories?: number;
-  MET?: number;
-  time?: string;
-}
