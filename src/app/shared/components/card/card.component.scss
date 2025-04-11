@@ -5,16 +5,14 @@
   width: 90%;
   max-width: 350px;
   height: 150px;
-  background-color: #00aeff;
+  background-color: #005f8d;
   padding: 5px;
   cursor: pointer;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  transition: all 0.1s;
-  border: 1px solid #00a1ff;
-  border-top-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border: 2px solid #004b73;
+  border-radius: 15px;
 
   .card-title {
     text-align: center;
