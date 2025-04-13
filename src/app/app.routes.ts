@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { routeGuard } from './shared/guards/route.guard';
 import { checkUserGuard } from './shared/guards/check-user.guard';
+import { leaderboardResolver } from './shared/resolvers/leaderboard.resolver';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,9 @@ export const routes: Routes = [
           import('./features/leaderboard/leaderboard.component').then(
             (c) => c.LeaderboardComponent
           ),
+        resolve: {
+          users: leaderboardResolver,
+        },
       },
 
       {

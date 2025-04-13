@@ -1,9 +1,8 @@
-import { Component, computed, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { UserService } from '../../shared/services/user.service';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Auth } from '@angular/fire/auth';
+import { userInterface } from '../../shared/interfaces/user.interface';
 
 @Component({
   selector: 'app-leaderboard',
@@ -12,12 +11,12 @@ import { Auth } from '@angular/fire/auth';
   styleUrl: './leaderboard.component.scss',
 })
 export class LeaderboardComponent {
-  private readonly userService = inject(UserService);
+  private readonly activatedRoute = inject(ActivatedRoute);
   readonly user = inject(Auth);
 
-  users = toSignal(this.userService.getAllUsers(), { initialValue: [] });
+  users = signal<userInterface[]>([]);
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe(console.log);
+    this.users.set(this.activatedRoute.snapshot.data['users']);
   }
 }
