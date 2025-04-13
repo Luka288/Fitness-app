@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterModule } from '@angular/router';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
@@ -19,9 +19,13 @@ export class SidePanelComponent {
     initialValue: [],
   });
 
-  constructor() {}
+  enablePanel = signal<boolean>(true);
 
   logOut() {
     this.authservice.logOut();
+  }
+
+  toggle() {
+    this.enablePanel.set(!this.enablePanel());
   }
 }

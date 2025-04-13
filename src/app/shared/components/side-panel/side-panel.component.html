@@ -1,18 +1,33 @@
-<div class="side-panel">
+<div
+  class="side-panel"
+  [ngClass]="{ inactive: !enablePanel(), active: enablePanel() }"
+>
   <div class="buttons">
+    <ul id="panelBars">
+      <li id="bars">
+        <i
+          id="toggler"
+          class="fa-solid"
+          [class.fa-bars-staggered]="enablePanel()"
+          [class.fa-bars]="!enablePanel()"
+          (click)="toggle()"
+        ></i>
+
+        <!-- <i class="fa-solid fa-bars-staggered"></i> -->
+      </li>
+    </ul>
     <ul>
       @for (item of sidePanelItems(); track $index) {
-      <li>
+      <li [routerLink]="[item.href]">
         <i [ngClass]="item.icon"></i>
-        <a [routerLink]="[item.href]">
+        <a *ngIf="enablePanel()">
           {{ item.title }}
         </a>
       </li>
       }
       <li>
-        <a (click)="logOut()"
-          ><i class="fa-solid fa-right-from-bracket"></i> Logout</a
-        >
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <a (click)="logOut()" *ngIf="enablePanel()">Logout</a>
       </li>
     </ul>
   </div>

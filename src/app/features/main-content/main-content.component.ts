@@ -28,7 +28,9 @@ export class MainContentComponent {
     initialValue: [],
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('test');
+  }
 
   userWorkouts(w: WorkoutInterface) {
     console.log(w);
