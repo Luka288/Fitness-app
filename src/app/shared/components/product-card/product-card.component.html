@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-header">
+    <img [src]="productInput?.product?.image_url" alt="" />
+    <h1>
+      {{ productInput?.product?.brands }}
+    </h1>
+  </div>
+  <div class="card-body" *ngIf="productInput">
+    <p
+      *ngIf="
+        productInput.product.nutriments.fat !== undefined;
+        else fatFallback
+      "
+    >
+      Fat: {{ productInput.product.nutriments.fat }}g
+    </p>
+    <ng-template #fatFallback>
+      <p>
+        Processing Level: NOVA Group
+        {{ productInput.product.nutriments["nova-group"] }}
+      </p>
+    </ng-template>
+
+    <p
+      *ngIf="
+        productInput.product.nutriments['energy-kcal'] !== undefined;
+        else energyFallback
+      "
+    >
+      Energy: {{ productInput.product.nutriments["energy-kcal"] }}kcal
+    </p>
+
+    <ng-template #energyFallback>
+      <p>
+        Energy: {{ productInput.product.nutriments["nova-group_100g"] }}kcal
+      </p>
+    </ng-template>
+    <p
+      *ngIf="
+        productInput.product.nutriments.proteins !== undefined;
+        else proteinFallback
+      "
+    >
+      Proteins: {{ productInput.product.nutriments.proteins }}g
+    </p>
+    <ng-template #proteinFallback>
+      <p>
+        Nova serving:
+        {{ productInput.product.nutriments["nova-group_serving"] }}
+      </p>
+    </ng-template>
+    <p
+      *ngIf="
+        productInput.product.nutriments.salt !== undefined;
+        else saltFallback
+      "
+    >
+      Salt: {{ productInput.product.nutriments.salt }}g
+    </p>
+    <ng-template #saltFallback>
+      <p>
+        Nutrition score:
+        {{ productInput.product.nutriments["nutrition-score-fr"] }}
+      </p>
+    </ng-template>
+
+    <p
+      *ngIf="
+        productInput.product.nutriments.sugars !== undefined;
+        else sugarFallback
+      "
+    >
+      Sugars: {{ productInput.product.nutriments.sugars }}g
+    </p>
+    <ng-template #sugarFallback>
+      <p>
+        Nutrition score per 100g:
+        {{ productInput.product.nutriments["nutrition-score-fr_100g"] }}
+      </p>
+    </ng-template>
+  </div>
+  <button>Add</button>
+  <!-- მომავალში რაციონში დასამატებლად <button>Add</button> -->
+</div>

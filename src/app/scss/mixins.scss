@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 @mixin flex($justify: center, $align: center, $wrap: wrap, $dir: row) {
   display: flex;
   justify-content: $justify;
@@ -18,4 +20,74 @@
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+}
+
+@mixin errorText($textColor: red, $font: $inter, $transform: capitalize) {
+  text-transform: $transform;
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  font-family: $font;
+  color: $textColor;
+  transition: all 0.2s;
+}
+
+@mixin custom-input(
+  $border-color: blue,
+  $focus-color: green,
+  $error-color: red,
+  $bg-color: #f1f1f1
+) {
+  width: 450px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  padding: 10px;
+  border-bottom: 3px solid $border-color;
+  background-color: $bg-color;
+  transition: all 0.4s;
+
+  &:focus {
+    border-bottom: 3px solid $focus-color;
+    transition: all 0.4s;
+  }
+
+  &.filled {
+    border-bottom: 3px solid $focus-color;
+    transition: all 0.4s;
+  }
+
+  &.errBorder {
+    border-bottom: 3px solid $error-color;
+    transition: all 0.4s;
+  }
+
+  &::placeholder {
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: capitalize;
+    font-family: $inter;
+  }
+}
+
+@mixin customFormButton(
+  $bgColor: #4b4bdf,
+  $fontColor: white,
+  $hoverColor: #8a8adf
+) {
+  width: 150px;
+  padding: 10px;
+  background-color: $bgColor;
+  color: $fontColor;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: $hoverColor;
+    transition: all 0.2s;
+  }
 }

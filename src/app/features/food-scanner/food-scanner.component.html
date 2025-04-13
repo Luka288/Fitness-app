@@ -1,0 +1,28 @@
+<main>
+  <form [formGroup]="barcodeGroup" (ngSubmit)="submit()">
+    <div class="inputWrap">
+      <input
+        type="text"
+        formControlName="barcodeInput"
+        placeholder="Enter product bar code"
+        [ngClass]="{
+          errBorder:
+            barcodeGroup.controls.barcodeInput.invalid &&
+            barcodeGroup.controls.barcodeInput.touched,
+          filled: barcodeGroup.controls.barcodeInput.value
+        }"
+      />
+      @if (barcodeGroup.controls.barcodeInput.hasError('required') &&
+      barcodeGroup.controls.barcodeInput.touched) {
+      <p class="error-message">Barcode is required</p>
+      }
+    </div>
+    <button>Search product</button>
+  </form>
+
+  <section id="placeholderSec"></section>
+
+  <section id="foundPorduct" *ngIf="product()">
+    <app-product-card [productInput]="product()" />
+  </section>
+</main>

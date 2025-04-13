@@ -9,6 +9,11 @@ export const sidePanel: BaseHeader[] = [
     href: 'leaderboard',
     icon: ['fa-solid', 'fa-chart-simple'],
   },
+  {
+    title: 'Scanner',
+    href: 'scanner',
+    icon: ['fa-solid', 'fa-utensils'],
+  },
 ];
 
 // <i class="fa-solid fa-chart-simple"></i>

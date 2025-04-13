@@ -51,6 +51,15 @@ export const routes: Routes = [
             (c) => c.WorkoutDetailComponent
           ),
       },
+
+      {
+        title: 'Fitness app | Food tracker',
+        path: 'scanner',
+        loadComponent: () =>
+          import('./features/food-scanner/food-scanner.component').then(
+            (c) => c.FoodScannerComponent
+          ),
+      },
     ],
   },
 

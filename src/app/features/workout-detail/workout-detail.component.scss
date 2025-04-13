@@ -34,68 +34,18 @@ main {
           }
 
           input {
-            width: 450px;
-            height: 24px;
-            border: 1px solid black;
-            border-radius: 3px;
-            outline: none;
-            border: none;
-            padding: 10px;
-            border-bottom: 3px solid blue;
-            background-color: #f1f1f1;
-            transition: all 0.4s;
-
-            &:focus {
-              border-bottom: 3px solid green;
-              transition: all 0.4s;
-            }
-
-            &.filled {
-              border-bottom: 3px solid green;
-              transition: all 0.4s;
-            }
-
-            &.errBorder {
-              border-bottom: 3px solid red;
-              transition: all 0.4s;
-            }
-
-            &::placeholder {
-              font-size: 14px;
-              font-weight: 400;
-              text-transform: capitalize;
-              font-family: $inter;
-            }
+            @include custom-input();
           }
         }
 
         .errC {
           p {
-            text-transform: capitalize;
-            padding: 0;
-            margin: 0;
-            font-size: 15px;
-            font-family: $inter;
-            color: red;
-            transition: all 0.2s;
+            @include errorText();
           }
         }
 
         button {
-          width: 150px;
-          padding: 10px;
-          background-color: #4b4bdf;
-          color: white;
-          outline: none;
-          border: none;
-          cursor: pointer;
-          transition: all 0.2s;
-          border-radius: 3px;
-
-          &:hover {
-            background-color: #8a8adf;
-            transition: all 0.2s;
-          }
+          @include customFormButton();
         }
 
         select {

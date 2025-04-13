@@ -1,0 +1,25 @@
+@use "../../../scss/mixins" as *;
+@use "../../../scss/variables" as *;
+
+.card {
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  box-sizing: border-box;
+  padding: 15px;
+  border-radius: 3px;
+  background-color: #ffffff;
+
+  .card-header {
+    @include flex(center, center, wrap, column);
+  }
+
+  .card-body {
+    font-family: $poppins;
+    font-size: 18px;
+  }
+
+  button {
+    @include customFormButton();
+  }
+}
