@@ -91,3 +91,9 @@
     transition: all 0.2s;
   }
 }
+
+@mixin cardBoxShadow($br: 8px) {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: $br;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

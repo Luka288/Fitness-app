@@ -20,9 +20,61 @@
     <button>Search product</button>
   </form>
 
-  <section id="placeholderSec"></section>
-
   <section id="foundPorduct" *ngIf="product()">
     <app-product-card [productInput]="product()" />
+  </section>
+
+  <section id="caution" *ngIf="!product()">
+    <div class="placeholderText">
+      <p>
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        Some products may not exist in the database. This could happen if the
+        item is rare, new, or the barcode was entered incorrectly. Double-check
+        the code and try again.
+      </p>
+    </div>
+  </section>
+
+  <!-- *ngIf="!product()" -->
+  <section id="placeholderSec">
+    <div class="info-card">
+      <div class="info-heading">
+        <b><i class="fa-regular fa-circle-question"></i> How It Works</b>
+      </div>
+      <div class="info-body">
+        <p>
+          We pull information directly from a variety of databases to help you
+          make informed choices about what you're eating.
+        </p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-heading">
+        <b><i class="fa-solid fa-heart-pulse"></i> Health Tips</b>
+      </div>
+      <div class="info-body">
+        <p>
+          Did you know? A balanced diet includes a mix of macronutrients:
+          protein, carbs, and fats!
+        </p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-heading">
+        <b
+          ><i class="fa-solid fa-barcode"></i> Why Barcode Information
+          Matters</b
+        >
+      </div>
+      <div class="info-body">
+        <p>
+          By using the barcode, we can give you accurate and up-to-date
+          information that helps you stay on track with your dietary goals.
+        </p>
+      </div>
+    </div>
   </section>
 </main>
