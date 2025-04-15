@@ -127,11 +127,13 @@ main {
   }
 
   .user-activites {
-    width: 40%;
-    height: 700px;
+    width: 85%;
+    max-width: 750px;
+    height: 750px;
     padding: 20px;
     border-radius: 3px;
     // border: $base-border-color;
+    box-sizing: border-box;
     background-color: white;
 
     .place-holder {
@@ -167,5 +169,23 @@ main {
     flex-direction: column;
     gap: 15px;
     margin-top: 20px;
+  }
+}
+
+@media (max-width: 1679px) {
+  main {
+    justify-content: center;
+    gap: 15px;
+
+    .user-activites {
+      width: 90%;
+      max-width: 850px;
+      @include flex(flex-start, flex-start, wrap, column);
+    }
+
+    .cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
   }
 }

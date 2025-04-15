@@ -36,3 +36,15 @@
     margin: 0;
   }
 }
+
+@media (max-width: 1679px) {
+  .card {
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    .details {
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+  }
+}

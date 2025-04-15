@@ -26,7 +26,6 @@ export class CalculateService {
 
     if (activity.calculate) {
       const result = activity.calculate(formData);
-      console.log(result);
       this.workoutService.saveData(result as calculatedData);
       return of([result as calculatedData]);
     }

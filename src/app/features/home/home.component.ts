@@ -1,11 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FirebaseAuthService } from '../../shared/services/firebase-auth.service';
-import { workoutTypes } from '../../shared/consts/workouts';
-import { CardComponent } from '../../shared/components/card/card.component';
 import { CommonModule } from '@angular/common';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
-import { headerBtns } from './../../shared/consts/header';
 import { DataService } from '../../shared/services/data.service';
 
 @Component({

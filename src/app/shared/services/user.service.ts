@@ -40,7 +40,7 @@ export class UserService {
           const user = doc.data() as userInterface;
 
           const totalBurned = (user.activities || []).reduce(
-            (total, activity) => total + activity.burnedCalories,
+            (total, activity) => Math.floor(total + activity.burnedCalories),
             0
           );
 

@@ -2,10 +2,24 @@
   <div class="title-container">
     <h1>Activity Calculations</h1>
   </div>
+  <!-- class="fa-solid fa-gauge-high" -->
+  <!-- <i class="fa-solid fa-repeat"></i> -->
   <p>
+    <i
+      [ngClass]="
+        calculatedData.speed ? 'fa-solid fa-gauge-high' : 'fa-solid fa-repeat'
+      "
+    ></i>
     {{ calculatedData.speed ? `Avg Speed: ${calculatedData.speed} Km/h` : `Reps: ${calculatedData.totalReps}` }}
   </p>
-  <p>Burned Calories: {{ calculatedData.burnedCalories }} KCAL</p>
-  <p *ngIf="calculatedData.MET">Effort: {{ calculatedData.MET }}</p>
-  <p *ngIf="calculatedData.time">Time spent {{ calculatedData.time }}</p>
+  <p>
+    <i class="fa-solid fa-fire-flame-curved"></i> Burned Calories:
+    {{ calculatedData.burnedCalories }} KCAL
+  </p>
+  <p *ngIf="calculatedData.MET">
+    <i class="fa-solid fa-person-running"></i> Effort: {{ calculatedData.MET }}
+  </p>
+  <p *ngIf="calculatedData.time">
+    <i class="fa-solid fa-clock"></i> Time: {{ calculatedData.time }}
+  </p>
 </section>

@@ -3,10 +3,15 @@
   height: 100%;
   min-height: 100vh;
   background-color: #f0f4f8;
+  display: flex;
+
+  .side-panel {
+    width: 170px;
+  }
 
   .main-content {
-    flex-grow: 1;
-    margin-left: 170px;
+    width: 100%;
+    box-sizing: border-box;
     padding: 20px;
   }
 }

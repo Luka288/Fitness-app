@@ -47,7 +47,12 @@ export class WorkoutService {
     const userDoc = doc(this.fire, `users/${user.uid}`);
 
     return docData(userDoc).pipe(
-      map((data) => (data ?? {})['activities'] || [])
+      map((data) =>
+        ((data ?? {})['activities'] || []).map((activity: calculatedData) => ({
+          ...activity,
+          burnedCalories: Math.floor(activity.burnedCalories!),
+        }))
+      )
     );
   }
 }
