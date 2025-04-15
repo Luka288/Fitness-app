@@ -75,6 +75,7 @@ main {
 
       .container-title {
         height: 50px;
+        margin-bottom: 15px;
         text-align: center;
         @include flex(center, center);
 
@@ -90,23 +91,23 @@ main {
           color: #333;
           position: relative;
 
-          &::before,
-          &::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            width: 50px;
-            height: 2px;
-            background-color: black;
-          }
+          // &::before,
+          // &::after {
+          //   content: "";
+          //   position: absolute;
+          //   top: 50%;
+          //   width: 50px;
+          //   height: 2px;
+          //   background-color: black;
+          // }
 
-          &::before {
-            left: -60px;
-          }
+          // &::before {
+          //   left: -60px;
+          // }
 
-          &::after {
-            right: -60px;
-          }
+          // &::after {
+          //   right: -60px;
+          // }
         }
       }
 
