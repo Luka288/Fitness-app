@@ -44,23 +44,35 @@
         <p>choose today's activity</p>
       </div>
       <div class="wrokout-cards">
-        <app-card
-          *ngFor="let item of workoutTypes()"
-          [workout]="item"
-          (emitWorkout)="userWorkouts($event)"
-        />
+        <app-card *ngFor="let item of workoutTypes()" [workout]="item" />
       </div>
     </div>
   </div>
-  <section class="user-activites">
-    <div class="activities-title">
-      <p>Activities</p>
+  <section class="workouts-data">
+    <div class="user-meals">
+      <div class="title-container">
+        <p>Daily Meals data</p>
+      </div>
+      <div class="data">
+        <p>Proteins: {{ dailyMeals()?.proteins }}</p>
+        <p>Salt: {{ dailyMeals()?.salt }}</p>
+        <p>Sugars: {{ dailyMeals()?.sugars }}</p>
+        <p>Fat: {{ dailyMeals()?.fat }}</p>
+      </div>
     </div>
-    <div class="place-holder" *ngIf="activities().length === 0">
-      <p>no activities found.</p>
-    </div>
-    <div class="cards">
-      <app-dashboard-card *ngFor="let item of activities()" [cardInfo]="item" />
+    <div class="user-activites">
+      <div class="activities-title">
+        <p>Activities</p>
+      </div>
+      <div class="place-holder" *ngIf="activities().length === 0">
+        <p>no activities found.</p>
+      </div>
+      <div class="cards">
+        <app-dashboard-card
+          *ngFor="let item of activities()"
+          [cardInfo]="item"
+        />
+      </div>
     </div>
   </section>
 </main>

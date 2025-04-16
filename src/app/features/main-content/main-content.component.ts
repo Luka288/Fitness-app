@@ -7,6 +7,7 @@ import { CardComponent } from '../../shared/components/card/card.component';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 import { WorkoutService } from '../../shared/services/workout.service';
 import { DashboardCardComponent } from '../../shared/components/dashboard-card/dashboard-card.component';
+import { FoodService } from '../../shared/services/food.service';
 
 @Component({
   selector: 'app-main-content',
@@ -17,6 +18,7 @@ import { DashboardCardComponent } from '../../shared/components/dashboard-card/d
 export class MainContentComponent {
   private readonly autService = inject(FirebaseAuthService);
   private readonly dataService = inject(DataService);
+  private readonly foodService = inject(FoodService);
   readonly workoutService = inject(WorkoutService);
 
   user = toSignal(this.autService.currentUseR(), { initialValue: null });
@@ -24,20 +26,15 @@ export class MainContentComponent {
     initialValue: [],
   });
 
+  dailyMeals = toSignal(this.foodService.getdailyMeals(), {
+    initialValue: null,
+  });
+
   workoutTypes = toSignal(this.dataService.workoutTypes(), {
     initialValue: [],
   });
 
   ngOnInit(): void {
-    console.log('test');
-  }
-
-  userWorkouts(w: WorkoutInterface) {
-    console.log(w);
+    this.foodService.getdailyMeals().subscribe(console.log);
   }
 }
-
-// userActivities = signal<WorkoutData[]>([]);
-// this.workoutService.getUserActivity().subscribe((res) => {
-//   this.userActivities.set(res as WorkoutData[]);
-// });

@@ -11,7 +11,9 @@ main {
     max-width: 850px;
 
     .user-container {
+      height: 200px;
       padding: 10px;
+      box-sizing: border-box;
       @include flex(space-between, wrap, row);
       gap: 15px;
       border-radius: 3px;
@@ -65,6 +67,7 @@ main {
     }
 
     .workouts-container {
+      height: 550px;
       border-radius: 3px;
       margin-top: 30px;
       height: fit-content;
@@ -90,24 +93,6 @@ main {
           text-transform: capitalize;
           color: #333;
           position: relative;
-
-          // &::before,
-          // &::after {
-          //   content: "";
-          //   position: absolute;
-          //   top: 50%;
-          //   width: 50px;
-          //   height: 2px;
-          //   background-color: black;
-          // }
-
-          // &::before {
-          //   left: -60px;
-          // }
-
-          // &::after {
-          //   right: -60px;
-          // }
         }
       }
 
@@ -127,40 +112,66 @@ main {
     }
   }
 
-  .user-activites {
+  .workouts-data {
     width: 85%;
     max-width: 750px;
     height: 750px;
-    padding: 20px;
-    border-radius: 3px;
     // border: $base-border-color;
-    box-sizing: border-box;
-    background-color: white;
 
-    .place-holder {
-      width: 100%;
-      height: 100%;
-      @include flex();
+    .user-meals {
+      width: 750px;
+      height: 200px;
+      box-sizing: border-box;
+      padding: 10px;
+      background-color: $white-bg;
 
-      p {
-        margin: 0;
-        padding: 0;
-        font-size: 30px;
-        font-family: $inter;
-        text-transform: capitalize;
+      .title-container {
+        width: 100%;
+        text-align: center;
+        border-bottom: 3px solid #0072ff;
+
+        p {
+          font-size: 17px;
+          font-family: $inter;
+          margin: 0;
+        }
       }
     }
 
-    .activities-title {
-      width: 100%;
-      border-bottom: 2px solid #0072ff;
-      text-align: center;
+    .user-activites {
+      height: 550px;
+      overflow: auto;
+      padding: 20px;
+      border-radius: 3px;
+      background-color: white;
+      box-sizing: border-box;
+      margin-top: 30px;
 
-      p {
-        padding: 0;
-        margin: 2px;
-        font-family: $inter;
-        font-size: 20px;
+      .place-holder {
+        width: 100%;
+        height: 100%;
+        @include flex();
+
+        p {
+          margin: 0;
+          padding: 0;
+          font-size: 30px;
+          font-family: $inter;
+          text-transform: capitalize;
+        }
+      }
+
+      .activities-title {
+        width: 100%;
+        border-bottom: 2px solid #0072ff;
+        text-align: center;
+
+        p {
+          padding: 0;
+          margin: 2px;
+          font-family: $inter;
+          font-size: 20px;
+        }
       }
     }
   }

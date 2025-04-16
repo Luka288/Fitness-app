@@ -5,7 +5,7 @@ import {
   nutrimentsResponse,
 } from '../interfaces/food.interface';
 import { API_URL } from '../consts/injection.tokens';
-import { catchError, map, throwError } from 'rxjs';
+import { catchError, from, map, Observable, of, throwError } from 'rxjs';
 import { AlertsService } from './alerts.service';
 import { Auth } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
@@ -91,7 +91,20 @@ export class FoodService {
       this.alertsService.toast('Something went wrong', 'error', 'red');
     }
   }
-}
 
-// await setDoc(nutrimentDoc, data, { merge: true });
-// this.alertsService.toast('Data added', 'success', 'green');
+  getdailyMeals(): Observable<nutrimentData | null> {
+    const user = this.auth.currentUser;
+    if (!user) return of(null);
+
+    const date = new Date().toISOString().split('T')[0];
+
+    const mealRef = doc(this.Fire, `users/${user.uid}/nutrition/${date}`);
+
+    return from(getDoc(mealRef)).pipe(
+      map((docSnap) =>
+        docSnap.exists() ? (docSnap.data() as nutrimentData) : null
+      ),
+      catchError(() => of(null))
+    );
+  }
+}
