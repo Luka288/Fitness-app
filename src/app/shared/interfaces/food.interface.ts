@@ -7,18 +7,22 @@ export interface nutrimentsResponse {
     brands: string;
     quantity: string;
     image_url: string;
-    nutriments: {
-      'energy-kcal': number;
-      proteins: number;
-      carbohydrates: number;
-      sugars: number;
-      fat: number;
-      salt: number;
-      'nova-group': number;
-      'nova-group_100g': number;
-      'nova-group_serving': number;
-      'nutrition-score-fr': number;
-      'nutrition-score-fr_100g': number;
-    };
+    nutriments: nutrimentData;
   };
 }
+
+export interface nutrimentData {
+  'energy-kcal': number;
+  proteins: number;
+  carbohydrates: number;
+  sugars: number;
+  fat: number;
+  salt: number;
+  'nova-group': number;
+  'nova-group_100g': number;
+  'nova-group_serving': number;
+  'nutrition-score-fr': number;
+  'nutrition-score-fr_100g': number;
+}
+
+export interface NutrimentData extends Partial<nutrimentData> {}

@@ -1,6 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { nutrimentsResponse } from '../../interfaces/food.interface';
+import { Component, inject, Input } from '@angular/core';
+import {
+  nutrimentData,
+  nutrimentsResponse,
+} from '../../interfaces/food.interface';
 import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
+import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'app-product-card',
@@ -9,17 +14,31 @@ import { CommonModule } from '@angular/common';
   styleUrl: './product-card.component.scss',
 })
 export class ProductCardComponent {
+  private readonly foodService = inject(FoodService);
+
   @Input() productInput: nutrimentsResponse | null = null;
 
   ngOnInit(): void {}
-}
 
-// <h1>Product: {{ productInput?.product?.brands }}</h1>
-// <h3>Fat: {{ productInput?.product?.nutriments?.fat }}g</h3>
-// <h3>
-//   Enetgy KCAL: {{productInput?.product?.nutriments?.['energy-kcal']}} KCAL
-// </h3>
-// <h3>Proteins: {{ productInput?.product?.nutriments?.proteins }}g</h3>
-// <h3>Carbohydrates: {{ productInput?.product?.nutriments?.carbohydrates }}g</h3>
-// <h3>Sugars: {{ productInput?.product?.nutriments?.sugars }}g</h3>
-// <h3>Salt: {{ productInput?.product?.nutriments?.salt }}g</h3>
+  sendData(data: nutrimentData) {
+    const productData = {
+      energyKcal: data['energy-kcal'],
+      proteins: data.proteins,
+      carbohydrates: data.carbohydrates,
+      sugars: data.sugars,
+      fat: data.fat,
+      salt: data.salt,
+      novaGroup: data['nova-group'],
+      novaGroup100g: data['nova-group_100g'],
+      novaGroupServing: data['nova-group_serving'],
+      nutritionScoreFr: data['nutrition-score-fr'],
+      nutritionScoreFr100g: data['nutrition-score-fr_100g'],
+    };
+
+    const filteredData = Object.fromEntries(
+      Object.entries(productData).filter(([key, value]) => value !== undefined)
+    );
+
+    this.foodService.storeData(filteredData);
+  }
+}
