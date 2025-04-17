@@ -118,9 +118,14 @@ main {
     height: 750px;
     // border: $base-border-color;
 
+    .loading {
+      text-align: center;
+    }
+
     .user-meals {
-      width: 750px;
-      height: 200px;
+      width: 100%;
+      max-width: 750px;
+      // height: 200px;
       box-sizing: border-box;
       padding: 10px;
       background-color: $white-bg;
@@ -128,7 +133,7 @@ main {
       .title-container {
         width: 100%;
         text-align: center;
-        border-bottom: 3px solid #0072ff;
+        // border-bottom: 3px solid #0072ff;
 
         p {
           font-size: 17px;

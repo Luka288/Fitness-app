@@ -12,17 +12,17 @@ export interface nutrimentsResponse {
 }
 
 export interface nutrimentData {
-  'energy-kcal': number;
+  energyKcal: number;
   proteins: number;
   carbohydrates: number;
   sugars: number;
   fat: number;
   salt: number;
-  'nova-group': number;
-  'nova-group_100g': number;
-  'nova-group_serving': number;
-  'nutrition-score-fr': number;
-  'nutrition-score-fr_100g': number;
+  novaGroup: number;
+  novaGroup100g: number;
+  novaGroupServing: number;
+  nutritionScoreFr: number;
+  nutritionScoreFr100g: number;
 }
 
 export interface NutrimentData extends Partial<nutrimentData> {}

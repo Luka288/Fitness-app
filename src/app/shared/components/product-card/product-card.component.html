@@ -17,23 +17,21 @@
     <ng-template #fatFallback>
       <p>
         Processing Level: NOVA Group
-        {{ productInput.product.nutriments["nova-group"] }}
+        {{ productInput.product.nutriments.novaGroup }}
       </p>
     </ng-template>
 
     <p
       *ngIf="
-        productInput.product.nutriments['energy-kcal'] !== undefined;
+        productInput.product.nutriments.energyKcal !== undefined;
         else energyFallback
       "
     >
-      Energy: {{ productInput.product.nutriments["energy-kcal"] }}kcal
+      Energy: {{ productInput.product.nutriments.energyKcal }}kcal
     </p>
 
     <ng-template #energyFallback>
-      <p>
-        Energy: {{ productInput.product.nutriments["nova-group_100g"] }}kcal
-      </p>
+      <p>Energy: {{ productInput.product.nutriments.novaGroup100g }}kcal</p>
     </ng-template>
     <p
       *ngIf="
@@ -46,7 +44,7 @@
     <ng-template #proteinFallback>
       <p>
         Nova serving:
-        {{ productInput.product.nutriments["nova-group_serving"] }}
+        {{ productInput.product.nutriments.novaGroupServing }}
       </p>
     </ng-template>
     <p
@@ -60,7 +58,7 @@
     <ng-template #saltFallback>
       <p>
         Nutrition score:
-        {{ productInput.product.nutriments["nutrition-score-fr"] }}
+        {{ productInput.product.nutriments.nutritionScoreFr }}
       </p>
     </ng-template>
 
@@ -75,7 +73,7 @@
     <ng-template #sugarFallback>
       <p>
         Nutrition score per 100g:
-        {{ productInput.product.nutriments["nutrition-score-fr_100g"] }}
+        {{ productInput.product.nutriments.nutritionScoreFr100g }}
       </p>
     </ng-template>
   </div>

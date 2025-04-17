@@ -22,17 +22,17 @@ export class ProductCardComponent {
 
   sendData(data: nutrimentData) {
     const productData = {
-      energyKcal: data['energy-kcal'],
+      energyKcal: data.energyKcal,
       proteins: data.proteins,
       carbohydrates: data.carbohydrates,
       sugars: data.sugars,
       fat: data.fat,
       salt: data.salt,
-      novaGroup: data['nova-group'],
-      novaGroup100g: data['nova-group_100g'],
-      novaGroupServing: data['nova-group_serving'],
-      nutritionScoreFr: data['nutrition-score-fr'],
-      nutritionScoreFr100g: data['nutrition-score-fr_100g'],
+      novaGroup: data.novaGroup,
+      novaGroup100g: data.novaGroup100g,
+      novaGroupServing: data.novaGroup100g,
+      nutritionScoreFr: data.nutritionScoreFr,
+      nutritionScoreFr100g: data.nutritionScoreFr100g,
     };
 
     const filteredData = Object.fromEntries(

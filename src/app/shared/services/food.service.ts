@@ -38,7 +38,7 @@ export class FoodService {
           const productData = {
             fat: res.product.nutriments.fat,
             salt: res.product.nutriments.salt,
-            energyKcal: res.product.nutriments['energy-kcal'],
+            energyKcal: res.product.nutriments.energyKcal,
             proteins: res.product.nutriments.proteins,
             carbohydrates: res.product.nutriments.carbohydrates,
             sugars: res.product.nutriments.sugars,

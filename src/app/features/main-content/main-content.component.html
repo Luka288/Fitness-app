@@ -53,12 +53,13 @@
       <div class="title-container">
         <p>Daily Meals data</p>
       </div>
-      <div class="data">
-        <p>Proteins: {{ dailyMeals()?.proteins }}</p>
-        <p>Salt: {{ dailyMeals()?.salt }}</p>
-        <p>Sugars: {{ dailyMeals()?.sugars }}</p>
-        <p>Fat: {{ dailyMeals()?.fat }}</p>
+      <div class="loading" *ngIf="isLoading()">
+        <p>loading...</p>
       </div>
+      <app-nutrition-card
+        [nutritionInput]="dailyMeals()!"
+        *ngIf="dailyMeals() && !isLoading()"
+      />
     </div>
     <div class="user-activites">
       <div class="activities-title">

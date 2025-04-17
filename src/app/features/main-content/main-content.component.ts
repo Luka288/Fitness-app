@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FirebaseAuthService } from '../../shared/services/firebase-auth.service';
 import { CommonModule } from '@angular/common';
@@ -8,10 +8,16 @@ import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 import { WorkoutService } from '../../shared/services/workout.service';
 import { DashboardCardComponent } from '../../shared/components/dashboard-card/dashboard-card.component';
 import { FoodService } from '../../shared/services/food.service';
+import { NutritionCardComponent } from '../../shared/components/nutrition-card/nutrition-card.component';
 
 @Component({
   selector: 'app-main-content',
-  imports: [CommonModule, CardComponent, DashboardCardComponent],
+  imports: [
+    CommonModule,
+    CardComponent,
+    DashboardCardComponent,
+    NutritionCardComponent,
+  ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',
 })
@@ -26,6 +32,8 @@ export class MainContentComponent {
     initialValue: [],
   });
 
+  isLoading = signal<boolean>(true);
+
   dailyMeals = toSignal(this.foodService.getdailyMeals(), {
     initialValue: null,
   });
@@ -36,5 +44,8 @@ export class MainContentComponent {
 
   ngOnInit(): void {
     this.foodService.getdailyMeals().subscribe(console.log);
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 300);
   }
 }
