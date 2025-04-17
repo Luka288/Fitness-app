@@ -1,5 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import {
+  baseNutriments,
   nutrimentData,
   nutrimentsResponse,
 } from '../../interfaces/food.interface';
@@ -20,23 +21,25 @@ export class ProductCardComponent {
 
   ngOnInit(): void {}
 
-  sendData(data: nutrimentData) {
+  sendData(data: baseNutriments) {
+    console.log(data);
+
     const productData = {
-      energyKcal: data.energyKcal,
+      energyKcal: data['energy-kcal'],
       proteins: data.proteins,
       carbohydrates: data.carbohydrates,
       sugars: data.sugars,
       fat: data.fat,
       salt: data.salt,
-      novaGroup: data.novaGroup,
-      novaGroup100g: data.novaGroup100g,
-      novaGroupServing: data.novaGroup100g,
-      nutritionScoreFr: data.nutritionScoreFr,
-      nutritionScoreFr100g: data.nutritionScoreFr100g,
+      novaGroup: data['nova-group'],
+      novaGroup100g: data['nova-group_100g'],
+      novaGroupServing: data['nova-group_100g'],
+      nutritionScoreFr: data['nutrition-score-fr'],
+      nutritionScoreFr100g: data['nutrition-score-fr_100g'],
     };
 
     const filteredData = Object.fromEntries(
-      Object.entries(productData).filter(([key, value]) => value !== undefined)
+      Object.entries(productData).filter(([key, value]) => value != null)
     );
 
     this.foodService.storeData(filteredData);

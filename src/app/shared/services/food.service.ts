@@ -38,7 +38,7 @@ export class FoodService {
           const productData = {
             fat: res.product.nutriments.fat,
             salt: res.product.nutriments.salt,
-            energyKcal: res.product.nutriments.energyKcal,
+            energyKcal: res.product.nutriments['energy-kcal'],
             proteins: res.product.nutriments.proteins,
             carbohydrates: res.product.nutriments.carbohydrates,
             sugars: res.product.nutriments.sugars,
@@ -56,6 +56,8 @@ export class FoodService {
   async storeData(data: Partial<nutrimentData>) {
     const user = this.auth.currentUser;
     if (!user) return;
+
+    console.log(data);
 
     const date = new Date().toISOString().split('T')[0];
 
@@ -89,6 +91,7 @@ export class FoodService {
       this.alertsService.toast('Data stored', 'success', 'green');
     } catch (error) {
       this.alertsService.toast('Something went wrong', 'error', 'red');
+      throw error;
     }
   }
 
