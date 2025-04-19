@@ -4,7 +4,7 @@
 .data {
   width: 90%;
   max-width: 750px;
-  height: 200px;
+  // height: 200px;
   padding: 10px 16px;
   background-color: $white-bg;
   border: 2px solid #0072ff;
@@ -49,8 +49,8 @@
 
 @media (max-width: 600px) {
   .data {
+    height: fit-content;
     flex-direction: column;
-    height: auto;
 
     .nutritions,
     .nova-group {

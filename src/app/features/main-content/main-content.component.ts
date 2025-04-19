@@ -4,11 +4,11 @@ import { FirebaseAuthService } from '../../shared/services/firebase-auth.service
 import { CommonModule } from '@angular/common';
 import { DataService } from '../../shared/services/data.service';
 import { CardComponent } from '../../shared/components/card/card.component';
-import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 import { WorkoutService } from '../../shared/services/workout.service';
 import { DashboardCardComponent } from '../../shared/components/dashboard-card/dashboard-card.component';
 import { FoodService } from '../../shared/services/food.service';
 import { NutritionCardComponent } from '../../shared/components/nutrition-card/nutrition-card.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-main-content',
@@ -17,6 +17,7 @@ import { NutritionCardComponent } from '../../shared/components/nutrition-card/n
     CardComponent,
     DashboardCardComponent,
     NutritionCardComponent,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',
@@ -44,8 +45,12 @@ export class MainContentComponent {
 
   ngOnInit(): void {
     this.foodService.getdailyMeals().subscribe(console.log);
+
+    // this.foodService.getAllMeals().subscribe(console.log);
+
+    // ხელოვნური ლოადინგ სქრინი
     setTimeout(() => {
       this.isLoading.set(false);
-    }, 300);
+    }, 500);
   }
 }

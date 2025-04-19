@@ -8,6 +8,12 @@
   flex-direction: $dir;
 }
 
+@mixin center-flex($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
 @mixin inputAling($dir: column, $g: 10px) {
   display: flex;
   flex-direction: $dir;

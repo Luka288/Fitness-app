@@ -57,8 +57,6 @@ export class FoodService {
     const user = this.auth.currentUser;
     if (!user) return;
 
-    console.log(data);
-
     const date = new Date().toISOString().split('T')[0];
 
     const nutrimentDoc = doc(this.Fire, `users/${user.uid}/nutrition/${date}`);
@@ -85,7 +83,10 @@ export class FoodService {
             }
           }
         }
+      } else {
+        updatedData = { ...data };
       }
+
       await setDoc(nutrimentDoc, updatedData, { merge: true });
 
       this.alertsService.toast('Data stored', 'success', 'green');
@@ -104,6 +105,20 @@ export class FoodService {
     const mealRef = doc(this.Fire, `users/${user.uid}/nutrition/${date}`);
 
     return from(getDoc(mealRef)).pipe(
+      map((docSnap) =>
+        docSnap.exists() ? (docSnap.data() as nutrimentData) : null
+      ),
+      catchError(() => of(null))
+    );
+  }
+
+  getAllMeals() {
+    const user = this.auth.currentUser;
+    if (!user) return of(null);
+
+    const mealsRef = doc(this.Fire, `users/${user.uid}/nutrition`);
+
+    return from(getDoc(mealsRef)).pipe(
       map((docSnap) =>
         docSnap.exists() ? (docSnap.data() as nutrimentData) : null
       ),

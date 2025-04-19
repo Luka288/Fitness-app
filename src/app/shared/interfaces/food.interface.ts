@@ -39,6 +39,7 @@ export interface baseNutriments {
   'nova-group_serving': number;
   'nutrition-score-fr': number;
   'nutrition-score-fr_100g': number;
+  date?: string;
 }
 
 export interface NutrimentData extends Partial<nutrimentData> {}

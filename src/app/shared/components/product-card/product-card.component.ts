@@ -36,6 +36,7 @@ export class ProductCardComponent {
       novaGroupServing: data['nova-group_100g'],
       nutritionScoreFr: data['nutrition-score-fr'],
       nutritionScoreFr100g: data['nutrition-score-fr_100g'],
+      date: new Date().toISOString().split('T')[0],
     };
 
     const filteredData = Object.fromEntries(

@@ -54,8 +54,9 @@
         <p>Daily Meals data</p>
       </div>
       <div class="loading" *ngIf="isLoading()">
-        <p>loading...</p>
+        <mat-spinner *ngIf="isLoading()"></mat-spinner>
       </div>
+      <h5 *ngIf="!dailyMeals() && !isLoading()">Data not found</h5>
       <app-nutrition-card
         [nutritionInput]="dailyMeals()!"
         *ngIf="dailyMeals() && !isLoading()"
@@ -65,14 +66,22 @@
       <div class="activities-title">
         <p>Activities</p>
       </div>
-      <div class="place-holder" *ngIf="activities().length === 0">
+      <div class="loading" *ngIf="isLoading()">
+        <mat-spinner *ngIf="isLoading()"></mat-spinner>
+      </div>
+      <div
+        class="place-holder"
+        *ngIf="activities().length === 0 && !isLoading()"
+      >
         <p>no activities found.</p>
       </div>
       <div class="cards">
+        @if (!isLoading()) {
         <app-dashboard-card
           *ngFor="let item of activities()"
           [cardInfo]="item"
         />
+        }
       </div>
     </div>
   </section>
