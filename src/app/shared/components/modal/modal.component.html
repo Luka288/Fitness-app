@@ -1,0 +1,43 @@
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h2>Set Daily Goal</h2>
+    <div class="activitGoal">
+      <select [formControl]="activityControl">
+        <option value="CALORIES">Calories</option>
+        <option value="DISTANCE">Distance</option>
+        <option value="REPS">Reps</option>
+      </select>
+    </div>
+    <div class="inputWrap">
+      <form>
+        <input
+          type="text"
+          [placeholder]="`Enter ${activityControl.value}`"
+          [formControl]="goalInputControl"
+          [ngClass]="{
+            errBorder: goalInputControl.invalid && goalInputControl.touched,
+            filled: goalInputControl.value
+          }"
+        />
+        @if (goalInputControl.hasError('required') && goalInputControl.touched)
+        {
+        <p class="errorText">{{ activityControl.value }} is required</p>
+        }@else if(goalInputControl.hasError('min') && goalInputControl.touched)
+        {
+        <p class="errorText">
+          {{ activityControl.value }} must be greater than 0
+        </p>
+        }@else if (goalInputControl.hasError('max')&& goalInputControl.touched )
+        {
+        <p class="errorText">
+          {{ activityControl.value }} must be less than 1000
+        </p>
+        }
+      </form>
+    </div>
+    <div class="modal-actions">
+      <button (click)="onSave()">Save</button>
+      <button (click)="onClose()">Cancel</button>
+    </div>
+  </div>
+</div>

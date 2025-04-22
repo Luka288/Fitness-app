@@ -4,7 +4,7 @@
 main {
   width: 100%;
   margin-top: 40px;
-  @include flex(space-between, flex-start);
+  @include flex(space-evenly, flex-start);
 
   .base-side {
     width: 90%;
@@ -18,6 +18,7 @@ main {
       gap: 15px;
       border-radius: 3px;
       background-color: white;
+      @include boxTune();
 
       .anchorButton {
         width: 100px;
@@ -72,9 +73,8 @@ main {
       margin-top: 30px;
       height: fit-content;
       background-color: white;
-      // border: $base-border-color;
-      // box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.12);
       padding: 10px;
+      @include boxTune();
 
       .container-title {
         height: 50px;
@@ -110,42 +110,6 @@ main {
         }
       }
     }
-  }
-
-  .workouts-data {
-    width: 85%;
-    max-width: 750px;
-    height: 750px;
-    // border: $base-border-color;
-
-    .loading {
-      @include center-flex();
-    }
-
-    h5 {
-      text-align: center;
-    }
-
-    .user-meals {
-      width: 100%;
-      max-width: 750px;
-      height: 200px;
-      box-sizing: border-box;
-      padding: 10px;
-      background-color: $white-bg;
-
-      .title-container {
-        width: 100%;
-        text-align: center;
-        // border-bottom: 3px solid #0072ff;
-
-        p {
-          font-size: 17px;
-          font-family: $inter;
-          margin: 0;
-        }
-      }
-    }
 
     .user-activites {
       // height: 550px;
@@ -154,6 +118,7 @@ main {
       background-color: white;
       box-sizing: border-box;
       margin-top: 30px;
+      @include boxTune();
 
       .place-holder {
         width: 100%;
@@ -179,6 +144,73 @@ main {
           margin: 2px;
           font-family: $inter;
           font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .workouts-chart {
+    width: 85%;
+    max-width: 750px;
+    height: 750px;
+
+    .loading {
+      @include center-flex();
+    }
+
+    .top-charts {
+      @include flex(space-evenly, center, wrap, row);
+
+      .user-meals {
+        @include classicCard();
+        @include boxTune();
+
+        .title-container {
+          width: 100%;
+          text-align: center;
+
+          p {
+            font-size: 20px;
+            font-family: $inter;
+            font-weight: 500;
+            line-height: 1.3;
+            color: #333;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.1px;
+          }
+        }
+      }
+
+      .daily-goal {
+        @include classicCard();
+        @include boxTune();
+
+        .title-container {
+          width: 100%;
+          text-align: center;
+
+          p {
+            font-size: 20px;
+            font-family: $inter;
+            font-weight: 500;
+            line-height: 1.3;
+            color: #333;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.1px;
+          }
+        }
+      }
+
+      .empty {
+        font-size: 1.2rem;
+        font-family: $inter;
+        text-align: center;
+        margin-top: 50px;
+        @include flex(center, center);
+        gap: 30px;
+
+        button {
+          @include customFormButton();
         }
       }
     }
@@ -215,7 +247,7 @@ main {
       }
     }
 
-    .workouts-data {
+    .workouts-chart {
       .user-meals {
         height: auto;
       }

@@ -31,13 +31,6 @@
           </p>
         </div>
       </div>
-      <!-- <div class="metrics">
-        <ul class="anchorButton">
-          <li>
-            <a>add metrics</a>
-          </li>
-        </ul>
-      </div> -->
     </div>
     <div class="workouts-container">
       <div class="container-title">
@@ -47,21 +40,7 @@
         <app-card *ngFor="let item of workoutTypes()" [workout]="item" />
       </div>
     </div>
-  </div>
-  <section class="workouts-data">
-    <div class="user-meals">
-      <div class="title-container">
-        <p>Daily Meals data</p>
-      </div>
-      <div class="loading" *ngIf="isLoading()">
-        <mat-spinner *ngIf="isLoading()"></mat-spinner>
-      </div>
-      <h5 *ngIf="!dailyMeals() && !isLoading()">Data not found</h5>
-      <app-nutrition-card
-        [nutritionInput]="dailyMeals()!"
-        *ngIf="dailyMeals() && !isLoading()"
-      />
-    </div>
+
     <div class="user-activites">
       <div class="activities-title">
         <p>Activities</p>
@@ -82,6 +61,38 @@
           [cardInfo]="item"
         />
         }
+      </div>
+    </div>
+  </div>
+  <section class="workouts-chart">
+    <div class="top-charts">
+      <div class="user-meals">
+        <div class="title-container">
+          <p>Macro tracker</p>
+        </div>
+        <div class="loading" *ngIf="isLoading()">
+          <mat-spinner *ngIf="isLoading()"></mat-spinner>
+        </div>
+        <h5 *ngIf="!dailyMeals() && !isLoading()">Data not found</h5>
+        <app-nutrition-card
+          [nutritionInput]="dailyMeals()!"
+          *ngIf="dailyMeals() && !isLoading()"
+        />
+      </div>
+
+      <div class="daily-goal">
+        <div class="title-container">
+          <p>Daily Goal</p>
+        </div>
+        <div class="empty">
+          <span>🏅No daily goals found. set your daily goal. </span>
+          <button (click)="openModal()">Set daily goal</button>
+        </div>
+        <app-modal
+          *ngIf="isOpen()"
+          (close)="closeModal()"
+          (onSave)="saveGoal()"
+        />
       </div>
     </div>
   </section>

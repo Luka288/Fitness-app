@@ -1,33 +1,5 @@
 <div class="data">
   <div class="nutritions">
-    <h5>Nutrition</h5>
-    <p><strong>Energy (kcal):</strong> {{ nutritionInput?.energyKcal || 0 }}</p>
-    <p><strong>Proteins:</strong> {{ nutritionInput?.proteins || 0 }} g</p>
-    <p>
-      <strong>Carbohydrates:</strong> {{ nutritionInput?.carbohydrates || 0 }} g
-    </p>
-    <p><strong>Sugars:</strong> {{ nutritionInput?.sugars || 0 }} g</p>
-    <p><strong>Fat:</strong> {{ nutritionInput?.fat || 0 }} g</p>
-    <p><strong>Salt:</strong> {{ nutritionInput?.salt || 0 }} g</p>
-  </div>
-  <div class="nova-group">
-    <h5>Labels & Scores</h5>
-    <p><strong>NOVA Group:</strong> {{ nutritionInput?.novaGroup || 0 }}</p>
-    <p>
-      <strong>NOVA Group (100g):</strong>
-      {{ nutritionInput?.novaGroup100g || 0 }}
-    </p>
-    <p>
-      <strong>NOVA Group (Serving):</strong>
-      {{ nutritionInput?.novaGroupServing || 0 }}
-    </p>
-    <p>
-      <strong>Nutrition Score (FR):</strong>
-      {{ nutritionInput?.nutritionScoreFr || 0 }}
-    </p>
-    <p>
-      <strong>Nutrition Score (FR 100g):</strong>
-      {{ nutritionInput?.nutritionScoreFr100g || 0 }}
-    </p>
+    <canvas appChart [nutritionData]="nutritionInput"> </canvas>
   </div>
 </div>

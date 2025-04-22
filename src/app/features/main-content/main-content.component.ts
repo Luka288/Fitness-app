@@ -9,6 +9,8 @@ import { DashboardCardComponent } from '../../shared/components/dashboard-card/d
 import { FoodService } from '../../shared/services/food.service';
 import { NutritionCardComponent } from '../../shared/components/nutrition-card/nutrition-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MultiCardComponent } from '../../shared/components/multi-card/multi-card.component';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-main-content',
@@ -18,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     DashboardCardComponent,
     NutritionCardComponent,
     MatProgressSpinnerModule,
+    ModalComponent,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',
@@ -28,7 +31,10 @@ export class MainContentComponent {
   private readonly foodService = inject(FoodService);
   readonly workoutService = inject(WorkoutService);
 
+  isOpen = signal(false);
+
   user = toSignal(this.autService.currentUseR(), { initialValue: null });
+
   activities = toSignal(this.workoutService.userActivity(), {
     initialValue: [],
   });
@@ -44,13 +50,21 @@ export class MainContentComponent {
   });
 
   ngOnInit(): void {
-    this.foodService.getdailyMeals().subscribe(console.log);
-
-    // this.foodService.getAllMeals().subscribe(console.log);
-
     // ხელოვნური ლოადინგ სქრინი
     setTimeout(() => {
       this.isLoading.set(false);
     }, 500);
+  }
+
+  openModal() {
+    this.isOpen.set(true);
+  }
+
+  saveGoal() {
+    this.isOpen.set(false);
+  }
+
+  closeModal() {
+    this.isOpen.set(false);
   }
 }

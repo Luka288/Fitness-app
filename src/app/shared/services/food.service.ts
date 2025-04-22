@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, inject, Injectable, KeyValueDiffers } from '@angular/core';
+import { Inject, inject, Injectable } from '@angular/core';
 import {
   nutrimentData,
   nutrimentsResponse,
@@ -9,9 +9,7 @@ import { catchError, from, map, Observable, of, throwError } from 'rxjs';
 import { AlertsService } from './alerts.service';
 import { Auth } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
-import { addDoc, getDoc, setDoc } from 'firebase/firestore';
-import { object } from '@angular/fire/database';
-import { Part } from 'firebase/vertexai';
+import { getDoc, setDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
