@@ -9,8 +9,9 @@ import { DashboardCardComponent } from '../../shared/components/dashboard-card/d
 import { FoodService } from '../../shared/services/food.service';
 import { NutritionCardComponent } from '../../shared/components/nutrition-card/nutrition-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MultiCardComponent } from '../../shared/components/multi-card/multi-card.component';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { DailyGoalComponent } from '../../shared/components/daily-goal/daily-goal.component';
+import { DailyGoal } from '../../shared/interfaces/daily.goal.interface';
 
 @Component({
   selector: 'app-main-content',
@@ -21,6 +22,7 @@ import { ModalComponent } from '../../shared/components/modal/modal.component';
     NutritionCardComponent,
     MatProgressSpinnerModule,
     ModalComponent,
+    DailyGoalComponent,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',
@@ -32,6 +34,7 @@ export class MainContentComponent {
   readonly workoutService = inject(WorkoutService);
 
   isOpen = signal(false);
+  isLoading = signal<boolean>(true);
 
   user = toSignal(this.autService.currentUseR(), { initialValue: null });
 
@@ -39,14 +42,16 @@ export class MainContentComponent {
     initialValue: [],
   });
 
-  isLoading = signal<boolean>(true);
+  workoutTypes = toSignal(this.dataService.workoutTypes(), {
+    initialValue: [],
+  });
 
   dailyMeals = toSignal(this.foodService.getdailyMeals(), {
     initialValue: null,
   });
 
-  workoutTypes = toSignal(this.dataService.workoutTypes(), {
-    initialValue: [],
+  dailyGoal = toSignal(this.workoutService.goalCalculate(), {
+    initialValue: null,
   });
 
   ngOnInit(): void {
@@ -54,14 +59,19 @@ export class MainContentComponent {
     setTimeout(() => {
       this.isLoading.set(false);
     }, 500);
+
+    this.workoutService.goalCalculate().subscribe((res) => {
+      console.log(res);
+    });
   }
 
   openModal() {
     this.isOpen.set(true);
   }
 
-  saveGoal() {
+  saveDailyGoal(data: DailyGoal) {
     this.isOpen.set(false);
+    this.workoutService.addGoal(data);
   }
 
   closeModal() {

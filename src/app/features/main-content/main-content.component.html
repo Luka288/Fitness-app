@@ -84,14 +84,22 @@
         <div class="title-container">
           <p>Daily Goal</p>
         </div>
-        <div class="empty">
+        <div class="loading" *ngIf="isLoading()">
+          <mat-spinner *ngIf="isLoading()"></mat-spinner>
+        </div>
+        <app-daily-goal
+          [goalData]="dailyGoal()"
+          (newGoal)="openModal()"
+          *ngIf="dailyGoal() && !isLoading()"
+        />
+        <div class="empty" *ngIf="!dailyGoal()">
           <span>🏅No daily goals found. set your daily goal. </span>
           <button (click)="openModal()">Set daily goal</button>
         </div>
         <app-modal
           *ngIf="isOpen()"
           (close)="closeModal()"
-          (onSave)="saveGoal()"
+          (saveGoal)="saveDailyGoal($event)"
         />
       </div>
     </div>

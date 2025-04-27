@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { DailyGoal } from '../../interfaces/daily.goal.interface';
 
 @Component({
   selector: 'app-modal',
@@ -15,20 +16,13 @@ import {
 })
 export class ModalComponent {
   @Output() close = new EventEmitter<void>();
-  @Output() saveGoal = new EventEmitter<number>();
+  @Output() saveGoal = new EventEmitter<DailyGoal>();
 
-  activityControl = new FormControl('CALORIES');
-  goalInputControl = new FormControl('', [
-    Validators.required,
-    Validators.min(1),
-    Validators.max(10000),
-  ]);
-
-  ngOnInit() {
-    this.activityControl.valueChanges.subscribe((value) => {
-      console.log(value);
-    });
-  }
+  activityControl = new FormControl('CALORIES', { nonNullable: true });
+  goalInputControl = new FormControl('', {
+    validators: [Validators.required, Validators.min(1), Validators.max(10000)],
+    nonNullable: true,
+  });
 
   onSave() {
     if (this.goalInputControl.invalid) {
@@ -37,7 +31,14 @@ export class ModalComponent {
     }
     console.log(`${this.goalInputControl.value} ${this.activityControl.value}`);
 
-    this.close.emit();
+    this.saveGoal.emit({
+      type: this.activityControl.value,
+      goal: Number(this.goalInputControl.value),
+      progress: 0,
+      addDate: new Date().toISOString(),
+    });
+
+    this.goalInputControl.reset();
   }
 
   onClose() {

@@ -18,6 +18,7 @@ export interface userData {
   distance: number;
   speed: string;
   time: string;
+  savedAt: string;
 }
 
 export interface WorkoutData extends Partial<BaseWorkoutData> {}

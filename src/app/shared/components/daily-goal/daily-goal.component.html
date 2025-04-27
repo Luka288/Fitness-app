@@ -1,0 +1,36 @@
+<div class="goal-card">
+  <div class="progress-circle">
+    <round-progress
+      [current]="goalData!.progress"
+      [max]="goalData!.goal"
+      [semicircle]="true"
+      [clockwise]="true"
+      [responsive]="true"
+    >
+    </round-progress>
+    <div class="title">
+      <h5 *ngIf="goalData!.goal > goalData!.progress">
+        {{ goalData!.progress }} / {{ goalData!.goal }}
+        <span>{{ goalData?.type === "DISTANCE" ? "KM" : "KCAL" }}</span>
+      </h5>
+      <span *ngIf="goalData!.progress >= goalData!.goal" class="completion-text"
+        >🏆<br />
+        Goal <br />
+        Completed</span
+      >
+    </div>
+  </div>
+  <div class="note">
+    <span
+      ><b>
+        <i class="fa-solid fa-circle-exclamation"></i>
+        Note:</b
+      >
+      Daily goals include today's activities. If you burned 1200 calories, it
+      will count towards your new calorie goal.</span
+    >
+  </div>
+  <div class="card-footer" *ngIf="goalData!.progress >= goalData!.goal">
+    <button (click)="onNewGoal()">Start new goal</button>
+  </div>
+</div>

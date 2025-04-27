@@ -8,5 +8,6 @@ export interface calculatedData {
   // საერთო მეტრაჟი
   burnedCalories?: number;
   time?: string;
-  distance: string;
+  distance: number;
+  unit: string;
 }

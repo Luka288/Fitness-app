@@ -80,7 +80,8 @@ export const activityConfig = {
         MET: MET === 8.0 ? 'Light' : MET === 9.8 ? 'Moderate' : 'Vigorous',
         activityName: 'Morning Run',
         time: `${formData.time} ${formData.timeUnit}`,
-        distance: `${formData.distance} ${formData.unit}`,
+        distance: Number(formData.distance),
+        unit: formData.unit,
       };
     },
   },
@@ -112,7 +113,8 @@ export const activityConfig = {
         MET: MET === 8.0 ? 'Light' : MET === 9.8 ? 'Moderate' : 'Vigorous',
         activityName: 'Cycling',
         time: `${formData.time} ${formData.timeUnit}`,
-        distance: `${formData.distance} ${formData.unit}`,
+        distance: Number(formData.distance),
+        unit: formData.unit,
       };
     },
   },
