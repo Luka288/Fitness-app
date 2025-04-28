@@ -110,7 +110,7 @@ export class WorkoutService {
             }
 
             if (goal.type === 'DISTANCE') {
-              console.log(progress);
+              console.log('test');
               return sum + (data.distance || 0);
             }
 
@@ -121,7 +121,7 @@ export class WorkoutService {
 
         return {
           ...goal,
-          progress: progress,
+          progress: Math.round(progress),
         };
       })
     );

@@ -1,7 +1,7 @@
 <div class="goal-card">
   <div class="progress-circle">
     <round-progress
-      [current]="goalData!.progress"
+      [current]="goalData?.progress || 0"
       [max]="goalData!.goal"
       [semicircle]="true"
       [clockwise]="true"
@@ -10,6 +10,13 @@
     </round-progress>
     <div class="title">
       <h5 *ngIf="goalData!.goal > goalData!.progress">
+        <i
+          class="fa-solid"
+          [ngClass]="{
+            'fa-person-running': goalData?.type === 'DISTANCE',
+            'fa-fire': goalData?.type === 'CALORIES'
+          }"
+        ></i>
         {{ goalData!.progress }} / {{ goalData!.goal }}
         <span>{{ goalData?.type === "DISTANCE" ? "KM" : "KCAL" }}</span>
       </h5>
@@ -20,7 +27,7 @@
       >
     </div>
   </div>
-  <div class="note">
+  <div class="note" *ngIf="goalData!.goal > goalData!.progress">
     <span
       ><b>
         <i class="fa-solid fa-circle-exclamation"></i>

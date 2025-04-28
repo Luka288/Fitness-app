@@ -92,7 +92,7 @@
           (newGoal)="openModal()"
           *ngIf="dailyGoal() && !isLoading()"
         />
-        <div class="empty" *ngIf="!dailyGoal()">
+        <div class="empty" *ngIf="!dailyGoal() && !isLoading()">
           <span>🏅No daily goals found. set your daily goal. </span>
           <button (click)="openModal()">Set daily goal</button>
         </div>
