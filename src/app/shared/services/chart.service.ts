@@ -77,7 +77,7 @@ export class ChartService {
         labels: labels,
         datasets: [
           {
-            label: 'Last 7 activity data',
+            label: 'Burned KCAL',
             data: data,
             borderColor: 'rgba(255, 99, 132, 1)',
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -92,11 +92,20 @@ export class ChartService {
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            title: {
+              position: 'center',
+              display: true,
+              text: 'Activity Summary (Last 7 Activity)',
+            },
+          },
+        },
         scales: {
           x: {
-            display: false,
+            display: true,
             title: {
-              display: true,
+              display: false,
               text: 'Last 7 activity data',
             },
           },
