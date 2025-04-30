@@ -66,14 +66,17 @@
   </div>
   <section class="workouts-chart">
     <div class="top-charts">
-      <div class="user-meals">
+      <div class="user-meals" [ngClass]="{ hidden: !dailyMeals() }">
         <div class="title-container">
           <p>Macro tracker</p>
         </div>
         <div class="loading" *ngIf="isLoading()">
           <mat-spinner *ngIf="isLoading()"></mat-spinner>
         </div>
-        <h5 *ngIf="!dailyMeals() && !isLoading()">Data not found</h5>
+        <div class="placeholder" *ngIf="!dailyMeals() && !isLoading()">
+          <h5>Add today's meals to view your macro data.</h5>
+          <button routerLink="scanner">Add food here!</button>
+        </div>
         <app-nutrition-card
           [nutritionInput]="dailyMeals()!"
           *ngIf="dailyMeals() && !isLoading()"
@@ -102,6 +105,22 @@
           (saveGoal)="saveDailyGoal($event)"
         />
       </div>
+    </div>
+    <div
+      class="calorie-data"
+      [ngClass]="{ hidden: weeklyActivity().length < 7 }"
+    >
+      <div class="not-available" *ngIf="weeklyActivity().length < 7">
+        <h4>
+          <i class="fa-solid fa-lock"></i>
+          Complete at least 7 workouts to unlock the progress <br />
+          chart for the last 7 workouts.
+        </h4>
+      </div>
+      <app-line-chart
+        *ngIf="weeklyActivity() && weeklyActivity().length >= 7"
+        [userWorkoutData]="weeklyActivity()"
+      />
     </div>
   </section>
 </main>

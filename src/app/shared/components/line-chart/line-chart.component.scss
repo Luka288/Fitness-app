@@ -1,0 +1,30 @@
+.data {
+  width: 100%;
+
+  .nutritions {
+    width: 100%;
+    height: 100%;
+    margin-top: 30px;
+
+    canvas {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .data {
+    width: 100%;
+
+    .nutritions {
+      width: 100%;
+      height: 100%;
+
+      canvas {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

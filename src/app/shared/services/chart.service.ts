@@ -6,50 +6,42 @@ import Chart from 'chart.js/auto';
   providedIn: 'root',
 })
 export class ChartService {
+  private lineChartInstance?: Chart;
+  private doughnutChartInstance?: Chart;
+
   doughnutChart(ctx: CanvasRenderingContext2D, data: nutrimentData) {
-    const labels = [
-      data.fat > 0 ? 'Fat' : null,
-      data.carbohydrates > 0 ? 'Carbohydrates' : null,
-      data.proteins > 0 ? 'Protein' : null,
-      data.sugars > 0 ? 'Sugars' : null,
-      data.salt > 0 ? 'Salt' : null,
-      data.energyKcal > 0 ? 'Fiber' : null,
-      data.novaGroup > 0 ? 'Processing Level' : null,
-      data.novaGroup100g > 0 ? 'Processing (100g)' : null,
-      data.novaGroupServing > 0 ? 'Processing/Serving' : null,
-      data.nutritionScoreFr > 0 ? 'Nutri-Score' : null,
-      data.nutritionScoreFr100g > 0 ? 'Nutri-Score 100g' : null,
-    ].filter(Boolean) as string[];
+    this.doughnutChartInstance?.destroy();
 
-    const chartData = [
-      data.fat > 0 ? data.fat : null,
-      data.carbohydrates > 0 ? data.carbohydrates : null,
-      data.proteins > 0 ? data.proteins : null,
-      data.sugars > 0 ? data.sugars : null,
-      data.salt > 0 ? data.salt : null,
-      data.energyKcal > 0 ? data.energyKcal : null,
-      data.novaGroup > 0 ? data.novaGroup : null,
-      data.novaGroup100g > 0 ? data.novaGroup100g : null,
-      data.novaGroupServing > 0 ? data.novaGroupServing : null,
-      data.nutritionScoreFr > 0 ? data.nutritionScoreFr : null,
-      data.nutritionScoreFr100g > 0 ? data.nutritionScoreFr100g : null,
+    const rawData = [
+      { label: 'Fat', value: data.fat, color: '#f87171' },
+      { label: 'Carbohydrates', value: data.carbohydrates, color: '#60a5fa' },
+      { label: 'Protein', value: data.proteins, color: '#34d399' },
+      { label: 'Sugars', value: data.sugars, color: '#fbbf24' },
+      { label: 'Salt', value: data.salt, color: '#e11d48' },
+      { label: 'Fiber', value: data.energyKcal, color: '#9333ea' },
+      { label: 'Processing Level', value: data.novaGroup, color: '#f43f5e' },
+      {
+        label: 'Processing (100g)',
+        value: data.novaGroup100g,
+        color: '#fb923c',
+      },
+      {
+        label: 'Processing/Serving',
+        value: data.novaGroupServing,
+        color: '#facc15',
+      },
+      { label: 'Nutri-Score', value: data.nutritionScoreFr, color: '#22c55e' },
+      {
+        label: 'Nutri-Score 100g',
+        value: data.nutritionScoreFr100g,
+        color: '#3b82f6',
+      },
     ];
 
-    const backgroundColors = [
-      // ძირითადი ინფო
-      '#f87171',
-      '#60a5fa',
-      '#34d399',
-      '#fbbf24',
-      '#e11d48',
-      '#9333ea',
-      // ნოვა გრუპი
-      '#f43f5e',
-      '#fb923c',
-      '#facc15',
-      '#22c55e',
-      '#3b82f6',
-    ];
+    const filtered = rawData.filter((item) => item.value > 0);
+    const labels = filtered.map((item) => item.label);
+    const chartData = filtered.map((item) => item.value);
+    const backgroundColors = filtered.map((item) => item.color);
 
     return new Chart(ctx, {
       type: 'doughnut',
@@ -72,6 +64,49 @@ export class ChartService {
             labels: {
               color: '#4b5563',
             },
+          },
+        },
+      },
+    });
+  }
+
+  lineChart(ctx: CanvasRenderingContext2D, labels: string[], data: number[]) {
+    return new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Last 7 activity data',
+            data: data,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            tension: 0.4,
+            fill: true,
+            pointBackgroundColor: 'black',
+            pointBorderColor: 'rgba(255, 99, 132, 1)',
+            pointHoverRadius: 6,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: {
+            display: false,
+            title: {
+              display: true,
+              text: 'Last 7 activity data',
+            },
+          },
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Last 7 activity data',
+            },
+            beginAtZero: true,
           },
         },
       },

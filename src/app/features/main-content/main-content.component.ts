@@ -12,6 +12,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 import { DailyGoalComponent } from '../../shared/components/daily-goal/daily-goal.component';
 import { DailyGoal } from '../../shared/interfaces/daily.goal.interface';
+import { LineChartComponent } from '../../shared/components/line-chart/line-chart.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-main-content',
@@ -23,6 +25,8 @@ import { DailyGoal } from '../../shared/interfaces/daily.goal.interface';
     MatProgressSpinnerModule,
     ModalComponent,
     DailyGoalComponent,
+    LineChartComponent,
+    RouterLink,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',
@@ -54,13 +58,17 @@ export class MainContentComponent {
     initialValue: null,
   });
 
+  weeklyActivity = toSignal(this.workoutService.getChartedWorkouts(), {
+    initialValue: [],
+  });
+
   ngOnInit(): void {
     // ხელოვნური ლოადინგ სქრინი
     setTimeout(() => {
       this.isLoading.set(false);
     }, 500);
 
-    this.workoutService.goalCalculate().subscribe((res) => {
+    this.workoutService.getChartedWorkouts().subscribe((res) => {
       console.log(res);
     });
   }

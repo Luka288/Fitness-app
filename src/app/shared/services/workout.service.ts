@@ -4,10 +4,18 @@ import { docData, Firestore } from '@angular/fire/firestore';
 import { addDoc, arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { userData, WorkoutData } from '../interfaces/workout.data.interface';
 import { AlertsService } from './alerts.service';
-import { combineLatest, distinctUntilChanged, map, Observable, of } from 'rxjs';
+import {
+  combineLatest,
+  distinctUntilChanged,
+  map,
+  Observable,
+  of,
+  retry,
+} from 'rxjs';
 import { calculatedData } from '../interfaces/calculate.interface';
 import { DailyGoal } from '../interfaces/daily.goal.interface';
 import { userInterface } from '../interfaces/user.interface';
+import { weeklyChart } from '../interfaces/weekly.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -123,6 +131,26 @@ export class WorkoutService {
           ...goal,
           progress: Math.round(progress),
         };
+      })
+    );
+  }
+
+  getChartedWorkouts(): Observable<weeklyChart[] | []> {
+    const user = this.auth.currentUser;
+    if (!user) return of([]);
+
+    const workoutRef = doc(this.fire, `users/${user.uid}`);
+
+    return docData(workoutRef).pipe(
+      map((res) => {
+        if (!res) return [];
+        const activities = (res as userInterface).activities || [];
+
+        return activities.slice(-7).map((res) => ({
+          burnedCalories: Math.round(res.burnedCalories),
+          activity: res.activityName,
+          date: res.date,
+        }));
       })
     );
   }

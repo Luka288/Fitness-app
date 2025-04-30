@@ -153,6 +153,9 @@ main {
     width: 85%;
     max-width: 750px;
     height: 750px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 
     .loading {
       @include center-flex();
@@ -162,21 +165,50 @@ main {
       @include flex(space-evenly, center, wrap, row);
 
       .user-meals {
+        position: relative;
         @include classicCard();
         @include boxTune();
+
+        &.hidden::before {
+          @include blockedContainer("/assets/images/Doughnut.png", 9px);
+        }
 
         .title-container {
           width: 100%;
           text-align: center;
+          position: relative;
+          z-index: 2;
 
           p {
-            font-size: 20px;
+            font-size: 25px;
             font-family: $inter;
-            font-weight: 500;
+            font-weight: 600;
             line-height: 1.3;
             color: #333;
             margin: 0 0 1rem 0;
             letter-spacing: 0.1px;
+          }
+        }
+
+        .placeholder {
+          width: 100%;
+          text-align: center;
+          position: relative;
+          z-index: 3;
+
+          h5 {
+            font-size: 20px;
+            font-weight: 550;
+            font-family: $inter;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            backdrop-filter: saturate(180%) blur(2px);
+          }
+
+          button {
+            @include customFormButton();
           }
         }
       }
@@ -211,6 +243,32 @@ main {
 
         button {
           @include customFormButton();
+        }
+      }
+    }
+
+    .calorie-data {
+      width: 85%;
+      height: 450px;
+      margin: auto;
+      box-sizing: border-box;
+      background-color: white;
+      position: relative;
+
+      &.hidden::before {
+        @include blockedContainer("/assets/images/chart-placeholder.png");
+      }
+
+      .not-available {
+        width: 100%;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+
+        h4 {
+          font-size: 1rem;
+          font-family: $inter;
+          font-weight: 450;
         }
       }
     }

@@ -121,3 +121,15 @@
   padding: 10px;
   background-color: $white-bg;
 }
+
+@mixin blockedContainer($url: "", $size: 7px) {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url($url);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: blur($size);
+  z-index: 0;
+}
