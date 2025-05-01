@@ -14,6 +14,7 @@ import { DailyGoalComponent } from '../../shared/components/daily-goal/daily-goa
 import { DailyGoal } from '../../shared/interfaces/daily.goal.interface';
 import { LineChartComponent } from '../../shared/components/line-chart/line-chart.component';
 import { RouterLink } from '@angular/router';
+import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
 
 @Component({
   selector: 'app-main-content',
@@ -26,6 +27,7 @@ import { RouterLink } from '@angular/router';
     DailyGoalComponent,
     LineChartComponent,
     RouterLink,
+    LastSeenPipe,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',

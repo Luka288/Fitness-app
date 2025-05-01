@@ -7,7 +7,10 @@
   position: fixed;
   z-index: 1121;
   left: 0;
-  background: linear-gradient(to bottom, #0072ff, #00c6ff);
+  // background: linear-gradient(to bottom, #0072ff, #00c6ff);
+  // background: linear-gradient(to bottom right, #005bea, #00c6ff);
+  background-color: #003e7e;
+
   padding: 10px;
 
   &.inactive {

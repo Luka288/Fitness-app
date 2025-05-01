@@ -21,7 +21,7 @@
 
           <p>
             <span class="label">Last seen:</span>
-            {{ user()?.metadata?.lastSignInTime | date : "dd/MM/YY" }}
+            {{ (user()?.metadata)!.lastSignInTime! | lastSeen }}
           </p>
         </div>
       </div>
