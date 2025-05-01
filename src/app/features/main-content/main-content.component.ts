@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FirebaseAuthService } from '../../shared/services/firebase-auth.service';
 import { CommonModule } from '@angular/common';
@@ -20,7 +20,6 @@ import { RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     CardComponent,
-    DashboardCardComponent,
     NutritionCardComponent,
     MatProgressSpinnerModule,
     ModalComponent,
@@ -39,6 +38,12 @@ export class MainContentComponent {
 
   isOpen = signal(false);
   isLoading = signal<boolean>(true);
+  totalKm = computed(() =>
+    this.activities().reduce((sum, item) => {
+      const distance = Number(item.distance);
+      return sum + (isNaN(distance) ? 0 : distance);
+    }, 0)
+  );
 
   user = toSignal(this.autService.currentUseR(), { initialValue: null });
 
@@ -66,6 +71,7 @@ export class MainContentComponent {
     // ხელოვნური ლოადინგ სქრინი
     setTimeout(() => {
       this.isLoading.set(false);
+      console.log(this.activities());
     }, 500);
 
     this.workoutService.getChartedWorkouts().subscribe((res) => {

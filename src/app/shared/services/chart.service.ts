@@ -95,8 +95,9 @@ export class ChartService {
         plugins: {
           legend: {
             title: {
+              //
               position: 'center',
-              display: true,
+              display: false,
               text: 'Activity Summary (Last 7 Activity)',
             },
           },

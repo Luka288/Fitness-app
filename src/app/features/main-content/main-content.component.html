@@ -1,69 +1,59 @@
 <main>
-  <div class="base-side">
-    <div class="user-container">
-      <div class="left-side">
-        <div class="image-container">
+  <aside class="left-side">
+    <section class="profile">
+      <div class="profile-data">
+        <div class="profile-header">
           <img [src]="user()?.photoURL" [alt]="`${user()?.displayName} Logo`" />
+          <h4>
+            {{ user()?.displayName }}
+          </h4>
         </div>
-        <div class="user-baseInfo">
+        <div class="profile-info">
           <p>
-            Username: <span>{{ user()?.displayName }}</span>
-          </p>
-          <p>
-            Email: <span>{{ user()?.email }}</span>
-          </p>
-          <p>
-            Member Since:
-            <span>{{
-              user()?.metadata?.creationTime | date : "dd/MM/yyyy"
-            }}</span>
-          </p>
-          <p>
-            Last seen:
-            <span>{{
-              user()?.metadata?.lastSignInTime | date : "dd/MM/yyyy"
-            }}</span>
+            <span class="label">Email:</span>
+            {{ user()?.email }}
           </p>
 
           <p>
-            Email verified:
-            <span>{{ user()?.emailVerified ? "Yes" : "No" }}</span>
+            <span class="label">Member since:</span>
+            {{ user()?.metadata?.creationTime | date : "dd/MM/YY" }}
+          </p>
+
+          <p>
+            <span class="label">Last seen:</span>
+            {{ user()?.metadata?.lastSignInTime | date : "dd/MM/YY" }}
           </p>
         </div>
       </div>
-    </div>
-    <div class="workouts-container">
+      <div class="dashboard-overview">
+        <h2>Dashboard Overview</h2>
+        <div class="stats">
+          <div class="data-wrap">
+            <span>
+              {{ activities().length }}
+            </span>
+            <p>Workouts Done</p>
+          </div>
+          <div class="divider"></div>
+          <div class="data-wrap">
+            <span>
+              {{ totalKm() }}
+            </span>
+            <p>Total KM</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="workouts-container">
       <div class="container-title">
-        <p>choose today's activity</p>
+        <h3>🔥Today's Activity</h3>
       </div>
       <div class="wrokout-cards">
         <app-card *ngFor="let item of workoutTypes()" [workout]="item" />
       </div>
-    </div>
+    </section>
+  </aside>
 
-    <div class="user-activites">
-      <div class="activities-title">
-        <p>Activities</p>
-      </div>
-      <div class="loading" *ngIf="isLoading()">
-        <mat-spinner *ngIf="isLoading()"></mat-spinner>
-      </div>
-      <div
-        class="place-holder"
-        *ngIf="activities().length === 0 && !isLoading()"
-      >
-        <p>no activities found.</p>
-      </div>
-      <div class="cards">
-        @if (!isLoading()) {
-        <app-dashboard-card
-          *ngFor="let item of activities()"
-          [cardInfo]="item"
-        />
-        }
-      </div>
-    </div>
-  </div>
   <section class="workouts-chart">
     <div class="top-charts">
       <div class="user-meals" [ngClass]="{ hidden: !dailyMeals() }">
@@ -110,6 +100,9 @@
       class="calorie-data"
       [ngClass]="{ hidden: weeklyActivity().length < 7 }"
     >
+      <div class="container-title">
+        <span>Activity Summary (Last 7 Activity)</span>
+      </div>
       <div class="not-available" *ngIf="weeklyActivity().length < 7">
         <h4>
           <i class="fa-solid fa-lock"></i>
