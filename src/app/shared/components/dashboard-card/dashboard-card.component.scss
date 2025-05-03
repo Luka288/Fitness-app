@@ -2,49 +2,42 @@
 @use "../../../scss/variables" as *;
 
 .card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 2px solid #ddd;
+  background: #f9f9f9;
+  padding: 1.5rem;
+  box-sizing: border-box;
   border-radius: 8px;
-  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: $montserrat;
-  font-size: 14px;
-  font-weight: 500;
-  width: fit-content;
-  max-width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
 
   .activity {
-    font-weight: bold;
-    color: #333;
-    flex-shrink: 0;
+    p {
+      font-family: $roboto;
+      font-weight: 600;
+      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
   }
 
   .details {
-    display: flex;
-    gap: 15px;
-    color: #555;
-  }
+    p {
+      font-family: $inter;
+      font-size: 1rem;
+      color: #555;
+      // line-height: 1.6;
+      margin-bottom: 0.5rem;
+    }
 
-  .separator {
-    color: #aaa;
-  }
-
-  p {
-    margin: 0;
-  }
-}
-
-@media (max-width: 1679px) {
-  .card {
-    flex-wrap: wrap;
-    flex-direction: column;
-
-    .details {
-      flex-wrap: wrap;
-      flex-direction: column;
+    p strong {
+      font-weight: 600;
+      color: #333;
     }
   }
 }

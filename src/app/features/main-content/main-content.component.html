@@ -20,7 +20,6 @@
           </p>
 
           <p>
-            <span class="label">Last seen:</span>
             {{ (user()?.metadata)!.lastSignInTime! | lastSeen }}
           </p>
         </div>
@@ -50,6 +49,22 @@
       </div>
       <div class="wrokout-cards">
         <app-card *ngFor="let item of workoutTypes()" [workout]="item" />
+      </div>
+    </section>
+
+    <section class="user-activities">
+      <h1>Your Activity Feed</h1>
+      <div class="blocked" *ngIf="!activities()">
+        <h2>
+          <i class="fa-solid fa-lock"></i>Do at least one workout to unlock
+          activity feed
+        </h2>
+      </div>
+      <div class="cards" *ngIf="activities()">
+        <app-dashboard-card
+          *ngFor="let item of activities()"
+          [cardInfo]="item"
+        />
       </div>
     </section>
   </aside>
@@ -100,7 +115,7 @@
       class="calorie-data"
       [ngClass]="{ hidden: weeklyActivity().length < 7 }"
     >
-      <div class="container-title">
+      <div class="container-title" *ngIf="weeklyActivity().length >= 7">
         <span>Activity Summary (Last 7 Activity)</span>
       </div>
       <div class="not-available" *ngIf="weeklyActivity().length < 7">

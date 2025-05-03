@@ -28,6 +28,7 @@ import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
     LineChartComponent,
     RouterLink,
     LastSeenPipe,
+    DashboardCardComponent,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',

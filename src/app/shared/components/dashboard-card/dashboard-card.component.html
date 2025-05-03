@@ -1,18 +1,14 @@
 <div class="card">
   <div class="activity">
-    <p>
-      {{ activity.activityName! | transformStr }}
-    </p>
+    <p>{{ activity.activityName | transformStr }}</p>
   </div>
   <div class="details">
     <p>
-      {{ activity.totalReps ? `Reps: ${activity.totalReps}` :  `Time: ${activity.time}` }}
-      |
+      {{ activity.totalReps ? `Reps: ${activity.totalReps}` : `Time: ${activity.time}` }}
     </p>
-    <p *ngIf="activity.distance">Distance: {{ activity.distance }} |</p>
-    <p *ngIf="activity.MET">Effort: {{ activity.MET }} |</p>
-    <p>Calories: {{ activity.burnedCalories }}Kcal |</p>
+    <p *ngIf="activity.distance">Distance: {{ activity.distance }}</p>
+    <p *ngIf="activity.MET">Effort: {{ activity.MET }}</p>
+    <p>Calories: {{ activity.burnedCalories }} Kcal</p>
+    <!-- ! აქტივობის წაშლა?  -->
   </div>
 </div>
-
-<!-- : activity.sets ? `Sets: ${activity.sets} -->
