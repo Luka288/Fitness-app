@@ -102,16 +102,26 @@ export const activityConfig = {
       const timeInHours = formData.timeUnit === 'MINUTE' ? time / 60 : time;
       const timeInMinutes = formData.timeUnit === 'HOUR' ? time * 60 : time;
 
-      const speed = formData.distance! / timeInHours || timeInMinutes;
+      const speed = formData.distance! / timeInHours;
 
       let MET = 0;
+      let intensity: string = '';
 
-      if (speed < 16) {
-        MET = 4.0; // მსუბუქი
-      } else if (speed < 20) {
-        MET = 6.8; // საშუალო
+      if (speed < 6) {
+        MET = 6.0; // ძალიან მსუბუქი
+        intensity = 'Very Light';
+      } else if (speed < 8) {
+        MET = 8.3; // მსუბუქი
+        intensity = 'Light';
+      } else if (speed < 10) {
+        MET = 10.0; // საშუალო
+        intensity = 'Moderate';
+      } else if (speed < 12) {
+        MET = 11.8; // ენერგიული
+        intensity = 'Vigorous';
       } else {
-        MET = 8.0; // მაქსიმალური
+        MET = 14.5; // ძალიან ენერგიული
+        intensity = 'Very Vigorous';
       }
 
       const burnedCaloreis = (MET * 3.5 * formData.kg! * timeInMinutes) / 200;
@@ -119,7 +129,7 @@ export const activityConfig = {
       return {
         speed: speed,
         burnedCaloreis: burnedCaloreis,
-        MET: MET === 8.0 ? 'Light' : MET === 9.8 ? 'Moderate' : 'Vigorous',
+        MET: intensity,
         activityName: 'Cycling',
         time: `${formData.time} ${formData.timeUnit}`,
         distance: Number(formData.distance),
