@@ -19,8 +19,10 @@
 }
 
 @media (max-width: 320px) {
-  .main-content {
-    margin-left: 20px;
-    padding: 0px;
+  .dashboard-container {
+    .main-content {
+      margin-left: 20px;
+      padding: 0px;
+    }
   }
 }
