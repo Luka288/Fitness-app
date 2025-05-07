@@ -44,6 +44,11 @@ export class MainContentComponent {
   totalKm = computed(() =>
     this.activities().reduce((sum, item) => {
       const distance = Number(item.distance);
+
+      setTimeout(() => {
+        console.log('test');
+      }, 500);
+
       return sum + (isNaN(distance) ? 0 : distance);
     }, 0)
   );
