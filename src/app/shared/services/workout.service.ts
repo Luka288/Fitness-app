@@ -1,21 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { docData, Firestore } from '@angular/fire/firestore';
-import { addDoc, arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
-import { userData, WorkoutData } from '../interfaces/workout.data.interface';
+import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { userData } from '../interfaces/workout.data.interface';
 import { AlertsService } from './alerts.service';
-import {
-  combineLatest,
-  distinctUntilChanged,
-  map,
-  Observable,
-  of,
-  retry,
-} from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { calculatedData } from '../interfaces/calculate.interface';
 import { DailyGoal } from '../interfaces/daily.goal.interface';
 import { userInterface } from '../interfaces/user.interface';
 import { weeklyChart } from '../interfaces/weekly.interface';
+import { consumerBeforeComputation } from '@angular/core/primitives/signals';
 
 @Injectable({
   providedIn: 'root',
@@ -34,13 +28,13 @@ export class WorkoutService {
 
       const workoutRef = doc(this.fire, `users/${user.uid}`);
 
-      await updateDoc(workoutRef, {
-        activities: arrayUnion({
-          ...workoutData,
-          date: date,
-          savedAt: new Date().toISOString(),
-        }),
-      });
+      // await updateDoc(workoutRef, {
+      //   activities: arrayUnion({
+      //     ...workoutData,
+      //     date: date,
+      //     savedAt: new Date().toISOString(),
+      //   }),
+      // });
 
       this.alerts.toast('Data saved!', 'success', '');
     } catch (error) {
@@ -151,6 +145,40 @@ export class WorkoutService {
           activity: res.activityName,
           date: res.date,
         }));
+      })
+    );
+  }
+
+  // მოაქვს წინა დღის ვარჯიში დღევანდელი ვარჯიშის შესადარებლად
+  loadYesterdaysWorkout(activityName: string) {
+    console.log(activityName);
+    const user = this.auth.currentUser;
+    if (!user) return of([]);
+
+    // შედეგი = morning_run = Morning run
+    const acName = activityName
+      .replace(/_/g, ' ')
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(' ');
+
+    const workoutRef = doc(this.fire, `users/${user.uid}`);
+
+    return docData(workoutRef).pipe(
+      map((res) => {
+        if (!res) return [];
+        const userData = res as userInterface;
+        const workouts: userData[] = userData.activities;
+
+        const filtered = workouts.filter(
+          (item) => item.activityName === acName
+        );
+
+        return filtered.reduce(
+          (max, item) =>
+            item.burnedCalories > max.burnedCalories ? item : max,
+          filtered[0]
+        );
       })
     );
   }

@@ -62,6 +62,12 @@ export class WorkoutDetailComponent {
       if (metric === 'time') {
         this.metricInputControl.addControl('timeUnit', new FormControl('HOUR'));
       }
+
+      this.workoutService
+        .loadYesterdaysWorkout(currWorkout!)
+        ?.subscribe((res) => {
+          console.log(res);
+        });
     });
   }
 

@@ -2,10 +2,8 @@
 @use "../../../scss/variables" as *;
 
 #dataSection {
-  width: 75%;
   max-height: 0;
   opacity: 0;
-  @include transparentGlass;
   margin: auto;
   padding: 16px;
   font-family: $inter;

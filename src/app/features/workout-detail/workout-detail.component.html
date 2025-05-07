@@ -1,22 +1,28 @@
 <main>
-  <section>
-    <app-activity-info *ngFor="let item of calculatedData()" [data]="item" />
-  </section>
-  <section id="inputsSec">
-    <div class="title-container">
-      <p>
-        Activity name:
-        <span>
-          {{ workout?.name }}
-        </span>
-      </p>
-    </div>
-    <div class="inputs">
+  <section id="main-wrapper">
+    <aside id="summarry">
+      <div class="container-title">
+        <h1>Workout summarry</h1>
+      </div>
+      <section class="workout-data">
+        <app-activity-info
+          *ngFor="let item of calculatedData()"
+          [data]="item"
+        />
+      </section>
+    </aside>
+    <aside id="form-side">
       <form [formGroup]="metricInputControl" (ngSubmit)="saveWorkout()">
+        <div class="container-title">
+          <h1>Workout summarry</h1>
+        </div>
         <div
-          class="inputW"
+          id="workout-input"
           *ngFor="let item of workout?.metrics; let i = index"
         >
+          <label [attr.for]="'workoutInput' + i">
+            {{ item }}
+          </label>
           <input
             type="text"
             [attr.id]="'workoutInput' + i"
@@ -57,6 +63,10 @@
         </div>
         <button type="submit">Calculate and save</button>
       </form>
-    </div>
+    </aside>
   </section>
 </main>
+
+<!-- <section>
+  <app-activity-info *ngFor="let item of calculatedData()" [data]="item" />
+</section> -->

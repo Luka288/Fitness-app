@@ -1,7 +1,6 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { CalculateService } from '../../services/calculate.service';
 import { calculatedData } from '../../interfaces/calculate.interface';
-import { userFormData } from '../../interfaces/formData.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({
