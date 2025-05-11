@@ -4,6 +4,15 @@
       <div class="container-title">
         <h1>Workout summarry</h1>
       </div>
+
+      @if(calculatedData().length === 0) {
+      <div class="nothing">
+        <div class="text">
+          Enter your workout stats to see detailed calculations.
+        </div>
+      </div>
+      }
+
       <section class="workout-data">
         <app-activity-info
           *ngFor="let item of calculatedData()"

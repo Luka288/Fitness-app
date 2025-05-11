@@ -36,7 +36,12 @@ export class WorkoutDetailComponent {
 
   metricInputControl = new FormGroup({});
 
-  constructor() {}
+  constructor() {
+    if (this.calculatedData()) {
+      console.log('test');
+      console.log(this.calculatedData());
+    }
+  }
 
   ngOnInit(): void {
     const currWorkout = this.router.snapshot.paramMap.get('id');

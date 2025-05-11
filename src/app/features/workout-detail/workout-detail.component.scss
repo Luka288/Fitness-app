@@ -26,6 +26,27 @@ main {
       @include boxTune();
       background-color: $white-bg;
       padding: 20px;
+
+      .nothing {
+        width: 75%;
+        height: auto;
+        margin: auto;
+        margin-top: 120px;
+        display: flex;
+        justify-content: center;
+
+        .text {
+          width: fit-content;
+          height: auto;
+          box-sizing: border-box;
+          padding: 15px;
+          border-top-left-radius: 14px;
+          border-top-right-radius: 7px;
+          border-left: 3px solid orange;
+          background-color: $gray;
+          font-family: $inter;
+        }
+      }
     }
 
     #form-side {

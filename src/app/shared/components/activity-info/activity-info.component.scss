@@ -2,8 +2,8 @@
 @use "../../../scss/variables" as *;
 
 #dataSection {
-  width: 100%;
-  max-width: 750px;
+  width: 90%;
+  max-width: 550px;
   opacity: 0;
   margin: auto;
   padding: 16px;
@@ -53,5 +53,12 @@
     .fa-clock {
       color: blue;
     }
+  }
+}
+
+@media (max-width: 425px) {
+  .main-content {
+    padding: 0 !important;
+    margin-left: 0px !important;
   }
 }
