@@ -29,7 +29,7 @@ main {
 
       .nothing {
         width: 75%;
-        height: auto;
+        height: 65px;
         margin: auto;
         margin-top: 120px;
         display: flex;
@@ -45,6 +45,7 @@ main {
           border-left: 3px solid orange;
           background-color: $gray;
           font-family: $inter;
+          @include flex();
         }
       }
     }
