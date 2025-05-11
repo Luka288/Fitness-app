@@ -7,29 +7,34 @@ main {
 
   #main-wrapper {
     width: 100%;
-    max-width: 75%;
-    height: auto;
-    background-color: $white-bg;
+    // max-width: 75%;
+    height: 100%;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    box-sizing: border-box;
-    padding: 20px;
+    justify-content: center;
+    align-items: center;
     border-radius: 16px;
-    @include boxTune();
+    gap: 30px;
 
     #summarry {
-      width: 750px;
+      width: 100%;
+      max-width: 750px;
       height: 600px;
       border-right: 2px solid #ccc;
       box-sizing: border-box;
+      @include boxTune();
+      background-color: $white-bg;
       padding: 20px;
     }
 
     #form-side {
-      width: 450px;
+      width: 100%;
+      max-width: 450px;
       height: 600px;
       box-sizing: border-box;
+      @include boxTune();
+      background-color: $white-bg;
       padding: 20px;
 
       form {
