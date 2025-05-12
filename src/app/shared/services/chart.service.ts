@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, SimpleChanges } from '@angular/core';
 import { nutrimentData } from '../interfaces/food.interface';
 import Chart from 'chart.js/auto';
 
@@ -9,8 +9,15 @@ export class ChartService {
   private lineChartInstance?: Chart;
   private doughnutChartInstance?: Chart;
 
+  ngOnchanges(changes: SimpleChanges): void {
+    if (this.doughnutChartInstance) {
+      this.doughnutChartInstance.resize();
+    }
+  }
+
   doughnutChart(ctx: CanvasRenderingContext2D, data: nutrimentData) {
     this.doughnutChartInstance?.destroy();
+    this.doughnutChartInstance?.resize();
 
     const rawData = [
       { label: 'Fat', value: data.fat, color: '#f87171' },

@@ -6,6 +6,7 @@
   min-height: 100vh;
   background-color: $main-bg;
   display: flex;
+  justify-content: center;
 
   .side-panel {
     width: 170px;
@@ -14,7 +15,7 @@
   .main-content {
     width: 100%;
     box-sizing: border-box;
-    padding: 20px;
+    // padding: 20px;
   }
 }
 
