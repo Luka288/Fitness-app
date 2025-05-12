@@ -36,12 +36,7 @@ export class WorkoutDetailComponent {
 
   metricInputControl = new FormGroup({});
 
-  constructor() {
-    if (this.calculatedData()) {
-      console.log('test');
-      console.log(this.calculatedData());
-    }
-  }
+  constructor() {}
 
   ngOnInit(): void {
     const currWorkout = this.router.snapshot.paramMap.get('id');
@@ -67,12 +62,6 @@ export class WorkoutDetailComponent {
       if (metric === 'time') {
         this.metricInputControl.addControl('timeUnit', new FormControl('HOUR'));
       }
-
-      this.workoutService
-        .loadYesterdaysWorkout(currWorkout!)
-        ?.subscribe((res) => {
-          console.log(res);
-        });
     });
   }
 

@@ -192,7 +192,7 @@ main {
   .workouts-chart {
     width: 85%;
     max-width: 750px;
-    height: 750px;
+    // height: 750px;
     display: flex;
     flex-direction: column;
     gap: 25px;
@@ -320,6 +320,33 @@ main {
         span {
           font-family: $inter;
         }
+      }
+    }
+
+    .pr-container {
+      width: 85%;
+      height: fit-content;
+      background-color: $white-bg;
+      margin: auto;
+      box-sizing: border-box;
+      padding: 20px;
+      @include boxTune();
+
+      h2 {
+        text-align: center;
+        font-family: $roboto;
+        margin: 0;
+
+        i {
+          color: red;
+        }
+      }
+
+      .locked-p {
+        font-family: $inter;
+        font-size: 15px;
+        text-align: center;
+        margin-top: 65px;
       }
     }
   }

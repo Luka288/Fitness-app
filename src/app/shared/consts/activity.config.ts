@@ -85,7 +85,7 @@ export const activityConfig = {
 
       return {
         speed: speed,
-        burnedCalories: Math.round(burnedCalories),
+        burnedCalories: Math.round(burnedCalories).toFixed(2),
         MET: intensity,
         activityName: 'Morning Run',
         time: `${formData.time} ${formData.timeUnit}`,
@@ -124,11 +124,11 @@ export const activityConfig = {
         intensity = 'Very Vigorous';
       }
 
-      const burnedCaloreis = (MET * 3.5 * formData.kg! * timeInMinutes) / 200;
+      const burnedCalories = (MET * 3.5 * formData.kg! * timeInMinutes) / 200;
 
       return {
         speed: speed,
-        burnedCaloreis: burnedCaloreis,
+        burnedCalories: Math.round(burnedCalories).toFixed(2),
         MET: intensity,
         activityName: 'Cycling',
         time: `${formData.time} ${formData.timeUnit}`,

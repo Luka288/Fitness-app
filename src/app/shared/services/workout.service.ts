@@ -28,13 +28,13 @@ export class WorkoutService {
 
       const workoutRef = doc(this.fire, `users/${user.uid}`);
 
-      // await updateDoc(workoutRef, {
-      //   activities: arrayUnion({
-      //     ...workoutData,
-      //     date: date,
-      //     savedAt: new Date().toISOString(),
-      //   }),
-      // });
+      await updateDoc(workoutRef, {
+        activities: arrayUnion({
+          ...workoutData,
+          date: date,
+          savedAt: new Date().toISOString(),
+        }),
+      });
 
       this.alerts.toast('Data saved!', 'success', '');
     } catch (error) {
@@ -150,34 +150,24 @@ export class WorkoutService {
   }
 
   // მოაქვს წინა დღის ვარჯიში დღევანდელი ვარჯიშის შესადარებლად
-  loadYesterdaysWorkout(activityName: string) {
-    console.log(activityName);
+  prWorkout(): Observable<userData | null> {
     const user = this.auth.currentUser;
-    if (!user) return of([]);
-
-    // შედეგი = morning_run = Morning run
-    const acName = activityName
-      .replace(/_/g, ' ')
-      .split(' ')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(' ');
+    if (!user) return of();
 
     const workoutRef = doc(this.fire, `users/${user.uid}`);
 
     return docData(workoutRef).pipe(
       map((res) => {
-        if (!res) return [];
+        if (!res) return null;
         const userData = res as userInterface;
         const workouts: userData[] = userData.activities;
 
-        const filtered = workouts.filter(
-          (item) => item.activityName === acName
-        );
+        // const filtered = workouts.filter(
+        //   (item) => item.activityName === acName
+        // );
 
-        return filtered.reduce(
-          (max, item) =>
-            item.burnedCalories > max.burnedCalories ? item : max,
-          filtered[0]
+        return workouts.reduce((max, item) =>
+          item.burnedCalories > max.burnedCalories ? item : max
         );
       })
     );

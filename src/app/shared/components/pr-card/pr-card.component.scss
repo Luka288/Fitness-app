@@ -1,0 +1,26 @@
+@use "../../../scss/mixins" as *;
+@use "../../../scss/variables" as *;
+
+section {
+  width: 100%;
+  height: fit-content;
+  font-family: $inter;
+
+  h3 {
+    font-size: clamp(1.3125rem, 1.2rem + 1vw, 1.75rem);
+    margin: 0;
+  }
+
+  .w-data {
+    margin-top: 25px;
+
+    p {
+      font-size: clamp(0.95rem, 0.8rem + 0.5vw, 1.125rem);
+      font-weight: 300;
+
+      strong {
+        font-weight: 500;
+      }
+    }
+  }
+}

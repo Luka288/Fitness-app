@@ -1,0 +1,25 @@
+<section>
+  <h3>
+    {{ personalBest?.activityName }}
+  </h3>
+  <div class="w-data">
+    <p>
+      Workout Intensity: <strong>{{ personalBest?.MET }}</strong>
+    </p>
+    <p>
+      Calories burned: <strong>{{ personalBest?.burnedCalories }} Kcal</strong>
+    </p>
+    @if (personalBest?.time) {
+    <p>
+      Duration: <strong>{{ personalBest?.time }}</strong>
+    </p>
+    } @if (personalBest?.burnedCalories && personalBest?.distance) {
+    <p>
+      Average Speed: <strong>{{ personalBest?.speed }} km/h</strong>
+    </p>
+    <p>
+      Distance Covered: <strong>{{ personalBest?.distance }} KM</strong>
+    </p>
+    }
+  </div>
+</section>

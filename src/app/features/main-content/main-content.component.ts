@@ -15,6 +15,7 @@ import { DailyGoal } from '../../shared/interfaces/daily.goal.interface';
 import { LineChartComponent } from '../../shared/components/line-chart/line-chart.component';
 import { RouterLink } from '@angular/router';
 import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
+import { PrCardComponent } from '../../shared/components/pr-card/pr-card.component';
 
 @Component({
   selector: 'app-main-content',
@@ -29,6 +30,7 @@ import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
     RouterLink,
     LastSeenPipe,
     DashboardCardComponent,
+    PrCardComponent,
   ],
   templateUrl: './main-content.component.html',
   styleUrl: './main-content.component.scss',
@@ -39,16 +41,16 @@ export class MainContentComponent {
   private readonly foodService = inject(FoodService);
   readonly workoutService = inject(WorkoutService);
 
+  constructor() {
+    this.workoutService.prWorkout().subscribe(console.log);
+  }
+
   isOpen = signal(false);
   isLoading = signal<boolean>(true);
+
   totalKm = computed(() =>
     this.activities().reduce((sum, item) => {
       const distance = Number(item.distance);
-
-      setTimeout(() => {
-        console.log('test');
-      }, 500);
-
       return sum + (isNaN(distance) ? 0 : distance);
     }, 0)
   );
@@ -74,17 +76,14 @@ export class MainContentComponent {
   weeklyActivity = toSignal(this.workoutService.getChartedWorkouts(), {
     initialValue: [],
   });
+  prData = toSignal(this.workoutService.prWorkout(), { initialValue: null });
 
   ngOnInit(): void {
     // ხელოვნური ლოადინგ სქრინი
     setTimeout(() => {
       this.isLoading.set(false);
-      console.log(this.activities());
+      console.log(this.prData());
     }, 500);
-
-    this.workoutService.getChartedWorkouts().subscribe((res) => {
-      console.log(res);
-    });
   }
 
   openModal() {
