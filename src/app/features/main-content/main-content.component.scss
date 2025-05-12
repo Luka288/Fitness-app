@@ -206,7 +206,8 @@ main {
     }
 
     .top-charts {
-      @include flex(space-evenly, center, wrap, row);
+      @include flex(center, center, wrap, row);
+      gap: 37px;
 
       .user-meals {
         position: relative;
@@ -298,6 +299,7 @@ main {
       box-sizing: border-box;
       background-color: white;
       position: relative;
+      @include boxTune();
 
       &.hidden::before {
         @include blockedContainer("/assets/images/chart-placeholder.png");
@@ -331,9 +333,10 @@ main {
       width: 85%;
       height: fit-content;
       background-color: $white-bg;
-      margin: auto;
       box-sizing: border-box;
       padding: 20px;
+      margin: auto;
+      margin-bottom: 20px;
       @include boxTune();
 
       h2 {
