@@ -1,14 +1,10 @@
 @use "../../scss/mixins" as *;
 @use "../../scss/variables" as *;
 
-* {
-  // padding: 0 !important;
-}
-
 main {
   width: 100%;
   margin-top: 40px;
-  @include flex(space-evenly, flex-start);
+  @include flex(center, flex-start);
 
   .left-side {
     width: 90%;
