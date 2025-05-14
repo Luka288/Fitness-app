@@ -197,10 +197,6 @@ main {
     flex-direction: column;
     gap: 25px;
 
-    .loading {
-      @include center-flex();
-    }
-
     .top-charts {
       @include flex(center, center, wrap, row);
       gap: 37px;
@@ -362,6 +358,11 @@ main {
     overflow: auto;
     gap: 15px;
     margin-top: 20px;
+  }
+
+  // გლობალური loading კლასი
+  .loading {
+    @include center-flex();
   }
 }
 

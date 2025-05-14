@@ -160,11 +160,9 @@ export class WorkoutService {
       map((res) => {
         if (!res) return null;
         const userData = res as userInterface;
-        const workouts: userData[] = userData.activities;
+        const workouts = userData.activities ? userData.activities : [];
 
-        // const filtered = workouts.filter(
-        //   (item) => item.activityName === acName
-        // );
+        if (workouts.length === 0) return null;
 
         return workouts.reduce((max, item) =>
           item.burnedCalories > max.burnedCalories ? item : max

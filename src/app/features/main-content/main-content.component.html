@@ -132,11 +132,15 @@
     </div>
     <div class="pr-container">
       <h2>Peak Performance Session <i class="fa-solid fa-fire"></i></h2>
-      @if (prData()) {
+
+      @if (prLoading()) {
+      <div class="loading">
+        <mat-spinner />
+      </div>
+      }@else if (prData()) {
       <div class="data-container">
         <app-pr-card [personalBest]="prData()" />
       </div>
-
       }@else {
       <p class="locked-p">
         Do at least one workout to see personal best data

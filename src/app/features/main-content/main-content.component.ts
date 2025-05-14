@@ -16,6 +16,7 @@ import { LineChartComponent } from '../../shared/components/line-chart/line-char
 import { RouterLink } from '@angular/router';
 import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
 import { PrCardComponent } from '../../shared/components/pr-card/pr-card.component';
+import { userData } from '../../shared/interfaces/workout.data.interface';
 
 @Component({
   selector: 'app-main-content',
@@ -41,12 +42,9 @@ export class MainContentComponent {
   private readonly foodService = inject(FoodService);
   readonly workoutService = inject(WorkoutService);
 
-  constructor() {
-    this.workoutService.prWorkout().subscribe(console.log);
-  }
-
   isOpen = signal(false);
   isLoading = signal<boolean>(true);
+  prLoading = signal<boolean>(true);
 
   totalKm = computed(() =>
     this.activities().reduce((sum, item) => {
@@ -76,14 +74,15 @@ export class MainContentComponent {
   weeklyActivity = toSignal(this.workoutService.getChartedWorkouts(), {
     initialValue: [],
   });
-  prData = toSignal(this.workoutService.prWorkout(), { initialValue: null });
+  prData = signal<userData | null>(null);
 
   ngOnInit(): void {
     // ხელოვნური ლოადინგ სქრინი
     setTimeout(() => {
       this.isLoading.set(false);
-      console.log(this.prData());
     }, 500);
+
+    this.loadPersonalBest();
   }
 
   openModal() {
@@ -97,5 +96,18 @@ export class MainContentComponent {
 
   closeModal() {
     this.isOpen.set(false);
+  }
+
+  loadPersonalBest() {
+    this.prLoading.set(true);
+    this.workoutService.prWorkout().subscribe({
+      next: (res) => {
+        this.prData.set(res);
+        this.prLoading.set(false);
+      },
+      error: (err) => {
+        this.prLoading.set(false);
+      },
+    });
   }
 }
