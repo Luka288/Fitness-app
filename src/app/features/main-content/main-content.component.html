@@ -75,35 +75,40 @@
         <div class="title-container">
           <p>Macro tracker</p>
         </div>
-        <div class="loading" *ngIf="isLoading()">
-          <mat-spinner *ngIf="isLoading()"></mat-spinner>
+
+        @if (mealLoading()) {
+        <div class="loading">
+          <mat-spinner />
         </div>
-        <div class="placeholder" *ngIf="!dailyMeals() && !isLoading()">
+        }@else if (dailyMeals()) {
+        <app-nutrition-card [nutritionInput]="dailyMeals()!" />
+        }@else {
+        <div class="placeholder" *ngIf="!dailyMeals()">
           <h5>Add today's meals to view your macro data.</h5>
           <button routerLink="scanner">Add food here!</button>
         </div>
-        <app-nutrition-card
-          [nutritionInput]="dailyMeals()!"
-          *ngIf="dailyMeals() && !isLoading()"
-        />
+
+        }
       </div>
 
       <div class="daily-goal">
         <div class="title-container">
           <p>Daily Goal</p>
         </div>
-        <div class="loading" *ngIf="isLoading()">
-          <mat-spinner *ngIf="isLoading()"></mat-spinner>
+
+        @if (goalLoading()) {
+        <div class="loading">
+          <mat-spinner />
         </div>
-        <app-daily-goal
-          [goalData]="dailyGoal()"
-          (newGoal)="openModal()"
-          *ngIf="dailyGoal() && !isLoading()"
-        />
-        <div class="empty" *ngIf="!dailyGoal() && !isLoading()">
+        }@else if(dailyGoal()) {
+        <app-daily-goal [goalData]="dailyGoal()" (newGoal)="openModal()" />
+        }@else {
+        <div class="empty">
           <span>🏅No daily goals found. set your daily goal. </span>
           <button (click)="openModal()">Set daily goal</button>
         </div>
+        }
+
         <app-modal
           *ngIf="isOpen()"
           (close)="closeModal()"

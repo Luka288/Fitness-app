@@ -17,6 +17,7 @@ import { RouterLink } from '@angular/router';
 import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
 import { PrCardComponent } from '../../shared/components/pr-card/pr-card.component';
 import { userData } from '../../shared/interfaces/workout.data.interface';
+import { nutrimentData } from '../../shared/interfaces/food.interface';
 
 @Component({
   selector: 'app-main-content',
@@ -43,8 +44,10 @@ export class MainContentComponent {
   readonly workoutService = inject(WorkoutService);
 
   isOpen = signal(false);
-  isLoading = signal<boolean>(true);
+  // isLoading = signal<boolean>(true);
   prLoading = signal<boolean>(true);
+  mealLoading = signal<boolean>(true);
+  goalLoading = signal<boolean>(true);
 
   totalKm = computed(() =>
     this.activities().reduce((sum, item) => {
@@ -63,25 +66,17 @@ export class MainContentComponent {
     initialValue: [],
   });
 
-  dailyMeals = toSignal(this.foodService.getdailyMeals(), {
-    initialValue: null,
-  });
-
-  dailyGoal = toSignal(this.workoutService.goalCalculate(), {
-    initialValue: null,
-  });
-
   weeklyActivity = toSignal(this.workoutService.getChartedWorkouts(), {
     initialValue: [],
   });
+
   prData = signal<userData | null>(null);
+  dailyMeals = signal<nutrimentData | null>(null);
+  dailyGoal = signal<DailyGoal | null>(null);
 
   ngOnInit(): void {
-    // ხელოვნური ლოადინგ სქრინი
-    setTimeout(() => {
-      this.isLoading.set(false);
-    }, 500);
-
+    this.loadDailyMeals();
+    this.dailyGoalProgress();
     this.loadPersonalBest();
   }
 
@@ -99,7 +94,6 @@ export class MainContentComponent {
   }
 
   loadPersonalBest() {
-    this.prLoading.set(true);
     this.workoutService.prWorkout().subscribe({
       next: (res) => {
         this.prData.set(res);
@@ -110,4 +104,37 @@ export class MainContentComponent {
       },
     });
   }
+
+  loadDailyMeals() {
+    this.foodService.getdailyMeals().subscribe({
+      next: (res) => {
+        this.dailyMeals.set(res);
+        this.mealLoading.set(false);
+      },
+      error: (err) => {
+        this.mealLoading.set(false);
+      },
+    });
+  }
+
+  dailyGoalProgress() {
+    this.workoutService.goalCalculate().subscribe({
+      next: (res) => {
+        this.dailyGoal.set(res);
+        this.goalLoading.set(false);
+      },
+
+      error: (e) => {
+        this.goalLoading.set(false);
+      },
+    });
+  }
 }
+
+// dailyMeals = toSignal(this.foodService.getdailyMeals(), {
+//   initialValue: null,
+// });
+
+// dailyGoal = toSignal(this.workoutService.goalCalculate(), {
+//   initialValue: null,
+// });
