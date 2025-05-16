@@ -23,7 +23,7 @@ export interface userData {
 
 export interface calculatedData extends userData {
   totalReps?: number;
-  unit: string;
+  unit?: string;
 }
 
 export interface WorkoutData extends Partial<BaseWorkoutData> {}

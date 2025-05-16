@@ -16,7 +16,10 @@ import { LineChartComponent } from '../../shared/components/line-chart/line-char
 import { RouterLink } from '@angular/router';
 import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
 import { PrCardComponent } from '../../shared/components/pr-card/pr-card.component';
-import { userData } from '../../shared/interfaces/workout.data.interface';
+import {
+  calculatedData,
+  userData,
+} from '../../shared/interfaces/workout.data.interface';
 import { nutrimentData } from '../../shared/interfaces/food.interface';
 
 @Component({
@@ -48,7 +51,7 @@ export class MainContentComponent {
   mealLoading = signal<boolean>(true);
   goalLoading = signal<boolean>(true);
 
-  prData = signal<userData | null>(null);
+  prData = signal<calculatedData | null>(null);
   dailyMeals = signal<nutrimentData | null>(null);
   dailyGoal = signal<DailyGoal | null>(null);
 

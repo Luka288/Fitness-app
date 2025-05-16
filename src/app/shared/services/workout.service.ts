@@ -143,7 +143,7 @@ export class WorkoutService {
     );
   }
 
-  prWorkout(): Observable<userData | null> {
+  prWorkout(): Observable<calculatedData | null> {
     const user = this.auth.currentUser;
     if (!user) return of();
 
