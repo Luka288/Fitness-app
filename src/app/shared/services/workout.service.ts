@@ -107,7 +107,6 @@ export class WorkoutService {
             }
 
             if (goal.type === 'DISTANCE') {
-              console.log('test');
               return sum + (data.distance || 0);
             }
 

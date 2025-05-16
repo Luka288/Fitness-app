@@ -2,24 +2,52 @@
 @use "../../../scss/variables" as *;
 
 .card {
-  width: 50%;
-  margin: auto;
-  margin-top: 20px;
+  width: 75%;
+  max-width: 540px;
+  background-color: #ffff;
+  @include boxTune();
   box-sizing: border-box;
-  padding: 15px;
-  border-radius: 3px;
-  background-color: #ffffff;
+  padding: 20px;
+  margin: auto;
+  margin-top: 40px;
+  @include flex(flex-start, none, wrap, row);
+  gap: 15px;
 
   .card-header {
-    @include flex(center, center, wrap, column);
+    img {
+      width: 100%;
+      max-width: 160px;
+    }
   }
 
   .card-body {
-    font-family: $poppins;
-    font-size: 18px;
+    h1 {
+      font-family: $roboto;
+      margin: 0;
+    }
+
+    .data {
+      margin-top: 40px;
+
+      p {
+        font-family: $inter;
+      }
+    }
   }
 
   button {
     @include customFormButton();
+  }
+
+  .footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 320px) {
+  .card {
+    padding: 3px;
   }
 }

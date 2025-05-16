@@ -65,6 +65,8 @@
 
 @media (max-width: 320px) {
   .side-panel {
+    width: 100px;
+
     &.inactive {
       width: 25px;
     }

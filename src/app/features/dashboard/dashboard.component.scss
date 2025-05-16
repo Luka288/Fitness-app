@@ -27,3 +27,11 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    .side-panel {
+      width: 100px;
+    }
+  }
+}

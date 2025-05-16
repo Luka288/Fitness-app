@@ -20,7 +20,7 @@ export class FoodScannerComponent {
   private readonly foodService = inject(FoodService);
 
   barcodeGroup = new FormGroup({
-    barcodeInput: new FormControl('4865602000027', {
+    barcodeInput: new FormControl('', {
       validators: [Validators.required],
       nonNullable: true,
     }),
@@ -32,7 +32,6 @@ export class FoodScannerComponent {
 
   searchProduct(product: string) {
     this.foodService.getFood(product).subscribe((res) => {
-      console.log(res.product.nutriments.fat);
       this.product.set(res);
     });
   }

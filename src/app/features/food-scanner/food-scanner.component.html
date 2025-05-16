@@ -1,4 +1,5 @@
 <main>
+  <h1><i class="fa-solid fa-barcode"></i> Product Barcode Lookup</h1>
   <form [formGroup]="barcodeGroup" (ngSubmit)="submit()">
     <div class="inputWrap">
       <input
@@ -20,11 +21,8 @@
     <button>Search product</button>
   </form>
 
-  <section id="foundPorduct" *ngIf="product()">
-    <app-product-card [productInput]="product()" />
-  </section>
-
-  <section id="caution" *ngIf="!product()">
+  @if (!product()) {
+  <section id="caution">
     <div class="placeholderText">
       <p>
         <i class="fa-solid fa-circle-exclamation"></i>
@@ -35,9 +33,53 @@
       </p>
     </div>
   </section>
+  } @if (product()) {
+  <section id="foundPorduct">
+    <app-product-card [productInput]="product()" />
+  </section>
+  }
 
-  <!-- *ngIf="!product()" -->
   <section id="placeholderSec">
+    <div class="info-card">
+      <div class="info-heading">
+        <i class="fa-regular fa-circle-question"></i> How It Works
+      </div>
+      <div class="info-body">
+        <p>
+          We pull data from multiple databases to help you make smart choices
+          about what you're eating.
+        </p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-heading">
+        <i class="fa-solid fa-heart-pulse"></i> Health Tips
+      </div>
+      <div class="info-body">
+        <p>
+          Eat a balance of protein, carbohydrates, and healthy fats to stay
+          energized and strong.
+        </p>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-heading">
+        <i class="fa-solid fa-barcode"></i> Why It Matters
+      </div>
+      <div class="info-body">
+        <p>
+          Barcodes help provide accurate product information quickly and
+          efficiently for your wellness.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- *ngIf="!product()" -->
+<!-- <section id="placeholderSec">
     <div class="info-card">
       <div class="info-heading">
         <b><i class="fa-regular fa-circle-question"></i> How It Works</b>
@@ -76,5 +118,4 @@
         </p>
       </div>
     </div>
-  </section>
-</main>
+  </section> -->
