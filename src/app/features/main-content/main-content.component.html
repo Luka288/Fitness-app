@@ -54,18 +54,22 @@
 
     <section class="user-activities">
       <h1>Your Activity Feed</h1>
-      <div class="blocked" *ngIf="!activities()">
+
+      @if (activities().length === 0) {
+      <div class="blocked">
         <h2>
           <i class="fa-solid fa-lock"></i>Do at least one workout to unlock
           activity feed
         </h2>
       </div>
-      <div class="cards" *ngIf="activities()">
+      }@else if (activities()) {
+      <div class="cards">
         <app-dashboard-card
           *ngFor="let item of activities()"
           [cardInfo]="item"
         />
       </div>
+      }
     </section>
   </aside>
 

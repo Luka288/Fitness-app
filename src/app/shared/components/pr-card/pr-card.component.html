@@ -3,9 +3,11 @@
     {{ personalBest?.activityName }}
   </h3>
   <div class="w-data">
+    @if (personalBest?.MET) {
     <p>
       Workout Intensity: <strong>{{ personalBest?.MET }}</strong>
     </p>
+    }
     <p>
       Calories burned: <strong>{{ personalBest?.burnedCalories }} Kcal</strong>
     </p>
@@ -19,6 +21,10 @@
     </p>
     <p>
       Distance Covered: <strong>{{ personalBest?.distance }} KM</strong>
+    </p>
+    } @if (personalBest?.totalReps) {
+    <p>
+      Total reps done: <strong>{{ personalBest?.totalReps }} REPS</strong>
     </p>
     }
   </div>

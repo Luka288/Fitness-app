@@ -51,8 +51,8 @@ header {
 
 main {
   width: 100%;
-  height: 100%;
   scroll-behavior: smooth;
+  background-color: $main-bg;
 
   .top-section {
     width: 90%;
@@ -62,6 +62,7 @@ main {
     margin: auto;
     margin-top: 10px;
     padding: 20px;
+    box-sizing: border-box;
     // background-color: #26bdc3;
     background: linear-gradient(135deg, #26bdc3 0%, #a8e063 100%);
     border-radius: 7px;
@@ -155,6 +156,57 @@ main {
             background-color: #1a8f96;
           }
         }
+      }
+    }
+  }
+
+  #about {
+    width: 90%;
+    height: fit-content;
+    margin: auto;
+    margin-bottom: 125px;
+    margin-top: 25px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffff;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+    @include boxTune();
+
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 850px;
+      max-height: 850px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .text-side {
+      width: 45%;
+      place-self: baseline;
+
+      .title {
+        font-size: 24px;
+        font-family: $roboto;
+      }
+
+      p {
+        font-family: $inter;
+      }
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  main {
+    #about {
+      .text-side {
+        width: 100%;
+        font-size: 14px;
       }
     }
   }

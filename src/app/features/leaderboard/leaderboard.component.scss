@@ -7,6 +7,10 @@ main {
   min-height: 100vh;
   font-family: $inter;
 
+  strong {
+    font-family: $roboto;
+  }
+
   section {
     width: 90%;
     // max-width: 800px;

@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { userData } from '../../interfaces/workout.data.interface';
+import {
+  calculatedData,
+  userData,
+} from '../../interfaces/workout.data.interface';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,5 +12,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './pr-card.component.scss',
 })
 export class PrCardComponent {
-  @Input() personalBest: userData | null = null;
+  @Input() personalBest: calculatedData | null = null;
 }

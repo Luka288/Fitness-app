@@ -4,6 +4,8 @@ import { FirebaseAuthService } from '../../shared/services/firebase-auth.service
 import { CommonModule } from '@angular/common';
 import { WorkoutInterface } from '../../shared/interfaces/workout.interface';
 import { DataService } from '../../shared/services/data.service';
+import { UserService } from '../../shared/services/user.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +16,9 @@ import { DataService } from '../../shared/services/data.service';
 export class HomeComponent {
   private readonly AuthService = inject(FirebaseAuthService);
   private readonly dataService = inject(DataService);
+  private readonly userService = inject(UserService);
 
   BTNS = this.dataService.getHeaderButtons();
-
-  constructor() {}
 
   googleAuth() {
     this.AuthService.googleAuth();
