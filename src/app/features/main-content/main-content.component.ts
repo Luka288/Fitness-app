@@ -44,17 +44,13 @@ export class MainContentComponent {
   readonly workoutService = inject(WorkoutService);
 
   isOpen = signal(false);
-  // isLoading = signal<boolean>(true);
   prLoading = signal<boolean>(true);
   mealLoading = signal<boolean>(true);
   goalLoading = signal<boolean>(true);
 
-  totalKm = computed(() =>
-    this.activities().reduce((sum, item) => {
-      const distance = Number(item.distance);
-      return sum + (isNaN(distance) ? 0 : distance);
-    }, 0)
-  );
+  prData = signal<userData | null>(null);
+  dailyMeals = signal<nutrimentData | null>(null);
+  dailyGoal = signal<DailyGoal | null>(null);
 
   user = toSignal(this.autService.currentUseR(), { initialValue: null });
 
@@ -70,9 +66,12 @@ export class MainContentComponent {
     initialValue: [],
   });
 
-  prData = signal<userData | null>(null);
-  dailyMeals = signal<nutrimentData | null>(null);
-  dailyGoal = signal<DailyGoal | null>(null);
+  totalKm = computed(() =>
+    this.activities().reduce((sum, item) => {
+      const distance = Number(item.distance);
+      return sum + (isNaN(distance) ? 0 : distance);
+    }, 0)
+  );
 
   ngOnInit(): void {
     this.loadDailyMeals();
