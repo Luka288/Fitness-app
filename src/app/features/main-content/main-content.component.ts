@@ -129,11 +129,3 @@ export class MainContentComponent {
     });
   }
 }
-
-// dailyMeals = toSignal(this.foodService.getdailyMeals(), {
-//   initialValue: null,
-// });
-
-// dailyGoal = toSignal(this.workoutService.goalCalculate(), {
-//   initialValue: null,
-// });

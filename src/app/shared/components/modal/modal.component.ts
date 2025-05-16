@@ -29,7 +29,6 @@ export class ModalComponent {
       this.goalInputControl.markAsTouched();
       return;
     }
-    console.log(`${this.goalInputControl.value} ${this.activityControl.value}`);
 
     this.saveGoal.emit({
       type: this.activityControl.value,

@@ -1,4 +1,4 @@
-import { userData, WorkoutData } from './workout.data.interface';
+import { userData } from './workout.data.interface';
 
 export interface userInterface {
   displayName: string;

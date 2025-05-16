@@ -1,7 +1,7 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { CalculateService } from '../../services/calculate.service';
-import { calculatedData } from '../../interfaces/calculate.interface';
 import { CommonModule } from '@angular/common';
+import { calculatedData } from '../../interfaces/workout.data.interface';
 
 @Component({
   selector: 'app-activity-info',

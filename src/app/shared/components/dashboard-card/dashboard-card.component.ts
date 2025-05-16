@@ -1,8 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { WorkoutData } from '../../interfaces/workout.data.interface';
+import {
+  calculatedData,
+  WorkoutData,
+} from '../../interfaces/workout.data.interface';
 import { TransformStrPipe } from '../../pipes/transform-str.pipe';
 import { CommonModule } from '@angular/common';
-import { calculatedData } from '../../interfaces/calculate.interface';
 
 @Component({
   selector: 'app-dashboard-card',

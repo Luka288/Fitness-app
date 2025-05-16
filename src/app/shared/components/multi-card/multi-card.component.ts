@@ -9,6 +9,4 @@ import { calculatedData } from '../../interfaces/calculate.interface';
 })
 export class MultiCardComponent {
   @Input() workoutData: calculatedData[] | null = null;
-
-  calculateProgress() {}
 }

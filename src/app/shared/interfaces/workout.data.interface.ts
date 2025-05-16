@@ -21,12 +21,9 @@ export interface userData {
   savedAt: string;
 }
 
-export interface WorkoutData extends Partial<BaseWorkoutData> {}
+export interface calculatedData extends userData {
+  totalReps?: number;
+  unit: string;
+}
 
-// MET: 'Vigorous';
-// activityName: 'Morning Run';
-// burnedCalories: 1002.225;
-// date: '2025-04-09';
-// distance: '10 KM';
-// speed: 10;
-// time: '1 HOUR';
+export interface WorkoutData extends Partial<BaseWorkoutData> {}

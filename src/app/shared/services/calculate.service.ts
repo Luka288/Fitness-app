@@ -2,14 +2,16 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { activityConfig, ActivityType } from '../consts/activity.config';
 import { userFormData } from '../interfaces/formData.interface';
-import { calculatedData } from '../interfaces/calculate.interface';
 import { WorkoutService } from './workout.service';
+import { AlertsService } from './alerts.service';
+import { calculatedData } from '../interfaces/workout.data.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CalculateService {
   private readonly workoutService = inject(WorkoutService);
+  private readonly alertService = inject(AlertsService);
 
   processWorkoutData(
     activityName: string,
@@ -20,7 +22,7 @@ export class CalculateService {
       activityConfig[currActivity as keyof typeof activityConfig];
 
     if (!activity) {
-      // ალერტი აქ
+      this.alertService.toast('Something went wrong', 'error', 'red');
       return of([]);
     }
 

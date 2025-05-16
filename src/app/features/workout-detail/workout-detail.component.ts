@@ -13,8 +13,8 @@ import {
 import { WorkoutService } from '../../shared/services/workout.service';
 import { CalculateService } from '../../shared/services/calculate.service';
 import { userFormData } from '../../shared/interfaces/formData.interface';
-import { calculatedData } from '../../shared/interfaces/calculate.interface';
 import { ActivityInfoComponent } from '../../shared/components/activity-info/activity-info.component';
+import { calculatedData } from '../../shared/interfaces/workout.data.interface';
 
 @Component({
   imports: [
@@ -42,8 +42,6 @@ export class WorkoutDetailComponent {
     const currWorkout = this.router.snapshot.paramMap.get('id');
     this.workout = workoutTypes.find((workout) => workout.id === currWorkout);
 
-    // ჭირდება რეფაქტორი უნდა გადასცეს workoutService ახლანდელი
-    // აქტივობის სახელი
     this.metricInputControl.addControl(
       'activityName',
       new FormControl(currWorkout)

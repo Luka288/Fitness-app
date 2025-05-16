@@ -19,11 +19,7 @@ export class ProductCardComponent {
 
   @Input() productInput: nutrimentsResponse | null = null;
 
-  ngOnInit(): void {}
-
   sendData(data: baseNutriments) {
-    console.log(data);
-
     const productData = {
       energyKcal: data['energy-kcal'],
       proteins: data.proteins,

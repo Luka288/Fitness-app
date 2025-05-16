@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth, User } from '@angular/fire/auth';
+import { Auth } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, setDoc } from 'firebase/firestore';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { userInterface } from '../interfaces/user.interface';
 
 @Injectable({
@@ -24,13 +24,10 @@ export class UserService {
       setDoc(firebase, { uid, email, displayName, photoURL }, { merge: true });
       return true;
     } catch (error) {
-      // sweet alerts maybe?
       return error;
     }
   }
 
-  // აბრუნებს ყველა მომხმარებელს მათი აქტივობებით
-  // ზრდის მიხედვით
   getAllUsers(): Observable<userInterface[]> {
     const userRef = collection(this.Fire, 'users');
 

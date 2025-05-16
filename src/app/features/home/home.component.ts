@@ -26,8 +26,4 @@ export class HomeComponent {
   testLogout() {
     this.AuthService.logOut();
   }
-
-  getFromChild(workout: WorkoutInterface) {
-    console.log(workout);
-  }
 }

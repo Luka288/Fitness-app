@@ -399,3 +399,21 @@ main {
     }
   }
 }
+
+@media (max-width: 1090px) {
+  main {
+    .left-side {
+      .profile {
+        justify-content: center;
+
+        .profile-data {
+          max-width: 100%;
+        }
+
+        .dashboard-overview {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}

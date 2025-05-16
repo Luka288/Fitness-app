@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth, GoogleAuthProvider } from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
-import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import { UserService } from './user.service';
-import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
+import { of } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({

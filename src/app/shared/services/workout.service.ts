@@ -2,14 +2,12 @@ import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { docData, Firestore } from '@angular/fire/firestore';
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
-import { userData } from '../interfaces/workout.data.interface';
+import { calculatedData, userData } from '../interfaces/workout.data.interface';
 import { AlertsService } from './alerts.service';
 import { combineLatest, map, Observable, of } from 'rxjs';
-import { calculatedData } from '../interfaces/calculate.interface';
 import { DailyGoal } from '../interfaces/daily.goal.interface';
 import { userInterface } from '../interfaces/user.interface';
 import { weeklyChart } from '../interfaces/weekly.interface';
-import { consumerBeforeComputation } from '@angular/core/primitives/signals';
 
 @Injectable({
   providedIn: 'root',
@@ -42,8 +40,6 @@ export class WorkoutService {
     }
   }
 
-  // ფუნქციას მოაქვს ახლანდელი მომხმარებლის ინფორმაცია
-  // და აბრუნებს მხოლოდ მომხმარებლის აქტივობების მასივს
   userActivity(): Observable<calculatedData[]> {
     const user = this.auth.currentUser;
     if (!user) return of([]);
@@ -87,7 +83,6 @@ export class WorkoutService {
     const user = this.auth.currentUser;
     if (!user) return of(null);
 
-    // დღევანდელი დღის მიზნის წამოსაღებად
     const date = new Date().toISOString().split('T')[0];
     const goalRef = doc(this.fire, `users/${user.uid}/dailyGoals/${date}`);
     const activityRef = doc(this.fire, `users/${user.uid}`);
@@ -149,7 +144,6 @@ export class WorkoutService {
     );
   }
 
-  // მოაქვს წინა დღის ვარჯიში დღევანდელი ვარჯიშის შესადარებლად
   prWorkout(): Observable<userData | null> {
     const user = this.auth.currentUser;
     if (!user) return of();

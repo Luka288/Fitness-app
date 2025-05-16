@@ -22,12 +22,6 @@ export class FoodService {
 
   constructor(@Inject(API_URL) private API: string) {}
 
-  //სნიკერსი: 5000159461122
-  productStaticCode: string = '5000159461122';
-
-  //4860103230423
-  //4865602000027
-
   getFood(barCode: string) {
     return this.http
       .get<nutrimentsResponse>(`${this.API}/${barCode}.json`)

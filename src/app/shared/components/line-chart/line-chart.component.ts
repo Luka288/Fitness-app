@@ -14,10 +14,7 @@ export class LineChartComponent {
 
   get labels(): string[] {
     if (!this.userWorkoutData) return [];
-    // ან თარიღი ან აქტივობის სახელი 7 დღის ჩარტში
-    // return this.userWorkoutData.map(
-    //   (dates) => `${dates.activity} ${dates.date}`
-    // );
+
     return this.userWorkoutData.map((dates) => dates.activity);
   }
 
