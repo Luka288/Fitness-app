@@ -85,7 +85,7 @@ export const activityConfig = {
 
       return {
         speed: speed,
-        burnedCalories: Math.round(burnedCalories).toFixed(2),
+        burnedCalories: parseFloat(Math.round(burnedCalories).toFixed(2)),
         MET: intensity,
         activityName: 'Morning Run',
         time: `${formData.time} ${formData.timeUnit}`,
@@ -128,7 +128,7 @@ export const activityConfig = {
 
       return {
         speed: speed,
-        burnedCalories: Math.round(burnedCalories).toFixed(2),
+        burnedCalories: parseFloat(Math.round(burnedCalories).toFixed(2)),
         MET: intensity,
         activityName: 'Cycling',
         time: `${formData.time} ${formData.timeUnit}`,

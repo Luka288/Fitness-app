@@ -63,8 +63,6 @@ export class WorkoutService {
     const date = new Date().toISOString().split('T')[0];
     const goalDoc = doc(this.fire, `users/${user.uid}/dailyGoals/${date}`);
 
-    // date: new Date().toISOString(),
-
     try {
       setDoc(
         goalDoc,
@@ -103,7 +101,9 @@ export class WorkoutService {
         const progress = todaysActivity.reduce(
           (sum: number, data: userData) => {
             if (goal.type === 'CALORIES') {
-              return sum + data.burnedCalories;
+              let ss = sum + data.burnedCalories;
+              console.log(ss);
+              return sum + (data.distance || 0);
             }
 
             if (goal.type === 'DISTANCE') {

@@ -13,8 +13,9 @@ export class DailyGoalComponent {
   @Input() goalData: DailyGoal | null = null;
   @Output() newGoal = new EventEmitter<void>();
 
-  //! შესასწორებელია Daily goal ის ლოგიკა როდესაც მომხმარებელი ამატებს
-  //! ახალ დღიურ მიზანს firebase ზე ხდება წინა goal ის წაშლა და ახლით ჩანაცვლება
+  ngOnInit(): void {
+    console.log(this.goalData);
+  }
 
   onNewGoal() {
     this.newGoal.emit();
