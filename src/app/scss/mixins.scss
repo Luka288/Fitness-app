@@ -39,7 +39,6 @@
 }
 
 @mixin custom-input(
-  $width: 100%,
   $max-width: none,
   $height: 54px,
   $border-color: blue,
@@ -47,7 +46,7 @@
   $error-color: red,
   $bg-color: #f1f1f1
 ) {
-  width: $width;
+  width: 100%;
   max-width: $max-width;
   height: $height;
   border: none;

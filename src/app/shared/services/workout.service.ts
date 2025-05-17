@@ -101,8 +101,6 @@ export class WorkoutService {
         const progress = todaysActivity.reduce(
           (sum: number, data: userData) => {
             if (goal.type === 'CALORIES') {
-              let ss = sum + data.burnedCalories;
-              console.log(ss);
               return sum + (data.distance || 0);
             }
 

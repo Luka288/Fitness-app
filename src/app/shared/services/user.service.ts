@@ -1,9 +1,14 @@
 import { inject, Injectable } from '@angular/core';
-import { Auth } from '@angular/fire/auth';
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, setDoc } from 'firebase/firestore';
 import { from, Observable } from 'rxjs';
 import { userInterface } from '../interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +16,20 @@ import { userInterface } from '../interfaces/user.interface';
 export class UserService {
   private readonly Fire = inject(Firestore);
   private readonly FireAuth = inject(Auth);
+  private readonly router = inject(Router);
+
+  registerUser(email: string, password: string) {
+    return createUserWithEmailAndPassword(this.FireAuth, email, password);
+  }
+
+  // ჭირდება რეფაქტორი
+  async loginUser(email: string, password: string) {
+    return signInWithEmailAndPassword(this.FireAuth, email, password).then(
+      () => {
+        this.router.navigateByUrl('dashboard');
+      }
+    );
+  }
 
   async saveUser() {
     const user = this.FireAuth.currentUser;

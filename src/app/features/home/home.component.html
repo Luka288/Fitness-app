@@ -9,6 +9,12 @@
 </header>
 
 <main>
+  @if (modalOpen()) {
+  <app-registration-modal
+    (emitCloseInfo)="toggleModal()"
+    (emitUserData)="register($event)"
+  />
+  }
   <section class="top-section">
     <div class="left-side">
       <div class="text-title">
@@ -25,6 +31,50 @@
     <div class="auth-container">
       <div class="c-title">
         <p>Authorize</p>
+      </div>
+      <div class="login">
+        <form (ngSubmit)="submitUser()" [formGroup]="userLoginForm">
+          <div class="input-wrap">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              formControlName="email"
+            />
+            @if (this.userLoginForm.controls.email.hasError('required') &&
+            this.userLoginForm.controls.email.touched) {
+            <p class="error-p">Email is required</p>
+            }@if (this.userLoginForm.controls.email.hasError('email') &&
+            this.userLoginForm.controls.email.touched) {
+            <p class="error-p">Invalid email</p>
+            }
+          </div>
+
+          <div class="input-wrap">
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter your password"
+              formControlName="password"
+            />
+            @if (userLoginForm.controls.password.hasError('minlength') &&
+            userLoginForm.controls.password.touched) {
+            <p class="error-p">Password must be at least 8 characters</p>
+            } @if(userLoginForm.controls.password.hasError('maxlength') &&
+            userLoginForm.controls.password.touched) {
+            <p class="error-p">Password must be less than 16 characters</p>
+            } @if (userLoginForm.controls.password.hasError('required') &&
+            userLoginForm.controls.password.touched) {
+            <p class="error-p">Password is required</p>
+            }
+          </div>
+          <div class="footer">
+            <button>login</button>
+            <a (click)="toggleModal()">register</a>
+          </div>
+        </form>
       </div>
       <ul>
         <li (click)="googleAuth()">

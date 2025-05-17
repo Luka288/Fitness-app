@@ -1,0 +1,47 @@
+<section class="modal-overlay">
+  <div class="modal-content">
+    <form [formGroup]="registrationForm">
+      <div class="input-wrap">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Enter your email"
+          formControlName="email"
+        />
+        @if (this.registrationForm.controls.email.hasError('required') &&
+        this.registrationForm.controls.email.touched) {
+        <p class="error-p">Email is required</p>
+        }@if (this.registrationForm.controls.email.hasError('email') &&
+        this.registrationForm.controls.email.touched) {
+        <p class="error-p">Invalid email</p>
+        }
+      </div>
+
+      <div class="input-wrap">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Enter your password"
+          formControlName="password"
+        />
+        @if (registrationForm.controls.password.hasError('minlength') &&
+        registrationForm.controls.password.touched) {
+        <p class="error-p">Password must be at least 8 characters</p>
+        } @if(registrationForm.controls.password.hasError('maxlength') &&
+        registrationForm.controls.password.touched) {
+        <p class="error-p">Password must be less than 16 characters</p>
+        } @if (registrationForm.controls.password.hasError('required') &&
+        registrationForm.controls.password.touched) {
+        <p class="error-p">Password is required</p>
+        }
+      </div>
+
+      <div class="footer">
+        <button (click)="emitData()">Register</button>
+        <button (click)="emitClose()">Close</button>
+      </div>
+    </form>
+  </div>
+</section>
