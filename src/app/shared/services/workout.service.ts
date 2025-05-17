@@ -94,14 +94,14 @@ export class WorkoutService {
       map(([goal, userRef]) => {
         if (!goal || !userRef) return null;
 
-        const todaysActivity = userRef.activities.filter(
+        const todaysActivity = (userRef.activities || []).filter(
           (data) => data.date === date
         );
 
         const progress = todaysActivity.reduce(
           (sum: number, data: userData) => {
             if (goal.type === 'CALORIES') {
-              return sum + (data.distance || 0);
+              return sum + (data.burnedCalories || 0);
             }
 
             if (goal.type === 'DISTANCE') {
@@ -115,7 +115,7 @@ export class WorkoutService {
 
         return {
           ...goal,
-          progress: Math.round(progress),
+          progress: Math.round(progress) || 0,
         };
       })
     );

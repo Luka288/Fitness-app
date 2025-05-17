@@ -1,7 +1,7 @@
 <div class="goal-card">
   <div class="progress-circle">
     <round-progress
-      [current]="goalData?.progress || 0"
+      [current]="goalData!.progress"
       [max]="goalData!.goal"
       [semicircle]="true"
       [clockwise]="true"

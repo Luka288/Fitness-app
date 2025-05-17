@@ -27,7 +27,7 @@ main {
       @include flex(center, none, wrap, column);
 
       input {
-        @include custom-input(90%, 450px, 22px);
+        @include custom-input(420px, 24px);
         gap: 15px;
       }
 
@@ -96,10 +96,8 @@ main {
       gap: 20px;
 
       .inputWrap {
-        max-width: 100%;
-
         input {
-          @include custom-input(100%, 100%, 20px);
+          @include custom-input(420px, 24px);
         }
       }
     }

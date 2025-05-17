@@ -33,6 +33,15 @@ export class RegistrationModalComponent {
       ],
       nonNullable: true,
     }),
+
+    username: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(16),
+      ],
+      nonNullable: true,
+    }),
   });
 
   emitData() {
@@ -44,6 +53,7 @@ export class RegistrationModalComponent {
     this.emitUserData.emit({
       email: this.registrationForm.controls.email.value,
       password: this.registrationForm.controls.password.value,
+      username: this.registrationForm.controls.username.value,
     });
 
     this.registrationForm.reset();

@@ -70,7 +70,7 @@ export class HomeComponent {
   }
 
   register(data: userRegData) {
-    this.userService.registerUser(data.email, data.password);
+    this.userService.registerUser(data.email, data.password, data.username);
   }
 
   googleAuth() {

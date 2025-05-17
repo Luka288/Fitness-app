@@ -38,6 +38,24 @@
         }
       </div>
 
+      <div class="input-wrap">
+        <input
+          type="username"
+          name="username"
+          id="username"
+          placeholder="Enter your username"
+          formControlName="username"
+        />
+        @if (registrationForm.controls.username.hasError('required') &&
+        registrationForm.controls.username.touched) {
+        <p class="error-p">username is required</p>
+        }@if (registrationForm.controls.username.hasError('minlength')) {
+        <p class="error-p">username must be at least 3 characters</p>
+        }@if (registrationForm.controls.username.hasError('maxlength')) {
+        <p class="error-p">username cannot be more then 16 characters</p>
+        }
+      </div>
+
       <div class="footer">
         <button (click)="emitData()">Register</button>
         <button (click)="emitClose()">Close</button>

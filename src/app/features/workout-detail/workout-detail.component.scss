@@ -71,7 +71,7 @@ main {
           }
 
           input {
-            @include custom-input(100%, 650px);
+            @include custom-input(650px, 54px);
             box-sizing: border-box;
             margin-top: 10px;
             padding-right: 80px;

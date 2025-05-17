@@ -3,12 +3,14 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  user,
 } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, setDoc } from 'firebase/firestore';
 import { from, Observable } from 'rxjs';
 import { userInterface } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
+import { updateCurrentUser, updateProfile } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +20,21 @@ export class UserService {
   private readonly FireAuth = inject(Auth);
   private readonly router = inject(Router);
 
-  registerUser(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.FireAuth, email, password);
+  async registerUser(email: string, password: string, username: string) {
+    //საჭიროა email password username
+    return createUserWithEmailAndPassword(this.FireAuth, email, password).then(
+      (userCred) => {
+        updateProfile(userCred.user, {
+          displayName: username,
+        });
+
+        this.saveUser(
+          userCred.user.uid!,
+          userCred.user.email || email,
+          userCred.user.displayName || username
+        );
+      }
+    );
   }
 
   // ჭირდება რეფაქტორი
@@ -31,13 +46,21 @@ export class UserService {
     );
   }
 
-  async saveUser() {
+  async saveUser(user_id?: string, user_email?: string, disName?: string) {
     const user = this.FireAuth.currentUser;
     if (!user) return;
 
     const firebase = doc(this.Fire, `users/${user.uid}`);
 
-    const { uid, email, displayName, photoURL } = user;
+    const user_data = {
+      uid: user.uid ?? user_id,
+      email: user.email ?? user_email,
+      displayName: user.displayName ?? disName,
+      photoURL: user.photoURL ?? '',
+    };
+
+    console.log(user_data);
+    const { uid, email, displayName, photoURL } = user_data;
 
     try {
       setDoc(firebase, { uid, email, displayName, photoURL }, { merge: true });
