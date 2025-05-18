@@ -41,6 +41,12 @@
               id="email"
               placeholder="Enter your email"
               formControlName="email"
+              [ngClass]="{
+                errBorder:
+                  userLoginForm.controls.email.invalid &&
+                  userLoginForm.controls.email.touched,
+                filled: userLoginForm.controls.email.value
+              }"
             />
             @if (this.userLoginForm.controls.email.hasError('required') &&
             this.userLoginForm.controls.email.touched) {
@@ -58,6 +64,12 @@
               id="password"
               placeholder="Enter your password"
               formControlName="password"
+              [ngClass]="{
+                errBorder:
+                  userLoginForm.controls.password.invalid &&
+                  userLoginForm.controls.password.touched,
+                filled: userLoginForm.controls.password.value
+              }"
             />
             @if (userLoginForm.controls.password.hasError('minlength') &&
             userLoginForm.controls.password.touched) {
