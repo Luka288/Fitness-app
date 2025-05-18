@@ -8,6 +8,12 @@
           id="email"
           placeholder="Enter your email"
           formControlName="email"
+          [ngClass]="{
+            errBorder:
+              registrationForm.controls.email.invalid &&
+              registrationForm.controls.email.touched,
+            filled: registrationForm.controls.email.value
+          }"
         />
         @if (this.registrationForm.controls.email.hasError('required') &&
         this.registrationForm.controls.email.touched) {
@@ -25,6 +31,12 @@
           id="password"
           placeholder="Enter your password"
           formControlName="password"
+          [ngClass]="{
+            errBorder:
+              registrationForm.controls.password.invalid &&
+              registrationForm.controls.password.touched,
+            filled: registrationForm.controls.password.value
+          }"
         />
         @if (registrationForm.controls.password.hasError('minlength') &&
         registrationForm.controls.password.touched) {
@@ -45,6 +57,13 @@
           id="username"
           placeholder="Enter your username"
           formControlName="username"
+          [ngClass]="{
+            errBorder:
+              (registrationForm.controls.username.invalid &&
+                registrationForm.controls.username.touched) ||
+              !isFormReady(),
+            filled: registrationForm.controls.username.value
+          }"
         />
         @if (registrationForm.controls.username.hasError('required') &&
         registrationForm.controls.username.touched) {
@@ -53,6 +72,8 @@
         <p class="error-p">username must be at least 3 characters</p>
         }@if (registrationForm.controls.username.hasError('maxlength')) {
         <p class="error-p">username cannot be more then 16 characters</p>
+        }@if (errMessage !== '') {
+        <p class="error-p">{{ errMessage }}</p>
         }
       </div>
 

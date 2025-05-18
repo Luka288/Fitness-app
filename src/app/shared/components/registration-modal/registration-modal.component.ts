@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,6 +9,9 @@ import {
 } from '@angular/forms';
 import { EmailAuthCredential } from 'firebase/auth';
 import { userRegData } from '../../interfaces/user.reg.interface';
+import { UserService } from '../../services/user.service';
+import { debounceTime } from 'rxjs';
+import { sidePanel } from '../../consts/header';
 
 @Component({
   selector: 'app-registration-modal',
@@ -17,8 +20,13 @@ import { userRegData } from '../../interfaces/user.reg.interface';
   styleUrl: './registration-modal.component.scss',
 })
 export class RegistrationModalComponent {
+  private readonly userService = inject(UserService);
+
   @Output() emitUserData = new EventEmitter<userRegData>();
   @Output() emitCloseInfo = new EventEmitter<void>();
+
+  errMessage: string = '';
+  isFormReady = signal<boolean>(true);
 
   registrationForm = new FormGroup({
     email: new FormControl('', {
@@ -44,22 +52,42 @@ export class RegistrationModalComponent {
     }),
   });
 
+  ngOnInit() {
+    this.registrationForm.controls.username.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe((res) => {
+        this.checkUSername(res);
+      });
+  }
+
+  checkUSername(username: string) {
+    this.userService.checkUsername(username).subscribe({
+      next: (res) => {
+        if (res) {
+          this.errMessage = 'Username already exists';
+          this.isFormReady.set(false);
+        }
+
+        if (!res) {
+          this.errMessage = '';
+          this.isFormReady.set(true);
+        }
+      },
+    });
+  }
+
   emitData() {
-    if (this.registrationForm.invalid) {
+    if (this.registrationForm.invalid || this.isFormReady() === false) {
       this.registrationForm.markAllAsTouched();
       return;
     }
-
-    this.emitUserData.emit({
-      email: this.registrationForm.controls.email.value,
-      password: this.registrationForm.controls.password.value,
-      username: this.registrationForm.controls.username.value,
-    });
 
     this.registrationForm.reset();
   }
 
   emitClose() {
     this.emitCloseInfo.emit();
+    this.registrationForm.reset();
+    this.isFormReady.set(true);
   }
 }

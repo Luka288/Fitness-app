@@ -16,10 +16,7 @@ import { LineChartComponent } from '../../shared/components/line-chart/line-char
 import { RouterLink } from '@angular/router';
 import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
 import { PrCardComponent } from '../../shared/components/pr-card/pr-card.component';
-import {
-  calculatedData,
-  userData,
-} from '../../shared/interfaces/workout.data.interface';
+import { calculatedData } from '../../shared/interfaces/workout.data.interface';
 import { nutrimentData } from '../../shared/interfaces/food.interface';
 
 @Component({

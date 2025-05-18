@@ -11,7 +11,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { sidePanel } from '../../shared/consts/header';
 import { RegistrationModalComponent } from '../../shared/components/registration-modal/registration-modal.component';
 import { userRegData } from '../../shared/interfaces/user.reg.interface';
 
