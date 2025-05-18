@@ -7,11 +7,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { EmailAuthCredential } from 'firebase/auth';
 import { userRegData } from '../../interfaces/user.reg.interface';
 import { UserService } from '../../services/user.service';
 import { debounceTime } from 'rxjs';
-import { where } from 'firebase/firestore';
 
 @Component({
   selector: 'app-registration-modal',

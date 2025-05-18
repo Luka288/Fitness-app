@@ -12,12 +12,20 @@
   z-index: 1200;
 
   .modal-content {
-    width: 450px;
+    width: 90%;
+    max-width: 450px;
     // height: 350px;
     background-color: white;
     border-radius: 3px;
     box-sizing: border-box;
     padding: 20px;
+
+    h2 {
+      text-align: center;
+      font-family: $roboto;
+      margin: 0;
+      margin-bottom: 10px;
+    }
 
     form {
       width: 100%;
@@ -25,14 +33,16 @@
       @include flex(center, center, wrap, column);
 
       .input-wrap {
-        width: 100%;
+        width: 90%;
+        max-width: 320px;
+        text-align: left;
         display: flex;
         justify-content: center;
-        align-items: center;
         flex-direction: column;
 
         input {
-          @include custom-input(320px, 33px);
+          @include custom-input();
+          height: 34px;
         }
 
         .error-p {
