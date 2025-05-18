@@ -114,4 +114,21 @@
     </div>
     <img src="assets/images/dashboard.png" alt="" />
   </section>
+
+  <section class="total-users">
+    <div class="data-card">
+      <p>
+        <i class="fa-solid fa-users"></i>
+        {{ count() }}
+      </p>
+      <span>Total Users registered</span>
+    </div>
+    <div class="data-card">
+      <p>
+        <i class="fa-solid fa-dumbbell"></i>
+        {{ workoutCount() }}
+      </p>
+      <span>Total Workouts done</span>
+    </div>
+  </section>
 </main>

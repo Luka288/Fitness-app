@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FirebaseAuthService } from '../../shared/services/firebase-auth.service';
 import { CommonModule } from '@angular/common';
@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { RegistrationModalComponent } from '../../shared/components/registration-modal/registration-modal.component';
 import { userRegData } from '../../shared/interfaces/user.reg.interface';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -49,6 +50,19 @@ export class HomeComponent {
   });
 
   BTNS = this.dataService.getHeaderButtons();
+
+  userData = toSignal(this.userService.getAllUsers(), { initialValue: [] });
+
+  count = computed(() => this.userData().length);
+
+  workoutCount = computed(() =>
+    this.userData().reduce(
+      (acc, user) => acc + (user.activities?.length || 0),
+      0
+    )
+  );
+
+  ngOnInit(): void {}
 
   loginUser(email: string, password: string) {
     this.userService.loginUser(email, password);

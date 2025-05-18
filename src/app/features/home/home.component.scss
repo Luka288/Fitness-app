@@ -2,30 +2,27 @@
 @use "../../scss/mixins" as *;
 
 header {
-  width: 90%;
-  height: 24px;
-  padding: 10px;
-  margin: auto;
-  background-color: transparent;
+  height: 44px;
+  background-color: $main-bg;
   font-family: $inter;
-  @include flex(space-between, center, center, nowrap);
-
-  ul {
-    padding: 0;
-  }
 
   .left-side {
+    width: 90%;
+    margin: auto;
+
     ul {
-      @include flex();
       gap: 15px;
+      padding: 0;
 
       li {
         list-style: none;
+        padding: 0;
 
         a {
           color: black;
           text-decoration: none;
           font-size: 30px;
+          padding: 0;
         }
       }
     }
@@ -60,7 +57,7 @@ main {
     min-height: 780px;
     @include flex(space-between);
     margin: auto;
-    margin-top: 10px;
+    // margin-top: 10px;
     padding: 20px;
     box-sizing: border-box;
     background: linear-gradient(135deg, #26bdc3 0%, #a8e063 100%);
@@ -209,7 +206,6 @@ main {
     width: 90%;
     height: fit-content;
     margin: auto;
-    margin-bottom: 125px;
     margin-top: 25px;
     padding: 20px;
     box-sizing: border-box;
@@ -241,6 +237,42 @@ main {
 
       p {
         font-family: $inter;
+      }
+    }
+  }
+
+  .total-users {
+    width: 90%;
+    padding: 20px;
+    margin: auto;
+    box-sizing: border-box;
+    @include flex(space-evenly, center, wrap, row);
+    font-size: 25px;
+
+    .data-card {
+      width: 350px;
+      height: 200px;
+      box-sizing: border-box;
+      padding: 15px;
+      @include boxTune();
+      background-color: #ffff;
+      text-align: center;
+      @include flex(center, center, wrap, column);
+
+      p {
+        font-family: $inter;
+        margin: 0;
+        margin-bottom: 6px;
+        letter-spacing: 3px;
+
+        i {
+          color: red;
+        }
+      }
+
+      span {
+        font-family: $roboto;
+        font-size: 20px;
       }
     }
   }

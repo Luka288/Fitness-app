@@ -109,6 +109,7 @@ export class UserService {
       })
     );
   }
+
   async currentUser() {
     return this.FireAuth.currentUser || false;
   }
