@@ -11,7 +11,7 @@ import { from, map, Observable, of } from 'rxjs';
 import { userInterface } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
 import { updateCurrentUser, updateProfile } from 'firebase/auth';
-import { where } from 'firebase/firestore/lite';
+import { where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -95,12 +95,20 @@ export class UserService {
   }
 
   checkUsername(username: string): Observable<boolean> {
-    const userRef = collection(this.Fire, `users`);
+    const userRef = collection(this.Fire, 'users');
     const userQuery = query(userRef, where('displayName', '==', username));
 
-    return from(getDocs(userQuery)).pipe(map((snapShot) => !snapShot.empty));
+    return from(getDocs(userQuery)).pipe(
+      map((q) => {
+        console.log(
+          'Query result:',
+          q.empty,
+          q.docs.map((d) => d.data())
+        );
+        return !q.empty;
+      })
+    );
   }
-
   async currentUser() {
     return this.FireAuth.currentUser || false;
   }

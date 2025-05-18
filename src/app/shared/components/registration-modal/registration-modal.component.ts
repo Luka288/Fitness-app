@@ -11,7 +11,7 @@ import { EmailAuthCredential } from 'firebase/auth';
 import { userRegData } from '../../interfaces/user.reg.interface';
 import { UserService } from '../../services/user.service';
 import { debounceTime } from 'rxjs';
-import { sidePanel } from '../../consts/header';
+import { where } from 'firebase/firestore';
 
 @Component({
   selector: 'app-registration-modal',
@@ -63,12 +63,12 @@ export class RegistrationModalComponent {
   checkUSername(username: string) {
     this.userService.checkUsername(username).subscribe({
       next: (res) => {
-        if (res) {
+        if (res === true) {
           this.errMessage = 'Username already exists';
           this.isFormReady.set(false);
         }
 
-        if (!res) {
+        if (res === false) {
           this.errMessage = '';
           this.isFormReady.set(true);
         }
