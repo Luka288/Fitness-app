@@ -15,6 +15,7 @@ import { RegistrationModalComponent } from '../../shared/components/registration
 import { userRegData } from '../../shared/interfaces/user.reg.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BooleanService } from '../../shared/services/boolean.service';
+import { PasswordResetModalComponent } from '../../shared/components/password-reset-modal/password-reset-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ import { BooleanService } from '../../shared/services/boolean.service';
     ReactiveFormsModule,
     FormsModule,
     RegistrationModalComponent,
+    PasswordResetModalComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -35,6 +37,7 @@ export class HomeComponent {
   private readonly booleanService = inject(BooleanService);
 
   modalOpen = signal<boolean>(false);
+  passReset = signal<boolean>(false);
 
   userLoginForm = new FormGroup({
     email: new FormControl('', {
@@ -72,6 +75,10 @@ export class HomeComponent {
 
   passwordReset(email: string) {
     this.userService.passwordReset(email);
+  }
+
+  openReset(bool: boolean) {
+    this.passReset.set(bool);
   }
 
   submitUser() {

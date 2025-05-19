@@ -15,7 +15,13 @@
     (emitUserData)="register($event)"
     (emitPassReset)="passwordReset($event)"
   />
+  } @if (passReset()) {
+  <app-password-reset-modal
+    (emitPassReset)="passwordReset($event)"
+    (emitCloseInfo)="passReset.set(!passReset())"
+  />
   }
+
   <section class="top-section">
     <div class="left-side">
       <div class="text-title">
@@ -90,7 +96,7 @@
                 <a (click)="toggleModal(false)">register</a>
               </li>
               <li>
-                <a (click)="toggleModal(true)">Forgot password?</a>
+                <a (click)="openReset(true)">Forgot password?</a>
               </li>
             </ul>
           </div>

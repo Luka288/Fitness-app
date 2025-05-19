@@ -3,7 +3,6 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  user,
 } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, query, setDoc } from 'firebase/firestore';
@@ -136,7 +135,6 @@ export class UserService {
     try {
       sendPasswordResetEmail(this.FireAuth, email);
 
-      console.log;
       // ალერტი
     } catch (error) {
       // ერორის ალერტი

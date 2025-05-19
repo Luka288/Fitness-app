@@ -52,28 +52,6 @@
     }
   }
 
-  .password-reset-form {
-    width: 90%;
-    margin: auto;
-
-    form {
-      gap: 0;
-      text-align: left;
-      display: flex;
-      align-items: flex-start;
-
-      input {
-        @include custom-input();
-        height: 34px;
-      }
-
-      .error-p {
-        @include errorText();
-        margin: 0;
-      }
-    }
-  }
-
   .footer {
     width: 100%;
     @include flex();

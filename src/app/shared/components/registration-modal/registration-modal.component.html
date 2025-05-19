@@ -1,38 +1,7 @@
 <section class="modal-overlay">
   <div class="modal-content">
-    <h2>
-      {{ passReset ? "Reset Password" : "Register" }}
-    </h2>
-    @if (passReset) {
-    <div class="password-reset-form">
-      <form [formGroup]="emailResetForm">
-        <input
-          type="email"
-          name=""
-          id=""
-          placeholder="Enter email address"
-          formControlName="emailReset"
-          [ngClass]="{
-            errBorder:
-              (emailResetForm.controls.emailReset.invalid &&
-                emailResetForm.controls.emailReset.touched) ||
-              !isEmailUnique(),
-            filled: emailResetForm.controls.emailReset.value
-          }"
-        />
-        @if (emailResetForm.controls.emailReset.hasError('required') &&
-        emailResetForm.controls.emailReset.touched) {
-        <p class="error-p">Email is required</p>
-        } @if (emailResetForm.controls.emailReset.hasError('email')) {
-        <p class="error-p">Invalid email</p>
-        }@if (errMessage !== '') {
-        <p class="error-p">
-          {{ errMessage }}
-        </p>
-        }
-      </form>
-    </div>
-    } @if (!passReset) {
+    <h2>Register</h2>
+
     <form [formGroup]="registrationForm">
       <div class="input-wrap">
         <input
@@ -43,9 +12,8 @@
           formControlName="email"
           [ngClass]="{
             errBorder:
-              (registrationForm.controls.email.invalid &&
-                registrationForm.controls.email.touched) ||
-              !isEmailUnique(),
+              registrationForm.controls.email.invalid &&
+              registrationForm.controls.email.touched,
             filled: registrationForm.controls.email.value
           }"
         />
@@ -116,11 +84,9 @@
         }
       </div>
     </form>
-    }
+
     <div class="footer">
-      <button (click)="passReset ? sendReset() : emitData()">
-        {{ passReset ? "Send Reset Link" : "Register" }}
-      </button>
+      <button (click)="emitData()">Register</button>
       <button (click)="emitClose()">Close</button>
     </div>
   </div>
