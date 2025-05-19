@@ -18,6 +18,7 @@ import { LastSeenPipe } from '../../shared/pipes/last-seen.pipe';
 import { PrCardComponent } from '../../shared/components/pr-card/pr-card.component';
 import { calculatedData } from '../../shared/interfaces/workout.data.interface';
 import { nutrimentData } from '../../shared/interfaces/food.interface';
+import { UserService } from '../../shared/services/user.service';
 
 @Component({
   selector: 'app-main-content',

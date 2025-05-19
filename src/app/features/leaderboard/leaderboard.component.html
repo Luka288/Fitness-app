@@ -21,7 +21,10 @@
         <tr *ngFor="let item of users()">
           <td class="username">
             <span
-              ><img [src]="item.photoURL" alt="Profile Picture" />
+              ><img
+                [src]="item.photoURL || 'assets/images/user.png'"
+                alt="Profile Picture"
+              />
               {{
                 item.uid === user.currentUser?.uid ? "You" : item.displayName
               }}

@@ -1,7 +1,38 @@
 <section class="modal-overlay">
   <div class="modal-content">
-    <h2>Registration form</h2>
-
+    <h2>
+      {{ passReset ? "Reset Password" : "Register" }}
+    </h2>
+    @if (passReset) {
+    <div class="password-reset-form">
+      <form [formGroup]="emailResetForm">
+        <input
+          type="email"
+          name=""
+          id=""
+          placeholder="Enter email address"
+          formControlName="emailReset"
+          [ngClass]="{
+            errBorder:
+              (emailResetForm.controls.emailReset.invalid &&
+                emailResetForm.controls.emailReset.touched) ||
+              !isEmailUnique(),
+            filled: emailResetForm.controls.emailReset.value
+          }"
+        />
+        @if (emailResetForm.controls.emailReset.hasError('required') &&
+        emailResetForm.controls.emailReset.touched) {
+        <p class="error-p">Email is required</p>
+        } @if (emailResetForm.controls.emailReset.hasError('email')) {
+        <p class="error-p">Invalid email</p>
+        }@if (errMessage !== '') {
+        <p class="error-p">
+          {{ errMessage }}
+        </p>
+        }
+      </form>
+    </div>
+    } @if (!passReset) {
     <form [formGroup]="registrationForm">
       <div class="input-wrap">
         <input
@@ -12,8 +43,9 @@
           formControlName="email"
           [ngClass]="{
             errBorder:
-              registrationForm.controls.email.invalid &&
-              registrationForm.controls.email.touched,
+              (registrationForm.controls.email.invalid &&
+                registrationForm.controls.email.touched) ||
+              !isEmailUnique(),
             filled: registrationForm.controls.email.value
           }"
         />
@@ -23,6 +55,11 @@
         }@if (this.registrationForm.controls.email.hasError('email') &&
         this.registrationForm.controls.email.touched) {
         <p class="error-p">Invalid email</p>
+        }@if (emailError) {
+        <p class="error-p">
+          {{ emailError }}
+        </p>
+
         }
       </div>
 
@@ -74,15 +111,17 @@
         <p class="error-p">username must be at least 3 characters</p>
         }@if (registrationForm.controls.username.hasError('maxlength')) {
         <p class="error-p">username cannot be more then 16 characters</p>
-        }@if (errMessage !== '') {
-        <p class="error-p">{{ errMessage }}</p>
+        }@if (usernameError !== '') {
+        <p class="error-p">{{ usernameError }}</p>
         }
       </div>
-
-      <div class="footer">
-        <button (click)="emitData()">Register</button>
-        <button (click)="emitClose()">Close</button>
-      </div>
     </form>
+    }
+    <div class="footer">
+      <button (click)="passReset ? sendReset() : emitData()">
+        {{ passReset ? "Send Reset Link" : "Register" }}
+      </button>
+      <button (click)="emitClose()">Close</button>
+    </div>
   </div>
 </section>

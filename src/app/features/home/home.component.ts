@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FirebaseAuthService } from '../../shared/services/firebase-auth.service';
 import { CommonModule } from '@angular/common';
@@ -14,6 +14,7 @@ import {
 import { RegistrationModalComponent } from '../../shared/components/registration-modal/registration-modal.component';
 import { userRegData } from '../../shared/interfaces/user.reg.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { BooleanService } from '../../shared/services/boolean.service';
 
 @Component({
   selector: 'app-home',
@@ -31,6 +32,7 @@ export class HomeComponent {
   private readonly AuthService = inject(FirebaseAuthService);
   private readonly dataService = inject(DataService);
   private readonly userService = inject(UserService);
+  private readonly booleanService = inject(BooleanService);
 
   modalOpen = signal<boolean>(false);
 
@@ -68,6 +70,10 @@ export class HomeComponent {
     this.userService.loginUser(email, password);
   }
 
+  passwordReset(email: string) {
+    this.userService.passwordReset(email);
+  }
+
   submitUser() {
     if (this.userLoginForm.invalid) {
       this.userLoginForm.markAllAsTouched();
@@ -94,7 +100,8 @@ export class HomeComponent {
     this.AuthService.logOut();
   }
 
-  toggleModal() {
+  toggleModal(isReset: boolean) {
     this.modalOpen.set(!this.modalOpen());
+    this.booleanService.forgotPasswordToggle.next(isReset);
   }
 }

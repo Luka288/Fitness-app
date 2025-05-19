@@ -11,8 +11,9 @@
 <main>
   @if (modalOpen()) {
   <app-registration-modal
-    (emitCloseInfo)="toggleModal()"
+    (emitCloseInfo)="toggleModal(false)"
     (emitUserData)="register($event)"
+    (emitPassReset)="passwordReset($event)"
   />
   }
   <section class="top-section">
@@ -84,11 +85,18 @@
           </div>
           <div class="footer">
             <button>login</button>
-            <a (click)="toggleModal()">register</a>
+            <ul>
+              <li>
+                <a (click)="toggleModal(false)">register</a>
+              </li>
+              <li>
+                <a (click)="toggleModal(true)">Forgot password?</a>
+              </li>
+            </ul>
           </div>
         </form>
       </div>
-      <ul>
+      <ul class="third-party-auth">
         <li (click)="googleAuth()">
           <a
             >Google sign in

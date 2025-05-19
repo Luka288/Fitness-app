@@ -7,11 +7,12 @@ import {
 } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, query, setDoc } from 'firebase/firestore';
-import { from, map, Observable, of } from 'rxjs';
+import { combineLatest, from, map, Observable, of } from 'rxjs';
 import { userInterface } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
-import { updateCurrentUser, updateProfile } from 'firebase/auth';
+import { updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { where } from 'firebase/firestore';
+import { AlertsService } from './alerts.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class UserService {
   private readonly Fire = inject(Firestore);
   private readonly FireAuth = inject(Auth);
   private readonly router = inject(Router);
+  private readonly alertService = inject(AlertsService);
 
   async registerUser(email: string, password: string, username: string) {
     //საჭიროა email password username
@@ -94,9 +96,29 @@ export class UserService {
     );
   }
 
-  checkUsername(username: string): Observable<boolean> {
+  checkUserProps(
+    username: string,
+    email: string
+  ): Observable<{ usernameTaken: boolean; emailTaken: boolean }> {
     const userRef = collection(this.Fire, 'users');
-    const userQuery = query(userRef, where('displayName', '==', username));
+
+    const usernameQuery = query(userRef, where('displayName', '==', username));
+    const emailQuery = query(userRef, where('email', '==', email));
+
+    return combineLatest([
+      from(getDocs(usernameQuery)),
+      from(getDocs(emailQuery)),
+    ]).pipe(
+      map(([usernameSnap, emailSnap]) => ({
+        usernameTaken: !usernameSnap.empty,
+        emailTaken: !emailSnap.empty,
+      }))
+    );
+  }
+
+  checkEmail(email: string): Observable<boolean> {
+    const userRef = collection(this.Fire, 'users');
+    const userQuery = query(userRef, where('email', '==', email));
 
     return from(getDocs(userQuery)).pipe(
       map((q) => {
@@ -105,9 +127,20 @@ export class UserService {
           q.empty,
           q.docs.map((d) => d.data())
         );
-        return !q.empty;
+        return q.empty ? false : true;
       })
     );
+  }
+
+  async passwordReset(email: string) {
+    try {
+      sendPasswordResetEmail(this.FireAuth, email);
+
+      console.log;
+      // ალერტი
+    } catch (error) {
+      // ერორის ალერტი
+    }
   }
 
   async currentUser() {

@@ -49,20 +49,43 @@
           @include errorText();
         }
       }
+    }
+  }
 
-      .footer {
-        width: 100%;
-        @include flex();
-        gap: 30px;
+  .password-reset-form {
+    width: 90%;
+    margin: auto;
 
-        button:nth-child(1) {
-          @include customFormButton();
-        }
+    form {
+      gap: 0;
+      text-align: left;
+      display: flex;
+      align-items: flex-start;
 
-        button:nth-child(2) {
-          @include customFormButton(150px, red, white, rgb(247, 116, 116));
-        }
+      input {
+        @include custom-input();
+        height: 34px;
       }
+
+      .error-p {
+        @include errorText();
+        margin: 0;
+      }
+    }
+  }
+
+  .footer {
+    width: 100%;
+    @include flex();
+    gap: 30px;
+    margin-top: 20px;
+
+    button:nth-child(1) {
+      @include customFormButton();
+    }
+
+    button:nth-child(2) {
+      @include customFormButton(150px, red, white, rgb(247, 116, 116));
     }
   }
 }
