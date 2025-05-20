@@ -36,8 +36,6 @@ export class WorkoutDetailComponent {
 
   metricInputControl = new FormGroup({});
 
-  constructor() {}
-
   ngOnInit(): void {
     const currWorkout = this.router.snapshot.paramMap.get('id');
     this.workout = workoutTypes.find((workout) => workout.id === currWorkout);

@@ -1,59 +1,47 @@
-# FitnessApplication
+# 💪 Fitness Tracker App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
+A modern and intuitive fitness application built with Angular 19. Users can track workouts, manage  
+their macro nutrition goals, search foods by barcode, and compete with others on a global leaderboard.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📋 About the Project
 
-```bash
-ng serve
-```
+This application helps users monitor their fitness journey by tracking daily workouts, nutrition macros, and personal records. It provides visual insights using charts, enables barcode-based food lookup, and offers a competitive leaderboard to stay motivated.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🧠 Key Functionalities
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 📊 Dashboard Overview
 
-```bash
-ng generate component component-name
-```
+Get a snapshot of your fitness journey — track your **macros**, **daily goals**, and visualize **7-day workout trends** using interactive charts.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 🏆 Personal Best Tracker
 
-```bash
-ng generate --help
-```
+Automatically tracks and displays your **all-time best performances** for different workout types.
 
-## Building
+### 🍫 Food Search with Barcode Scanning
 
-To build the project run:
+Quickly find and add products to your macro log by scanning barcodes.  
+For example, scanning `5000159461122` fetches the Snickers bar’s exact data.
 
-```bash
-ng build
-```
+### 🏅 Global Leaderboard
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Compete with other users by logging workouts and earning points.  
+Stay motivated by seeing how you rank among the fitness community.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🚀 Features & Technologies
 
-```bash
-ng test
-```
+- **Framework**: Angular v19
+- **Language**: TypeScript
+- **Backend**: Firebase Firestore
+- **Auth**: Firebase Authentication
+- **UI Components**: Angular Material
+- **Charts**: Chart.js
+- **Alerts**: SweetAlert2
+- **Progress Indicator**: angular-svg-round-progressbar
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
