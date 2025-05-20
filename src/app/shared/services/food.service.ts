@@ -36,8 +36,6 @@ export class FoodService {
             sugars: res.product.nutriments.sugars,
           };
 
-          console.log(res);
-
           return { ...res, productData };
         }),
         catchError((err) => {

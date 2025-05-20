@@ -6,7 +6,7 @@ import {
 } from '@angular/fire/auth';
 import { doc, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, query, setDoc } from 'firebase/firestore';
-import { combineLatest, from, map, Observable, of } from 'rxjs';
+import { combineLatest, from, map, Observable } from 'rxjs';
 import { userInterface } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
 import { updateProfile, sendPasswordResetEmail } from 'firebase/auth';
@@ -23,7 +23,6 @@ export class UserService {
   private readonly alertService = inject(AlertsService);
 
   async registerUser(email: string, password: string, username: string) {
-    //საჭიროა email password username
     return createUserWithEmailAndPassword(this.FireAuth, email, password).then(
       (userCred) => {
         updateProfile(userCred.user, {
@@ -39,7 +38,6 @@ export class UserService {
     );
   }
 
-  // ჭირდება რეფაქტორი
   async loginUser(email: string, password: string) {
     return signInWithEmailAndPassword(this.FireAuth, email, password).then(
       () => {
@@ -61,7 +59,6 @@ export class UserService {
       photoURL: user.photoURL ?? '',
     };
 
-    console.log(user_data);
     const { uid, email, displayName, photoURL } = user_data;
 
     try {
@@ -121,11 +118,6 @@ export class UserService {
 
     return from(getDocs(userQuery)).pipe(
       map((q) => {
-        console.log(
-          'Query result:',
-          q.empty,
-          q.docs.map((d) => d.data())
-        );
         return q.empty ? false : true;
       })
     );
@@ -134,10 +126,9 @@ export class UserService {
   async passwordReset(email: string) {
     try {
       sendPasswordResetEmail(this.FireAuth, email);
-
-      // ალერტი
     } catch (error) {
-      // ერორის ალერტი
+      this.alertService.toast('Something went wrong', 'error', 'red');
+      throw error;
     }
   }
 

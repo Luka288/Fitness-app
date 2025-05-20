@@ -84,9 +84,7 @@ export class HomeComponent {
         }
 
         if (res) {
-          this.userLoginForm.controls.email.setErrors({
-            emailNotFound: false,
-          });
+          this.userLoginForm.controls.email.setErrors(null);
         }
       },
     });

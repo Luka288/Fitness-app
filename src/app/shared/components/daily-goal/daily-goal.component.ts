@@ -13,12 +13,6 @@ export class DailyGoalComponent {
   @Input() goalData: DailyGoal | null = null;
   @Output() newGoal = new EventEmitter<void>();
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      console.log(this.goalData);
-    }, 100);
-  }
-
   onNewGoal() {
     this.newGoal.emit();
   }

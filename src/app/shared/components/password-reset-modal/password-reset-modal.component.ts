@@ -44,9 +44,7 @@ export class PasswordResetModalComponent {
     this.userService.checkEmail(email).subscribe({
       next: (res) => {
         if (res === true) {
-          this.emailResetForm.controls.emailReset.setErrors({
-            emailNotFound: false,
-          });
+          this.emailResetForm.controls.emailReset.setErrors(null);
           this.isEmailUnique.set(true);
         }
 
