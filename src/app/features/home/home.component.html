@@ -61,6 +61,8 @@
             }@if (this.userLoginForm.controls.email.hasError('email') &&
             this.userLoginForm.controls.email.touched) {
             <p class="error-p">Invalid email</p>
+            }@if (userLoginForm.controls.email.hasError('emailNotFound')) {
+            <p class="error-p">Email not found</p>
             }
           </div>
 

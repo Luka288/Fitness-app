@@ -16,6 +16,7 @@ import { userRegData } from '../../shared/interfaces/user.reg.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BooleanService } from '../../shared/services/boolean.service';
 import { PasswordResetModalComponent } from '../../shared/components/password-reset-modal/password-reset-modal.component';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,12 @@ export class HomeComponent {
   private readonly dataService = inject(DataService);
   private readonly userService = inject(UserService);
   private readonly booleanService = inject(BooleanService);
+
+  ngOnInit(): void {
+    this.userLoginForm.controls.email.valueChanges
+      .pipe(debounceTime(350))
+      .subscribe((res) => (res === '' ? null : this.validateEmail(res)));
+  }
 
   modalOpen = signal<boolean>(false);
   passReset = signal<boolean>(false);
@@ -67,7 +74,23 @@ export class HomeComponent {
     )
   );
 
-  ngOnInit(): void {}
+  validateEmail(email: string) {
+    this.userService.checkEmail(email).subscribe({
+      next: (res) => {
+        if (!res) {
+          this.userLoginForm.controls.email.setErrors({
+            emailNotFound: true,
+          });
+        }
+
+        if (res) {
+          this.userLoginForm.controls.email.setErrors({
+            emailNotFound: false,
+          });
+        }
+      },
+    });
+  }
 
   loginUser(email: string, password: string) {
     this.userService.loginUser(email, password);

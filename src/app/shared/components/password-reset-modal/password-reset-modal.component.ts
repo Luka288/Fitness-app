@@ -7,7 +7,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { BooleanService } from '../../services/boolean.service';
 import { UserService } from '../../services/user.service';
 import { debounceTime } from 'rxjs';
 
@@ -23,18 +22,14 @@ export class PasswordResetModalComponent {
   @Output() emitCloseInfo = new EventEmitter<void>();
   @Output() emitPassReset = new EventEmitter<string>();
 
+  emailSended = signal<boolean>(false);
+  isEmailUnique = signal<boolean>(true);
+
   ngOnInit(): void {
     this.emailResetForm.controls.emailReset.valueChanges
       .pipe(debounceTime(300))
-      .subscribe((res) => {
-        if (res === '') return;
-
-        this.checkEmail(res);
-      });
+      .subscribe((res) => (res === '' ? null : this.checkEmail(res)));
   }
-
-  isEmailUnique = signal<boolean>(true);
-  errMsg: string = '';
 
   emailResetForm = new FormGroup({
     emailReset: new FormControl('', {
@@ -49,12 +44,16 @@ export class PasswordResetModalComponent {
     this.userService.checkEmail(email).subscribe({
       next: (res) => {
         if (res === true) {
-          this.errMsg = '';
+          this.emailResetForm.controls.emailReset.setErrors({
+            emailNotFound: false,
+          });
           this.isEmailUnique.set(true);
         }
 
         if (res === false) {
-          this.errMsg = 'Cant find email address';
+          this.emailResetForm.controls.emailReset.setErrors({
+            emailNotFound: true,
+          });
           this.isEmailUnique.set(false);
         }
       },
@@ -72,6 +71,7 @@ export class PasswordResetModalComponent {
     this.emitPassReset.emit(email);
     this.emailResetForm.reset();
     this.isEmailUnique.set(true);
+    this.emailSended.set(true);
   }
 
   emitClose() {

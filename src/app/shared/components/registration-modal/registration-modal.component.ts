@@ -28,12 +28,19 @@ export class RegistrationModalComponent {
 
   passReset = this.booleanService.forgotPasswordToggle.value;
 
-  // empty strings
+  emailResetForm = new FormGroup({
+    emailReset: new FormControl('', {
+      validators: [Validators.email, Validators.required],
+      nonNullable: true,
+    }),
+  });
+
   errMessage: string = '';
   emailError: string = '';
   usernameError: string = '';
 
   isFormReady = signal<boolean>(true);
+  isEmailUnique = signal<boolean>(true);
 
   registrationForm = new FormGroup({
     email: new FormControl('', {
@@ -67,11 +74,14 @@ export class RegistrationModalComponent {
     this.registrationForm.controls.email.valueChanges
       .pipe(debounceTime(500))
       .subscribe(() => this.validateUser());
+
+    this.emailResetForm.controls.emailReset.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe((res) => {
+        this.checkEmail(res);
+      });
   }
 
-  // რეგისტრაციის დროს ამოწმებს იმეილს არის თუ არა
-  // უკვე გამოყენებული ასევე ამოწმებს მომხმარებლის სახელს
-  // (username) არის თუ არა გამოყენებული
   validateUser() {
     let username = this.registrationForm.controls.username.value;
     let email = this.registrationForm.controls.email.value;
@@ -79,18 +89,14 @@ export class RegistrationModalComponent {
     this.userService.checkUserProps(username, email).subscribe({
       next: (res) => {
         this.isFormReady.set(!res.usernameTaken);
+        this.isEmailUnique.set(!res.emailTaken);
 
         if (res.usernameTaken) {
           this.usernameError = 'Username already taken';
-          console.error('Username is taken');
         } else if (res.emailTaken) {
           this.emailError = 'Email already taken';
-          console.error('Email is taken');
-        } else if (!res.usernameTaken) {
+        } else {
           this.usernameError = '';
-        }
-
-        if (!res.emailTaken) {
           this.emailError = '';
         }
       },
@@ -100,8 +106,30 @@ export class RegistrationModalComponent {
     });
   }
 
+  // მხოლოდ პაროლის რესეტის დროს
+  // ამოწმებს არსებობს თუ არა იმეილი ბაზაში
+  checkEmail(email: string) {
+    this.userService.checkEmail(email).subscribe({
+      next: (res) => {
+        if (res === true) {
+          this.errMessage = '';
+          this.isEmailUnique.set(true);
+        }
+
+        if (res === false) {
+          this.errMessage = 'We cant find email address';
+          this.isEmailUnique.set(false);
+        }
+      },
+    });
+  }
+
   emitData() {
-    if (this.registrationForm.invalid || !this.isFormReady()) {
+    if (
+      this.registrationForm.invalid ||
+      !this.isFormReady() ||
+      !this.isEmailUnique()
+    ) {
       this.registrationForm.markAllAsTouched();
       return;
     }
@@ -111,8 +139,20 @@ export class RegistrationModalComponent {
       password: this.registrationForm.controls.password.value,
       username: this.registrationForm.controls.username.value,
     });
+
     this.registrationForm.reset();
-    this.registrationForm.markAsUntouched();
+  }
+
+  sendReset() {
+    if (this.emailResetForm.invalid || !this.isEmailUnique()) {
+      this.emailResetForm.markAllAsTouched();
+      return;
+    }
+
+    const email = this.emailResetForm.controls.emailReset.value;
+
+    this.emitPassReset.emit(email);
+    this.emailResetForm.reset();
   }
 
   emitClose() {
