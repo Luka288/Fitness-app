@@ -45,3 +45,17 @@ Stay motivated by seeing how you rank among the fitness community.
 - **Progress Indicator**: angular-svg-round-progressbar
 
 ---
+
+## 🖼️ Screenshots
+
+### 📊 Dashboard View
+
+![Dashboard](./assets/images/dashboard.png)
+
+### 🍫 Barcode Scanning
+
+![Barcode Scanning](./assets/images/barcode.png)
+
+### 🍫 Leaderboard
+
+![Leaderboard page](./assets/images/leaderboard.png)
