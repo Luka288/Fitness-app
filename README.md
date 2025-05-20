@@ -50,12 +50,12 @@ Stay motivated by seeing how you rank among the fitness community.
 
 ### 📊 Dashboard View
 
-![Dashboard](./assets/images/dashboard.png)
+![Dashboard](assets/images/dashboard.png)
 
 ### 🍫 Barcode Scanning
 
-![Barcode Scanning](./assets/images/barcode.png)
+![Barcode Scanning](assets/images/barcode.png)
 
 ### 🍫 Leaderboard
 
-![Leaderboard page](./assets/images/leaderboard.png)
+![Leaderboard page](assets/images/leaderboard.png)
