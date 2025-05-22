@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Output, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -7,8 +7,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UserService } from '../../services/user.service';
-import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-password-reset-modal',
@@ -17,19 +15,13 @@ import { debounceTime } from 'rxjs';
   styleUrl: './password-reset-modal.component.scss',
 })
 export class PasswordResetModalComponent {
-  private readonly userService = inject(UserService);
-
   @Output() emitCloseInfo = new EventEmitter<void>();
   @Output() emitPassReset = new EventEmitter<string>();
 
   emailSended = signal<boolean>(false);
   isEmailUnique = signal<boolean>(true);
 
-  ngOnInit(): void {
-    this.emailResetForm.controls.emailReset.valueChanges
-      .pipe(debounceTime(300))
-      .subscribe((res) => (res === '' ? null : this.checkEmail(res)));
-  }
+  ngOnInit(): void {}
 
   emailResetForm = new FormGroup({
     emailReset: new FormControl('', {
@@ -37,26 +29,6 @@ export class PasswordResetModalComponent {
       nonNullable: true,
     }),
   });
-
-  // მხოლოდ პაროლის რესეტის დროს
-  // ამოწმებს არსებობს თუ არა იმეილი ბაზაში
-  checkEmail(email: string) {
-    this.userService.checkEmail(email).subscribe({
-      next: (res) => {
-        if (res === true) {
-          this.emailResetForm.controls.emailReset.setErrors(null);
-          this.isEmailUnique.set(true);
-        }
-
-        if (res === false) {
-          this.emailResetForm.controls.emailReset.setErrors({
-            emailNotFound: true,
-          });
-          this.isEmailUnique.set(false);
-        }
-      },
-    });
-  }
 
   sendReset() {
     if (this.emailResetForm.invalid || !this.isEmailUnique()) {

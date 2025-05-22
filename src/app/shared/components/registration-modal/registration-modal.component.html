@@ -17,13 +17,13 @@
             filled: registrationForm.controls.email.value
           }"
         />
-        @if (this.registrationForm.controls.email.hasError('required') &&
-        this.registrationForm.controls.email.touched) {
+        @if (registrationForm.controls.email.hasError('required') &&
+        registrationForm.controls.email.touched) {
         <p class="error-p">Email is required</p>
-        }@if (this.registrationForm.controls.email.hasError('email') &&
-        this.registrationForm.controls.email.touched) {
+        }@if (registrationForm.controls.email.hasError('email') &&
+        registrationForm.controls.email.touched) {
         <p class="error-p">Invalid email</p>
-        }@if (emailError) {
+        }@if (registrationForm.controls.email.hasError('usernameTaken')) {
         <p class="error-p">
           {{ emailError }}
         </p>
@@ -79,8 +79,8 @@
         <p class="error-p">username must be at least 3 characters</p>
         }@if (registrationForm.controls.username.hasError('maxlength')) {
         <p class="error-p">username cannot be more then 16 characters</p>
-        }@if (usernameError !== '') {
-        <p class="error-p">{{ usernameError }}</p>
+        }@if (registrationForm.controls.username.hasError('usernameTaken')) {
+        <p class="error-p">Username already taken</p>
         }
       </div>
     </form>

@@ -4,10 +4,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from '@angular/fire/auth';
-import { doc, Firestore } from '@angular/fire/firestore';
+import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { collection, getDocs, query, setDoc } from 'firebase/firestore';
-import { combineLatest, from, map, Observable } from 'rxjs';
-import { userInterface } from '../interfaces/user.interface';
+import { combineLatest, from, map, Observable, of } from 'rxjs';
+import { userPublicData } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
 import { updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { where } from 'firebase/firestore';
@@ -23,19 +23,26 @@ export class UserService {
   private readonly alertService = inject(AlertsService);
 
   async registerUser(email: string, password: string, username: string) {
-    return createUserWithEmailAndPassword(this.FireAuth, email, password).then(
-      (userCred) => {
-        updateProfile(userCred.user, {
-          displayName: username,
-        });
+    try {
+      const userCred = await createUserWithEmailAndPassword(
+        this.FireAuth,
+        email,
+        password
+      );
 
-        this.saveUser(
-          userCred.user.uid!,
-          userCred.user.email || email,
-          userCred.user.displayName || username
-        );
-      }
-    );
+      await updateProfile(userCred.user, { displayName: username });
+
+      await this.storePublicInfo({
+        username: userCred.user.displayName!,
+        userImage: userCred.user.photoURL!,
+      });
+
+      await this.saveUser(
+        userCred.user.uid,
+        userCred.user.email!,
+        userCred.user.displayName!
+      );
+    } catch (error) {}
   }
 
   async loginUser(email: string, password: string) {
@@ -61,6 +68,8 @@ export class UserService {
 
     const { uid, email, displayName, photoURL } = user_data;
 
+    this.storePublicInfo({ username: displayName!, userImage: photoURL! });
+
     try {
       setDoc(firebase, { uid, email, displayName, photoURL }, { merge: true });
       return true;
@@ -69,25 +78,37 @@ export class UserService {
     }
   }
 
-  getAllUsers(): Observable<userInterface[]> {
-    const userRef = collection(this.Fire, 'users');
+  async storePublicInfo(data: { username: string; userImage: string }) {
+    const user = this.FireAuth.currentUser;
+    if (!user) {
+      return;
+    }
+
+    const dataToSave = {
+      username: data.username,
+      userImage: data.userImage,
+    };
+
+    const userRef = doc(this.Fire, `publicData/${user.uid}`);
+
+    try {
+      await setDoc(userRef, dataToSave, { merge: true });
+    } catch (error) {
+      console.error('Error saving public data:', error);
+    }
+  }
+
+  getPublicUsers(): Observable<userPublicData[]> {
+    const userRef = collection(this.Fire, `publicData`);
 
     return from(
       getDocs(userRef).then((q) => {
         const users = q.docs.map((doc) => {
-          const user = doc.data() as userInterface;
-
-          const totalBurned = (user.activities || []).reduce(
-            (total, activity) => Math.floor(total + activity.burnedCalories),
-            0
-          );
-
-          return { ...user, totalBurned };
+          const user = doc.data() as userPublicData;
+          return { ...user };
         });
 
-        return users.sort(
-          (a, b) => (b.totalBurned || 0) - (a.totalBurned || 0)
-        );
+        return users;
       })
     );
   }
@@ -96,9 +117,9 @@ export class UserService {
     username: string,
     email: string
   ): Observable<{ usernameTaken: boolean; emailTaken: boolean }> {
-    const userRef = collection(this.Fire, 'users');
+    const userRef = collection(this.Fire, 'publicData');
 
-    const usernameQuery = query(userRef, where('displayName', '==', username));
+    const usernameQuery = query(userRef, where('username', '==', username));
     const emailQuery = query(userRef, where('email', '==', email));
 
     return combineLatest([
@@ -112,11 +133,12 @@ export class UserService {
     );
   }
 
-  checkEmail(email: string): Observable<boolean> {
-    const userRef = collection(this.Fire, 'users');
-    const userQuery = query(userRef, where('email', '==', email));
+  checkUsername(username: string): Observable<boolean> {
+    const publicDataRef = collection(this.Fire, 'publicData');
 
-    return from(getDocs(userQuery)).pipe(
+    const usernameQ = query(publicDataRef, where('username', '==', username));
+
+    return from(getDocs(usernameQ)).pipe(
       map((q) => {
         return q.empty ? false : true;
       })

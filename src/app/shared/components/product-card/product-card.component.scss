@@ -39,6 +39,15 @@
     @include customFormButton();
   }
 
+  .error {
+    width: 100%;
+    color: orange;
+    font-family: $inter;
+    margin: 0;
+    font-size: 20px;
+    text-align: center;
+  }
+
   .footer {
     width: 100%;
     display: flex;

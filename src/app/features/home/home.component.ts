@@ -16,7 +16,6 @@ import { userRegData } from '../../shared/interfaces/user.reg.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BooleanService } from '../../shared/services/boolean.service';
 import { PasswordResetModalComponent } from '../../shared/components/password-reset-modal/password-reset-modal.component';
-import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -38,9 +37,7 @@ export class HomeComponent {
   private readonly booleanService = inject(BooleanService);
 
   ngOnInit(): void {
-    this.userLoginForm.controls.email.valueChanges
-      .pipe(debounceTime(350))
-      .subscribe((res) => (res === '' ? null : this.validateEmail(res)));
+    this.userService.getPublicUsers()?.subscribe(console.log);
   }
 
   modalOpen = signal<boolean>(false);
@@ -63,32 +60,16 @@ export class HomeComponent {
 
   BTNS = this.dataService.getHeaderButtons();
 
-  userData = toSignal(this.userService.getAllUsers(), { initialValue: [] });
+  userData = toSignal(this.userService.getPublicUsers(), { initialValue: [] });
 
   count = computed(() => this.userData().length);
 
-  workoutCount = computed(() =>
-    this.userData().reduce(
-      (acc, user) => acc + (user.activities?.length || 0),
+  workoutCount = computed(() => {
+    return this.userData().reduce(
+      (sum, item) => sum + (item.activities ?? 0),
       0
-    )
-  );
-
-  validateEmail(email: string) {
-    this.userService.checkEmail(email).subscribe({
-      next: (res) => {
-        if (!res) {
-          this.userLoginForm.controls.email.setErrors({
-            emailNotFound: true,
-          });
-        }
-
-        if (res) {
-          this.userLoginForm.controls.email.setErrors(null);
-        }
-      },
-    });
-  }
+    );
+  });
 
   loginUser(email: string, password: string) {
     this.userService.loginUser(email, password);

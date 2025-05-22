@@ -42,6 +42,7 @@ export class MainContentComponent {
   private readonly autService = inject(FirebaseAuthService);
   private readonly dataService = inject(DataService);
   private readonly foodService = inject(FoodService);
+  private readonly userService = inject(UserService);
   readonly workoutService = inject(WorkoutService);
 
   isOpen = signal(false);

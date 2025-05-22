@@ -95,6 +95,9 @@
       </ng-template>
     </div>
   </div>
+  } @if (emptyResponse()) {
+  <p class="error">Cant add product its data is empty</p>
+
   }
   <div class="footer">
     <button (click)="sendData(productInput?.product?.nutriments!)">

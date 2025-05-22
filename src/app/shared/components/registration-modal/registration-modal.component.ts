@@ -74,52 +74,21 @@ export class RegistrationModalComponent {
     this.registrationForm.controls.email.valueChanges
       .pipe(debounceTime(500))
       .subscribe(() => this.validateUser());
-
-    this.emailResetForm.controls.emailReset.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe((res) => {
-        this.checkEmail(res);
-      });
   }
 
   validateUser() {
     let username = this.registrationForm.controls.username.value;
-    let email = this.registrationForm.controls.email.value;
 
-    this.userService.checkUserProps(username, email).subscribe({
+    this.userService.checkUsername(username).subscribe({
       next: (res) => {
-        this.isFormReady.set(!res.usernameTaken);
-        this.isEmailUnique.set(!res.emailTaken);
-
-        if (res.usernameTaken) {
-          this.usernameError = 'Username already taken';
-        } else if (res.emailTaken) {
-          this.emailError = 'Email already taken';
-        } else {
-          this.usernameError = '';
-          this.emailError = '';
+        if (res === true) {
+          this.registrationForm.controls.username.setErrors({
+            usernameTaken: true,
+          });
         }
       },
       error: (err) => {
         console.error('Error checking user properties:', err);
-      },
-    });
-  }
-
-  // მხოლოდ პაროლის რესეტის დროს
-  // ამოწმებს არსებობს თუ არა იმეილი ბაზაში
-  checkEmail(email: string) {
-    this.userService.checkEmail(email).subscribe({
-      next: (res) => {
-        if (res === true) {
-          this.errMessage = '';
-          this.isEmailUnique.set(true);
-        }
-
-        if (res === false) {
-          this.errMessage = 'We cant find email address';
-          this.isEmailUnique.set(false);
-        }
       },
     });
   }

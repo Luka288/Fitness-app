@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { docData, Firestore } from '@angular/fire/firestore';
-import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { calculatedData, userData } from '../interfaces/workout.data.interface';
 import { AlertsService } from './alerts.service';
 import { combineLatest, map, Observable, of } from 'rxjs';
 import { DailyGoal } from '../interfaces/daily.goal.interface';
-import { userInterface } from '../interfaces/user.interface';
+import { userPrivateData } from '../interfaces/user.interface';
 import { weeklyChart } from '../interfaces/weekly.interface';
 
 @Injectable({
@@ -26,6 +26,8 @@ export class WorkoutService {
 
       const workoutRef = doc(this.fire, `users/${user.uid}`);
 
+      // const publicData = doc(this.fire, `publicData/${user.uid}`);
+
       await updateDoc(workoutRef, {
         activities: arrayUnion({
           ...workoutData,
@@ -34,9 +36,60 @@ export class WorkoutService {
         }),
       });
 
+      // const data = await getDoc(workoutRef);
+      // let activitiesLen = 0;
+      // let totalCalories = 0;
+
+      // if (data.exists()) {
+      //   const userData = data.data() as userPrivateData;
+
+      //   activitiesLen = userData?.activities.length || 0;
+
+      //   totalCalories = userData?.activities.reduce(
+      //     (sum, activity) => sum + (activity.burnedCalories || 0),
+      //     0
+      //   );
+      // }
+
+      // await updateDoc(publicData, {
+      //   activities: activitiesLen,
+      //   burnedCalories: totalCalories,
+      // });
+      this.updatePublicData();
+
       this.alerts.toast('Data saved!', 'success', '');
     } catch (error) {
       this.alerts.toast('Something went wrong try again', 'error', 'red');
+    }
+  }
+
+  async updatePublicData() {
+    const user = this.auth.currentUser;
+    if (!user) return;
+
+    try {
+      const userDocRef = doc(this.fire, `users/${user.uid}`);
+      const publicDataRef = doc(this.fire, `publicData/${user.uid}`);
+
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (!userSnapshot.exists()) return;
+
+      const userData = userSnapshot.data() as userPrivateData;
+      const activities = userData.activities || [];
+
+      const activitiesLen = activities.length;
+      const totalCalories = activities.reduce(
+        (sum, activity) => sum + (activity.burnedCalories || 0),
+        0
+      );
+
+      await updateDoc(publicDataRef, {
+        activities: activitiesLen,
+        burnedCalories: totalCalories,
+      });
+    } catch (error) {
+      console.error('Error syncing public data:', error);
     }
   }
 
@@ -45,6 +98,7 @@ export class WorkoutService {
     if (!user) return of([]);
 
     const userDoc = doc(this.fire, `users/${user.uid}`);
+    this.updatePublicData();
 
     return docData(userDoc).pipe(
       map((data) =>
@@ -86,8 +140,9 @@ export class WorkoutService {
     const activityRef = doc(this.fire, `users/${user.uid}`);
 
     const goal = docData(goalRef).pipe(map((res) => res as DailyGoal));
+
     const userRef = docData(activityRef).pipe(
-      map((res) => res as userInterface)
+      map((res) => res as userPrivateData)
     );
 
     return combineLatest([goal, userRef]).pipe(
@@ -130,7 +185,7 @@ export class WorkoutService {
     return docData(workoutRef).pipe(
       map((res) => {
         if (!res) return [];
-        const activities = (res as userInterface).activities || [];
+        const activities = (res as userPrivateData).activities || [];
 
         return activities.slice(-7).map((res) => ({
           burnedCalories: Math.round(res.burnedCalories),
@@ -150,7 +205,7 @@ export class WorkoutService {
     return docData(workoutRef).pipe(
       map((res) => {
         if (!res) return null;
-        const userData = res as userInterface;
+        const userData = res as userPrivateData;
         const workouts = userData.activities ? userData.activities : [];
 
         if (workouts.length === 0) return null;

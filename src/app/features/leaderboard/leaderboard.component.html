@@ -22,19 +22,24 @@
           <td class="username">
             <span
               ><img
-                [src]="item.photoURL || 'assets/images/user.png'"
+                [src]="item.userImage || 'assets/images/user.png'"
                 alt="Profile Picture"
               />
-              {{
+              <!-- {{
                 item.uid === user.currentUser?.uid ? "You" : item.displayName
+              }} -->
+              {{
+                item.username === this.user.currentUser?.displayName
+                  ? "You"
+                  : item.username
               }}
             </span>
           </td>
           <td>
-            {{ item.totalBurned }}
+            {{ item.burnedCalories }}
           </td>
           <td>
-            {{ (item.activities && item.activities.length) || 0 }}
+            {{ item.activities || 0 }}
           </td>
         </tr>
       </tbody>

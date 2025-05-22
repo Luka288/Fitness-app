@@ -1,12 +1,11 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, signal, SimpleChanges } from '@angular/core';
 import {
   baseNutriments,
-  nutrimentData,
   nutrimentsResponse,
 } from '../../interfaces/food.interface';
 import { CommonModule } from '@angular/common';
-import { filter } from 'rxjs';
 import { FoodService } from '../../services/food.service';
+import { AlertsService } from '../../services/alerts.service';
 
 @Component({
   selector: 'app-product-card',
@@ -16,8 +15,16 @@ import { FoodService } from '../../services/food.service';
 })
 export class ProductCardComponent {
   private readonly foodService = inject(FoodService);
+  private readonly alertService = inject(AlertsService);
 
   @Input() productInput: nutrimentsResponse | null = null;
+  emptyResponse = signal<boolean>(false);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['productInput'] && changes['productInput'].currentValue) {
+      this.emptyResponse.set(false);
+    }
+  }
 
   sendData(data: baseNutriments) {
     const productData = {
@@ -35,8 +42,21 @@ export class ProductCardComponent {
       date: new Date().toISOString().split('T')[0],
     };
 
+    // ამოწმებს ყველა ფორფერთის არის თუ არა undefined ან null
+    // იმ შემთხვევაში თუ არის null ან udnefined არ აგზავნის ჩარტში
+    const allEmpty = Object.entries(productData)
+      .filter(([key]) => key !== 'date')
+      .every(([_, value]) => !value);
+
+    if (allEmpty) {
+      this.emptyResponse.set(true);
+      return;
+    }
+
     const filteredData = Object.fromEntries(
-      Object.entries(productData).filter(([key, value]) => value != null)
+      Object.entries(productData).filter(
+        ([_, value]) => value != null && value !== 0
+      )
     );
 
     this.foodService.storeData(filteredData);

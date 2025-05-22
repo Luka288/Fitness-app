@@ -260,42 +260,6 @@ main {
       }
     }
   }
-
-  .total-users {
-    width: 90%;
-    padding: 20px;
-    margin: auto;
-    box-sizing: border-box;
-    @include flex(space-evenly, center, wrap, row);
-    font-size: 25px;
-
-    .data-card {
-      width: 350px;
-      height: 200px;
-      box-sizing: border-box;
-      padding: 15px;
-      @include boxTune();
-      background-color: #ffff;
-      text-align: center;
-      @include flex(center, center, wrap, column);
-
-      p {
-        font-family: $inter;
-        margin: 0;
-        margin-bottom: 6px;
-        letter-spacing: 3px;
-
-        i {
-          color: red;
-        }
-      }
-
-      span {
-        font-family: $roboto;
-        font-size: 20px;
-      }
-    }
-  }
 }
 
 @media (max-width: 1440px) {
