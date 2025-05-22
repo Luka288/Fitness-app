@@ -17,6 +17,13 @@ export class LeaderboardComponent {
   users = signal<userPublicData[]>([]);
 
   ngOnInit(): void {
-    this.users.set(this.activatedRoute.snapshot.data['users']);
+    const userDatas = this.activatedRoute.snapshot.data[
+      'users'
+    ] as userPublicData[];
+    const sortedUsers = userDatas.sort(
+      (a, b) => a.burnedCalories + b.burnedCalories
+    );
+
+    this.users.set(sortedUsers);
   }
 }
