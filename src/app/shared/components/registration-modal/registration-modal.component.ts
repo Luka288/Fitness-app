@@ -11,16 +11,22 @@ import { userRegData } from '../../interfaces/user.reg.interface';
 import { UserService } from '../../services/user.service';
 import { debounceTime } from 'rxjs';
 import { BooleanService } from '../../services/boolean.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-registration-modal',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './registration-modal.component.html',
   styleUrl: './registration-modal.component.scss',
 })
 export class RegistrationModalComponent {
   private readonly userService = inject(UserService);
-  private readonly booleanService = inject(BooleanService);
+  readonly booleanService = inject(BooleanService);
 
   @Output() emitUserData = new EventEmitter<userRegData>();
   @Output() emitCloseInfo = new EventEmitter<void>();
@@ -128,5 +134,7 @@ export class RegistrationModalComponent {
     this.emitCloseInfo.emit();
     this.registrationForm.reset();
     this.isFormReady.set(true);
+    this.booleanService.registerLoading.next(false);
+    this.booleanService.isRegeisterd.next(false);
   }
 }

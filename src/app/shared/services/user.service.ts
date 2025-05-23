@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { updateProfile, sendPasswordResetEmail } from 'firebase/auth';
 import { where } from 'firebase/firestore';
 import { AlertsService } from './alerts.service';
+import { BooleanService } from './boolean.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +22,10 @@ export class UserService {
   private readonly FireAuth = inject(Auth);
   private readonly router = inject(Router);
   private readonly alertService = inject(AlertsService);
+  private readonly booleanService = inject(BooleanService);
 
   async registerUser(email: string, password: string, username: string) {
+    this.booleanService.registerLoading.next(true);
     try {
       const userCred = await createUserWithEmailAndPassword(
         this.FireAuth,
@@ -42,7 +45,14 @@ export class UserService {
         userCred.user.email!,
         userCred.user.displayName!
       );
-    } catch (error) {}
+      this.booleanService.isRegeisterd.next(true);
+    } catch (error) {
+      // maybe alert?
+      throw error;
+    } finally {
+      this.booleanService.registerLoading.next(false);
+      this.router.navigateByUrl('/dashboard');
+    }
   }
 
   async loginUser(email: string, password: string) {

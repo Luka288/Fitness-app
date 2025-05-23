@@ -1,1 +1,0 @@
-import{R as t,l as e}from"./chunk-WI2OL4WN.js";var r=class o{enablePanel=new e(!0);forgotPasswordToggle=new e(!1);static \u0275fac=function(a){return new(a||o)};static \u0275prov=t({token:o,factory:o.\u0275fac,providedIn:"root"})};export{r as a};

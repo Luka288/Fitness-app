@@ -1,7 +1,8 @@
 <section class="modal-overlay">
   <div class="modal-content">
-    <h2>Register</h2>
+    <h2 class="modal-title">Register</h2>
 
+    @if (!booleanService.registerLoading.value) {
     <form [formGroup]="registrationForm">
       <div class="input-wrap">
         <input
@@ -84,6 +85,12 @@
         }
       </div>
     </form>
+    } @if (booleanService.registerLoading.value) {
+    <div class="loading-container">
+      <mat-spinner />
+      <h2>Loading...</h2>
+    </div>
+    }
 
     <div class="footer">
       <button (click)="emitData()">Register</button>

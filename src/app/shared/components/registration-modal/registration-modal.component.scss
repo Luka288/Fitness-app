@@ -20,7 +20,7 @@
     box-sizing: border-box;
     padding: 20px;
 
-    h2 {
+    .modal-title {
       text-align: center;
       font-family: $roboto;
       margin: 0;
@@ -48,6 +48,18 @@
         .error-p {
           @include errorText();
         }
+      }
+    }
+
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: $inter;
+      margin-top: 50px;
+
+      h2 {
+        font-weight: 300;
       }
     }
   }

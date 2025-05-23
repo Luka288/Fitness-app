@@ -36,9 +36,7 @@ export class HomeComponent {
   private readonly userService = inject(UserService);
   private readonly booleanService = inject(BooleanService);
 
-  ngOnInit(): void {
-    this.userService.getPublicUsers()?.subscribe(console.log);
-  }
+  ngOnInit(): void {}
 
   modalOpen = signal<boolean>(false);
   passReset = signal<boolean>(false);
