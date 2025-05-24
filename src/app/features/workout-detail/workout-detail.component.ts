@@ -10,7 +10,6 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { WorkoutService } from '../../shared/services/workout.service';
 import { CalculateService } from '../../shared/services/calculate.service';
 import { userFormData } from '../../shared/interfaces/formData.interface';
 import { ActivityInfoComponent } from '../../shared/components/activity-info/activity-info.component';
@@ -28,7 +27,6 @@ import { calculatedData } from '../../shared/interfaces/workout.data.interface';
 })
 export class WorkoutDetailComponent {
   private readonly router = inject(ActivatedRoute);
-  private readonly workoutService = inject(WorkoutService);
   private readonly calculateService = inject(CalculateService);
 
   workout: WorkoutInterface | undefined;
