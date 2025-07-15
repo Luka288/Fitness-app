@@ -1,5 +1,4 @@
-import { Component, inject, Input, signal } from '@angular/core';
-import { CalculateService } from '../../services/calculate.service';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { calculatedData } from '../../interfaces/workout.data.interface';
 
@@ -10,7 +9,5 @@ import { calculatedData } from '../../interfaces/workout.data.interface';
   styleUrl: './activity-info.component.scss',
 })
 export class ActivityInfoComponent {
-  private readonly calculateService = inject(CalculateService);
-
   @Input({ alias: 'data' }) calculatedData!: calculatedData;
 }

@@ -1,12 +1,14 @@
 <section id="dataSection" [ngClass]="calculatedData ? 'active' : ''">
-  <p>
-    <i
-      [ngClass]="
-        calculatedData.speed ? 'fa-solid fa-gauge-high' : 'fa-solid fa-repeat'
-      "
-    ></i>
-    {{ calculatedData.speed ? `Avg Speed: ${calculatedData.speed} Km/h` : `Reps: ${calculatedData.totalReps}` }}
+  <p *ngIf="calculatedData.speed">
+    <i class="fa-solid fa-gauge-high"></i>
+    Avg Speed: {{ calculatedData.speed }} Km/h
   </p>
+
+  <p *ngIf="!calculatedData.speed && calculatedData.totalReps">
+    <i class="fa-solid fa-repeat"></i>
+    Reps: {{ calculatedData.totalReps }}
+  </p>
+
   <p>
     <i class="fa-solid fa-fire-flame-curved"></i> Burned Calories:
     {{ calculatedData.burnedCalories }} KCAL

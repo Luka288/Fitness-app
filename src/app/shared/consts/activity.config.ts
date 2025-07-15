@@ -1,3 +1,4 @@
+import { effect } from '@angular/core';
 import { userFormData } from '../interfaces/formData.interface';
 
 export const activityConfig = {
@@ -155,8 +156,33 @@ export const activityConfig = {
       };
     },
   },
-};
 
-export function calculate(distance?: number, time?: number) {}
+  sparring: {
+    calculate(formData: userFormData) {
+      const MET =
+        formData.effort === 'LIGHT'
+          ? 6
+          : formData.effort === 'MODERATE'
+          ? 6
+          : formData.effort === 'MAXIMUM'
+          ? 12.8
+          : 0;
+
+      const timeInMinutes =
+        formData.timeUnit === 'HOUR' ? formData.time! * 60 : formData.time!;
+
+      const weight = formData.kg!;
+
+      const burnedCalories = (MET * 3.5 * weight * timeInMinutes) / 200;
+
+      return {
+        burnedCalories: parseFloat(burnedCalories.toFixed(2)),
+        activityName: 'Sparring',
+        effort: formData.effort,
+        time: `${formData.time} ${formData.timeUnit}`,
+      };
+    },
+  },
+};
 
 export type ActivityType = keyof typeof activityConfig;

@@ -27,16 +27,34 @@
         <div class="container-title">
           <h1>Workout Form</h1>
         </div>
+        @for (item of workout?.metrics; track $index) {
+
         <div
-          id="workout-input"
-          *ngFor="let item of workout?.metrics; let i = index"
+          [ngClass]="{
+            'workout-input': item !== 'effort',
+            defaultDropDown: item === 'effort'
+          }"
         >
-          <label [attr.for]="'workoutInput' + i">
+          @if (item === 'effort') {
+
+          <label [attr.for]="'workoutInput' + $index">
             {{ item }}
           </label>
+
+          <select [attr.id]="'workoutInput' + $index" [formControlName]="item">
+            <option value="MAXIMUM">Maximum</option>
+            <option value="MODERATE">Moderate</option>
+            <option value="LIGHT">Light</option>
+          </select>
+
+          }@else {
+          <label [attr.for]="'workoutInput' + $index">
+            {{ item }}
+          </label>
+
           <input
             type="text"
-            [attr.id]="'workoutInput' + i"
+            [attr.id]="'workoutInput' + $index"
             [attr.name]="item"
             [placeholder]="item"
             [formControlName]="item"
@@ -57,7 +75,8 @@
             <option value="HOUR">HOUR</option>
             <option value="MINUTES">MINUTES</option>
           </select>
-          }
+          } }
+
           <div
             class="errC"
             *ngIf="
@@ -72,6 +91,8 @@
             }
           </div>
         </div>
+        }
+
         <button type="submit">Calculate and save</button>
       </form>
     </aside>

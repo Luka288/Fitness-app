@@ -54,6 +54,16 @@ export const workoutTypes: WorkoutInterface[] = [
     type: 'distance',
     metrics: ['distance', 'kg', 'time'],
   },
-];
 
-// წაშლილი მეტრიკები calories
+  //TODO: SPARRING ამ მომენტში ვმუშაობ
+
+  {
+    id: 'sparring',
+    name: 'Sparring',
+    description: 'Combat training & endurance',
+    icon: '', //! DEPRECATED
+    type: 'time',
+    metrics: ['time', 'kg', 'effort'], // ! effort ახალი მნიშვნელობა პროექტში
+    //! კალკულაციების დროს იქნება ჩასამატებელი.
+  },
+];

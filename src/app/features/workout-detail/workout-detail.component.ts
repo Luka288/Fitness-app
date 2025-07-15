@@ -44,6 +44,13 @@ export class WorkoutDetailComponent {
     );
 
     this.workout?.metrics.forEach((metric) => {
+      if (metric === 'effort') {
+        this.metricInputControl.addControl(
+          'effort',
+          new FormControl('LIGHT', Validators.required)
+        );
+      }
+
       this.metricInputControl.addControl(
         metric,
         new FormControl('', [Validators.required, Validators.min(1)])

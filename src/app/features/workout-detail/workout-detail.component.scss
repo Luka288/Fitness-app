@@ -59,7 +59,36 @@ main {
         height: 100%;
         @include inputAling(column, 30px);
 
-        #workout-input {
+        .defaultDropDown {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+
+          label {
+            font-size: 16px;
+            font-weight: 500;
+            text-transform: capitalize;
+            font-family: $inter;
+          }
+
+          select {
+            width: 100%;
+            height: 34px;
+            outline: none;
+            border: none;
+            background-color: #f1f1f1;
+            font-size: 15px;
+            border-bottom: 3px solid blue;
+            border-radius: 3px;
+
+            option {
+              font-size: 20px;
+              border: none;
+            }
+          }
+        }
+
+        .workout-input {
           width: 100%;
           position: relative;
 
@@ -77,24 +106,23 @@ main {
             padding-right: 80px;
           }
 
-          .errC {
-            @include errorText();
-
-            p {
-              margin: 0;
-            }
-          }
-
           select {
             width: 70px;
             outline: none;
             border: none;
             background-color: transparent;
             position: absolute;
-            // transform: translateY(-40px);
             margin-top: 25px;
             font-size: 15px;
             right: 0px;
+          }
+        }
+
+        .errC {
+          @include errorText();
+
+          p {
+            margin: 0;
           }
         }
 
