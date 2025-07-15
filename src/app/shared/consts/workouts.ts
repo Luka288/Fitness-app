@@ -55,15 +55,12 @@ export const workoutTypes: WorkoutInterface[] = [
     metrics: ['distance', 'kg', 'time'],
   },
 
-  //TODO: SPARRING ამ მომენტში ვმუშაობ
-
   {
     id: 'sparring',
     name: 'Sparring',
     description: 'Combat training & endurance',
-    icon: '', //! DEPRECATED
+    icon: '',
     type: 'time',
-    metrics: ['time', 'kg', 'effort'], // ! effort ახალი მნიშვნელობა პროექტში
-    //! კალკულაციების დროს იქნება ჩასამატებელი.
+    metrics: ['time', 'kg', 'effort'],
   },
 ];
