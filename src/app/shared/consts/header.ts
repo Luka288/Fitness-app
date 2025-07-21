@@ -15,5 +15,3 @@ export const sidePanel: BaseHeader[] = [
     icon: ['fa-solid', 'fa-utensils'],
   },
 ];
-
-// <i class="fa-solid fa-chart-simple"></i>

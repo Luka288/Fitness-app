@@ -140,7 +140,7 @@ export const activityConfig = {
   },
 
   plank_hold: {
-    MET: 4.0, // სტატიკური MAGIC რიცხვი
+    MET: 4.0,
     calculate: (formData: userFormData) => {
       const timeInMinutes =
         formData.timeUnit === 'HOUR' ? formData.time! * 60 : formData.time!;
